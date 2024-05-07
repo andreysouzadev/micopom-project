@@ -1,0 +1,12 @@
+body{
+    background: linear-gradient(to bottom, #f1eedb, #f3ea9c); /* Substitua as cores conforme necessário */
+  }
+
+  .form-control:hover {
+    border-color: #e4b51a; 
+  }
+  
+  .form-control:focus {
+    border-color: #e4b51a;
+    border-width: 2px;
+  }
