@@ -3,12 +3,14 @@ import { HomeComponent } from './navegacao/home/home.component';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './acessos/login/login.component';
 import { CadastroComponent } from './acessos/cadastro/cadastro.component';
+import { EsqueceuSenhaComponent } from './acessos/esqueceu-senha/esqueceu-senha.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: '/home', pathMatch: 'full' },
   // { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   { path: 'cadastro', component: CadastroComponent},
+  { path: 'esqueceu-senha', component: EsqueceuSenhaComponent},
   {
     path: '',
     children: [

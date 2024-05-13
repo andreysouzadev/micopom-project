@@ -7,17 +7,29 @@
       </div>
       <div class="col-lg-7">
         <h2 class="text-center mb-3">Entrar</h2>
-        <form>
+        <form  [formGroup]="loginForm">
           <div class="form-group mb-3">
             <label for="email">E-mail</label>
-            <input class="form-control " type="email" name="email" id="email"  required />
+            <input class="form-control" type="email" name="email" id="email" formControlName="email" />
+            <!-- <span class="text-danger" *ngIf="loginForm.get('email')?.errors?.['required'] && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)">
+              <p>E-mail é requerido</p>
+            </span>    
+            <span class="text-danger" *ngIf="loginForm.get('email')?.errors?.['email'] && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)">
+              <p>E-mail em formato inválido</p>
+            </span>     -->
           </div>
           <div class="form-group mb-4">
-            <label for="password">Senha</label>
-            <input class="form-control" type="password" name="password" id="password"  required />
+            <label for="senha">Senha</label>
+            <input class="form-control" type="password" name="senha" id="senha" formControlName="senha"/>
+            <!-- <span class="text-danger" *ngIf="loginForm.get('senha')?.errors?.required && (loginForm.get('senha')?.dirty || loginForm.get('senha')?.touched)">
+              <p>Senha é requerido</p>
+            </span>
+            <span class="text-danger" *ngIf="loginForm.get('senha')?.errors?.rangeLength && (loginForm.get('senha')?.dirty || loginForm.get('senha')?.touched)">
+              <p>Formato inválido</p>
+            </span>   -->
           </div>
           <button type="submit" class="btn btn-warning btn-block col-12">Clique para entrar</button>
-          <button type="button" class="btn btn-link col-12">Esqueceu a senha?</button>
+          <button type="button" class="btn btn-link col-12" routerLink="/esqueceu-senha">Esqueceu a senha?</button>
         </form>
       </div>
     </div>
