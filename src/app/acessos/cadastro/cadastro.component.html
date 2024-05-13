@@ -1,48 +1,167 @@
-    <body>
-      <div class="container d-flex align-items-center justify-content-center vh-100">
-        <div class="col-md-10">
-          <div class="row align-items-center">
-            <div class="col-lg-3"> 
-              <img src="assets/micoleao1.png" class="img-fluid"/> 
-            </div>
-            <div class="col-lg-7">
-              <h2 class="text-center mb-3">Cadastre-se</h2>
-              <form>
-                <div class="form-group mb-1">
-                  <label for="email">Nome Completo</label>
-                  <input class="form-control" type="text" name="nomeCompleto" id="nomecompleto"/>
-                </div>
-                <div class="form-group mb-1">
-                  <label for="email">E-mail</label>
-                  <input class="form-control" type="email" name="email" id="email" />
-                </div>
-                <div class="form-group mb-1">
-                  <label for="email">CPF</label>
-                  <input class="form-control" type="number" name="CPF" id="CPF" />
-                </div>
-                <div class="form-group mb-1">
-                  <label for="email">Telefone</label>
-                  <input class="form-control" type="number" name="telefone" id="telefone" />
-                </div>
-                <div class="form-group mb-1">
-                  <label for="email">Senha</label>
-                  <input class="form-control" type="password" name="senha" id="senha" />
-                </div>
-                <div class="form-group mb-4">
-                  <label for="password">Confirmar Senha</label>
-                  <input class="form-control" type="password" name="confirmarSenha" id="confirmarSenha" />
-                </div>
-                <div class="row">
-                  <div class="col-lg-6">
-                    <button type="submit" class="btn btn-warning btn-block col-9">Cadastrar</button>
+  <body>
+    <div class="container d-flex align-items-center justify-content-center vh-100">
+      <div class="col-md-8">
+        <div class="row align-items-center">
+          <div class="col-lg-3"> 
+            <img src="assets/micoleao1.png" class="img-fluid"/> 
+          </div>
+          <div class="col-lg-9">
+            <h2 class="text-center mb-3">Cadastre-se</h2>
+            <form (ngSubmit)="adicionarUsuario()" [formGroup]="cadastroForm">
+              <div class="row mb-1"> 
+                <div class="col-sm-6"> 
+                  <div class="form-group"> 
+                    <label for="nome">Nome Completo</label>
+                    <input class="form-control" type="text" name="nome" id="nome" formControlName="nome" [ngClass]="{'is-invalid': cadastroForm.get('nome')?.errors && (cadastroForm.get('nome')?.dirty || cadastroForm.get('nome')?.touched)}"/>
                   </div>
-                  <div class="col-lg-6">
-                    <p class="mt-0">Ao preencher o formulário acima, você concorda com os nossos termos de uso e nossa política de acesso.</p>
+                  <span class="text-danger" *ngIf="cadastroForm.get('nome')?.errors?.['required'] && (cadastroForm.get('nome')?.dirty || cadastroForm.get('nome')?.touched)">
+                    <p>Nome é requerido</p>
+                  </span>   
+                  <span class="text-danger" *ngIf="cadastroForm.get('nome')?.errors?.rangeLength && (cadastroForm.get('nome')?.dirty || cadastroForm.get('nome')?.touched)">
+                    <p>Formato inválido</p>
+                  </span>                  
+                </div>
+                <div class="col-sm-6"> 
+                  <div class="form-group"> 
+                    <label for="email">E-mail</label>
+                    <input class="form-control" type="email" name="email" id="email" formControlName="email" />
+                  </div>
+                  <span class="text-danger" *ngIf="cadastroForm.get('email')?.errors?.['required'] && (cadastroForm.get('email')?.dirty || cadastroForm.get('email')?.touched)">
+                    <p>E-mail é requerido</p>
+                  </span>    
+                  <span class="text-danger" *ngIf="cadastroForm.get('email')?.errors?.['email'] && (cadastroForm.get('email')?.dirty || cadastroForm.get('email')?.touched)">
+                    <p>E-mail em formato inválido</p>
+                  </span>    
+                </div>
+              </div>
+              <div class="row mb-1">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="telefone">Telefone</label>
+                    <input class="form-control" type="text" name="telefone" id="telefone" formControlName="telefone" telefone [textMask]="{mask: MASKS.telefone.textMask}"/>
+                    <span class="text-danger" *ngIf="cadastroForm.get('telefone')?.errors?.['required'] && (cadastroForm.get('telefone')?.dirty || cadastroForm.get('telefone')?.touched)">
+                      <p>Telefone é requerido</p>
+                    </span>   
                   </div>
                 </div>
-              </form>
-            </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="logradouro">Logradouro</label>
+                    <input class="form-control" type="text" name="logradouro" id="logradouro" formControlName="logradouro"/>
+                    <span class="text-danger" *ngIf="cadastroForm.get('logradouro')?.errors?.['required'] && (cadastroForm.get('logradouro')?.dirty || cadastroForm.get('logradouro')?.touched)">
+                      <p>Logradouro é requerido</p>
+                    </span>   
+                    <span class="text-danger" *ngIf="cadastroForm.get('logradouro')?.errors?.rangeLength && (cadastroForm.get('logradouro')?.dirty || cadastroForm.get('logradouro')?.touched)">
+                      <p>Formato inválido</p>
+                    </span>   
+                    
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-1">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="nlogradouro">N°</label>
+                    <input class="form-control" type="number" name="nlogradouro" id="nlogradouro" formControlName="nlogradouro"/>
+                  </div>
+                  <span class="text-danger" *ngIf="cadastroForm.get('nlogradouro')?.errors?.['required'] && (cadastroForm.get('nlogradouro')?.dirty || cadastroForm.get('nlogradouro')?.touched)">
+                    <p>n° é requerido</p>
+                  </span>
+                  <span class="text-danger" *ngIf="cadastroForm.get('nlogradouro')?.errors?.rangeLength && (cadastroForm.get('nlogradouro')?.dirty || cadastroForm.get('nlogradouro')?.touched)">
+                    <p>Formato inválido</p>
+                  </span>  
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="cidade">Cidade</label>
+                    <input class="form-control" type="text" name="cidade" id="cidade" formControlName="cidade"/>
+                    <span class="text-danger" *ngIf="cadastroForm.get('cidade')?.errors?.['required'] && (cadastroForm.get('cidade')?.dirty || cadastroForm.get('cidade')?.touched)">
+                      <p>Cidade é requerido</p>
+                    </span>
+                    <span class="text-danger" *ngIf="cadastroForm.get('cidade')?.errors?.rangeLength && (cadastroForm.get('cidade')?.dirty || cadastroForm.get('cidade')?.touched)">
+                      <p>Formato inválido</p>
+                    </span>   
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mb-1">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="complemento">Complemento</label>
+                    <input class="form-control" type="text" name="complemento" id="complemento" formControlName="complemento"/>
+                    <span class="text-danger" *ngIf="cadastroForm.get('complemento')?.errors?.['required'] && (cadastroForm.get('complemento')?.dirty || cadastroForm.get('complemento')?.touched)">
+                      <p>Complemento é requerido</p>
+                    </span>
+                    <span class="text-danger" *ngIf="cadastroForm.get('complemento')?.errors?.rangeLength && (cadastroForm.get('complemento')?.dirty || cadastroForm.get('complemento')?.touched)">
+                      <p>Formato inválido</p>
+                    </span>  
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="uf">UF</label>
+                    <input class="form-control" type="text" name="uf" id="uf" formControlName="uf"/>
+                    <span class="text-danger" *ngIf="cadastroForm.get('uf')?.errors?.['required'] && (cadastroForm.get('uf')?.dirty || cadastroForm.get('uf')?.touched)">
+                      <p>UF é requerido</p>
+                    </span>
+                    <span class="text-danger" *ngIf="cadastroForm.get('uf')?.errors?.rangeLength && (cadastroForm.get('uf')?.dirty || cadastroForm.get('uf')?.touched)">
+                      <p>Formato inválido</p>
+                    </span>     
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-1">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="senha">Senha</label>
+                    <input class="form-control" type="password" name="senha" id="senha" formControlName="senha"/>
+                    <span class="text-danger" *ngIf="cadastroForm.get('senha')?.errors?.required && (cadastroForm.get('senha')?.dirty || cadastroForm.get('senha')?.touched)">
+                      <p>Senha é requerido</p>
+                    </span>
+                    <span class="text-danger" *ngIf="cadastroForm.get('senha')?.errors?.rangeLength && (cadastroForm.get('senha')?.dirty || cadastroForm.get('senha')?.touched)">
+                      <p>Formato inválido</p>
+                    </span>  
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="confirmarsenha">Confirme sua senha</label>
+                    <input class="form-control" type="password" name="confirmarsenha" id="confirmarsenha" formControlName="confirmarsenha"/>
+                    <span class="text-danger" *ngIf="cadastroForm.get('confirmarsenha')?.errors?.required && (cadastroForm.get('confirmarsenha')?.dirty || cadastroForm.get('confirmarsenha')?.touched)">
+                      <p>Confirmar senha é requerido</p>
+                    </span>  
+                    <span class="text-danger" *ngIf="cadastroForm.get('confirmarsenha')?.errors?.equalTo && (cadastroForm.get('confirmarsenha')?.dirty || cadastroForm.get('confirmarsenha')?.touched)">
+                      <p>Senha não correspondente</p>
+                    </span>  
+                  </div>
+                </div>
+              </div>
+              
+              <div class="row">
+                <div class="col-lg-6">
+                  <button type="submit" class="btn btn-warning btn-block">Cadastrar</button>
+                </div>
+                <div class="col-lg-6">
+                  <p class="mt-0">Ao preencher o formulário acima, você concorda com os nossos termos de uso e nossa política de acesso.</p>
+                </div>
+
+
+
+
+                <!-- Div para testes de formulário -->
+                <!-- <div class="form-group">
+                  <div class="col-md-4 col-md-offset-2">
+                    <p>
+                      formulario: {{ formResult }}
+                    </p>
+                  </div>
+                </div> -->
+              </div>
+            </form>
           </div>
         </div>
       </div>
+    </div>
   </body>
+  

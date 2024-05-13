@@ -9,6 +9,13 @@ import { LoginComponent } from './acessos/login/login.component';
 import { CadastroComponent } from './acessos/cadastro/cadastro.component';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { APP_BASE_HREF } from '@angular/common';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgBrazil } from 'ng-brazil';
+import { TextMaskModule } from 'angular2-text-mask';
+import { CustomFormsModule } from 'ng2-validation';
+import { EsqueceuSenhaComponent } from './acessos/esqueceu-senha/esqueceu-senha.component'
+
 
 
 @NgModule({
@@ -18,12 +25,18 @@ import { APP_BASE_HREF } from '@angular/common';
     MenuComponent,
     FooterComponent,
     LoginComponent,
-    CadastroComponent
+    CadastroComponent,
+    EsqueceuSenhaComponent
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
-    RouterModule
+    ReactiveFormsModule,
+    RouterModule,
+    NgBrazil,
+    TextMaskModule,
+    CustomFormsModule,
   ],
   providers: [
     {provide: APP_BASE_HREF, useValue: '/'}
