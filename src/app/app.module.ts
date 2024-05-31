@@ -15,8 +15,9 @@ import { NgBrazil } from 'ng-brazil';
 import { TextMaskModule } from 'angular2-text-mask';
 import { CustomFormsModule } from 'ng2-validation';
 import { EsqueceuSenhaComponent } from './acessos/esqueceu-senha/esqueceu-senha.component'
-
-
+import { CupomComponent } from './item/item.component';
+import { HttpClientModule } from '@angular/common/http';
+import { CouponDetailComponent } from './coupon-detail/coupon-detail.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,10 @@ import { EsqueceuSenhaComponent } from './acessos/esqueceu-senha/esqueceu-senha.
     NgBrazil,
     TextMaskModule,
     CustomFormsModule,
+    CupomComponent,
+    CouponDetailComponent,
+    HttpClientModule,
+    FormsModule
   ],
   providers: [
     {provide: APP_BASE_HREF, useValue: '/'}

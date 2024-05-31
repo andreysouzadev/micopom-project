@@ -1,0 +1,36 @@
+.cupom {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .cupom h2 {
+    font-size: 1.5em;
+    color: #007BFF; /* Cor azul para destacar o nome do estabelecimento */
+  }
+  
+  .cupom p.descricao {
+    font-size: 0.9em;
+    color: #666; /* Cor cinza para a descrição */
+  }
+  
+  .cupom .valor-original {
+    font-size: 0.8em;
+    text-decoration: line-through; /* Tacha o valor original */
+    color: #999; /* Cor cinza para o valor original */
+  }
+  
+  .cupom .valor-desconto {
+    font-size: 1.2em;
+    color: #28a745; /* Cor verde para destacar o valor com desconto */
+    font-weight: bold; /* Torna o valor do desconto em negrito */
+  }
+  
+  .cupom .avaliacoes {
+    font-size: 0.8em;
+    color: #333;
+  }
+  
