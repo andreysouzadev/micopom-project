@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './acessos/login/login.component';
 import { CadastroComponent } from './acessos/cadastro/cadastro.component';
 import { EsqueceuSenhaComponent } from './acessos/esqueceu-senha/esqueceu-senha.component';
+import { CouponDetailComponent } from './coupon-detail/coupon-detail.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -11,6 +12,8 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'cadastro', component: CadastroComponent},
   { path: 'esqueceu-senha', component: EsqueceuSenhaComponent},
+  { path: 'coupon/:id', component: CouponDetailComponent},
+  { path: 'cadastro', component: CadastroComponent},
   {
     path: '',
     children: [

@@ -25,63 +25,25 @@
       </div>
     </div>
   </header>
+
+  
   
   
   
   <div class="container main-container">
     <div class="row text-center">
-  
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-          <img class="card-img-top" src="assets/crossplat.jpg" height="164px" width="253px" alt="">
-          <div class="card-body">
-            <h4 class="card-title">CUPOM EXAMPLE</h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
-          </div>
-          <div class="card-footer">
-            <a routerLink="#" class="btn btn-dark">Saiba mais</a>
-          </div>
-        </div>
+      <div class="search-container">
+        <input
+          type="text"
+          placeholder="Buscar itens..."
+          [(ngModel)]="searchTerm"
+          (keydown.enter)="onSearch()"
+        />
+        <button (click)="onSearch()">Buscar</button>
       </div>
-  
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-          <img class="card-img-top" src="assets/performance.jpg" height="164px" width="253px" alt="">
-          <div class="card-body">
-            <h4 class="card-title">CUPOM EXAMPLE</h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magni sapiente, tempore debitis beatae culpa natus architecto.</p>
-          </div>
-          <div class="card-footer">
-            <a routerLink="#" class="btn btn-dark">Saiba mais</a>
-          </div>
-        </div>
-      </div>
-  
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-          <img class="card-img-top" src="assets/produtividade.jpg" height="164px" width="253px" alt="">
-          <div class="card-body">
-            <h4 class="card-title">CUPOM EXAMPLE</h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
-          </div>
-          <div class="card-footer">
-            <a routerLink="#" class="btn btn-dark">Saiba mais</a>
-          </div>
-        </div>
-      </div>
-  
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-          <img class="card-img-top" src="assets/full_dev.jpg" height="164px" width="253px" alt="">
-          <div class="card-body">
-            <h4 class="card-title">CUPOM EXAMPLE</h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magni sapiente, tempore debitis beatae culpa natus architecto.</p>
-          </div>
-          <div class="card-footer">
-            <a routerLink="#" class="btn btn-dark">Saiba mais</a>
-          </div>
-        </div>
-      </div>
+      <div class="grid-container">
+        <app-cupom *ngFor="let cupom of filteredItems" [cupom]="cupom"></app-cupom>
+      </div>            
     </div>
   </div>
   <app-footer></app-footer>

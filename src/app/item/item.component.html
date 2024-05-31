@@ -1,0 +1,10 @@
+<div class="cupom" (click)="navigateToDetail(cupom.id_cupom)">
+    <img src="{{ cupom.url_imagem }}" alt="Logo do Estabelecimento" style="width: 100px; height: auto; margin-bottom: 10px;">
+    <h2>{{ cupom.nome_estabelecimento }}</h2>
+    <p class="descricao">{{ cupom.de_cupom }}</p>
+    <p><span class="valor-original">R$ {{ cupom.vl_original }}</span> <span class="valor-desconto">R$ {{ cupom.vl_desconto }}</span></p>
+    <p>Validade: {{ cupom.dt_validade | date:'dd/MM/yyyy' }}</p>
+    <p>Disponíveis: {{ cupom.qt_disponivel }}</p>
+    <p class="avaliacoes">Média de Avaliações: {{ cupom.media_avaliacoes || 'Não avaliado' }}</p>
+  </div>
+  

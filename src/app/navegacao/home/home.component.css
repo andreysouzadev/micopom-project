@@ -1,0 +1,49 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Colunas adaptáveis com largura mínima de 200px */
+    gap: 20px; /* Espaço entre os itens da grade */
+    padding: 20px; /* Espaçamento interno do contêiner da grade */
+  }
+
+  .search-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .search-container input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-right: 10px;
+    transition: border-color 0.3s;
+  }
+  
+  .search-container input[type="text"]:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  .search-container button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .search-container button:hover {
+    background-color: #0056b3;
+  }
+  
+  .search-container button:focus {
+    outline: none;
+  }
+  
