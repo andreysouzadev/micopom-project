@@ -1,4 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import { categoryService } from 'src/app/category.service';
+
+export interface Categorias {
+  id_categoria: number;
+  no_categoria: string;
+}
 
 @Component({
   selector: 'app-menu',
@@ -7,4 +14,28 @@ import { Component } from '@angular/core';
 })
 export class MenuComponent {
 
+  categorias: Categorias[] = []
+
+  constructor(private CategoryService: categoryService) {}
+
+  ngOnInit() {
+    this.CategoryService.getCategories().subscribe(
+      (data: Categorias[]) => {
+        console.log(data)
+        this.categorias = data;
+      },
+      (error: any) => {
+        console.error('Erro ao buscar categorias', error)
+      }
+    )
+
+  }
+
+  // export class MenuComponent {
+  //   constructor(
+  //     private router: Router
+  //   ) {}
+  //   @Input() categorias!: Categorias;
+  
+  //   }
 }

@@ -15,9 +15,11 @@ import { NgBrazil } from 'ng-brazil';
 import { TextMaskModule } from 'angular2-text-mask';
 import { CustomFormsModule } from 'ng2-validation';
 import { EsqueceuSenhaComponent } from './acessos/esqueceu-senha/esqueceu-senha.component'
-import { CupomComponent } from './item/item.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CupomComponent } from './item/item.component';
 import { CouponDetailComponent } from './coupon-detail/coupon-detail.component';
+
+
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { CouponDetailComponent } from './coupon-detail/coupon-detail.component';
     FooterComponent,
     LoginComponent,
     CadastroComponent,
-    EsqueceuSenhaComponent
+    EsqueceuSenhaComponent,
+    CupomComponent,
+    CouponDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,14 +42,14 @@ import { CouponDetailComponent } from './coupon-detail/coupon-detail.component';
     NgBrazil,
     TextMaskModule,
     CustomFormsModule,
-    CupomComponent,
-    CouponDetailComponent,
+    // CupomComponent,
+    // CouponDetailComponent,
     HttpClientModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [
     {provide: APP_BASE_HREF, useValue: '/'}
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
