@@ -8,16 +8,20 @@ import { Cupom } from './item/item.component'; // Ajuste o caminho conforme nece
   providedIn: 'root'
 })
 export class ItemService {
-  private apiUrl = environment.apiUrl + 'cupons/cupons_disponiveis';
+  private apiUrl = environment.apiUrl + 'cupons';
 
   constructor(private http: HttpClient) {}
 
   getItems(): Observable<Cupom[]> {
     console.log("Fetching items from API:", this.apiUrl);
-    return this.http.get<Cupom[]>(this.apiUrl);
+    return this.http.get<Cupom[]>(`${this.apiUrl}/cupons_disponiveis`);
   }
 
   getItemById(id: string): Observable<any> {
-    return this.http.get<Cupom[]>(`${this.apiUrl}/${id}`);
+    return this.http.get<Cupom[]>(`${this.apiUrl}/cupons_disponiveis/${id}`);
+  }
+
+  getItemByCategory(category: string): Observable<Cupom[]> {
+    return this.http.get<Cupom[]>(`${this.apiUrl}/cupons_categoria/${category}`);
   }
 }

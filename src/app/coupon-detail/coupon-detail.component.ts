@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ItemService } from '../item.service'; // Ajuste o caminho conforme necessário
 import { Cupom } from '../item/item.component'; // Ajuste o caminho conforme necessário
+import { CartItem, CartService} from '../cart/cart.service';
 
 @Component({
   selector: 'app-coupon-detail',
@@ -15,7 +16,8 @@ export class CouponDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private itemService: ItemService
+    private itemService: ItemService,
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {
@@ -31,6 +33,14 @@ export class CouponDetailComponent implements OnInit {
   }
 
   buyCoupon(): void {
-    console.log('Compra realizada')
+    const newItem: CartItem = {
+      id: this.coupon.id_cupom,
+      name: this.coupon.no_cupom,
+      price: this.coupon.vl_desconto,
+      quantity: this.quantity,
+      // Adicione outras propriedades conforme necessário
+    };
+    this.cartService.addToCart(newItem);
+    alert('Item adicionado ao carrinho!');
     }
 }

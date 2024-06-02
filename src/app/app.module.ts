@@ -27,7 +27,9 @@ import { CouponDetailComponent } from './coupon-detail/coupon-detail.component';
     FooterComponent,
     LoginComponent,
     CadastroComponent,
-    EsqueceuSenhaComponent
+    EsqueceuSenhaComponent,
+    CupomComponent,
+    CouponDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,8 +40,7 @@ import { CouponDetailComponent } from './coupon-detail/coupon-detail.component';
     NgBrazil,
     TextMaskModule,
     CustomFormsModule,
-    CupomComponent,
-    CouponDetailComponent,
+    
     HttpClientModule,
     FormsModule
   ],

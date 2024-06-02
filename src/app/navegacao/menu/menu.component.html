@@ -1,23 +1,87 @@
-<!-- No seu arquivo de componente HTML correspondente (por exemplo, navigation.component.html) -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-      <a class="navbar-brand" routerLink="/home">Micopom</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link"  routerLink="/produtos">Produtos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link"  routerLink="/sobre">Sobre</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link"  routerLink="/contato">Contato</a>
-          </li>
-        </ul>
-      </div>
+  <div class="container">
+    <a class="navbar-brand" routerLink="/home">Micopom</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/produtos">Produtos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/sobre">Sobre</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/contato">Contato</a>
+        </li>
+        <li class="nav-item">
+          <button class="btn btn-link nav-link" (click)="toggleCart()">
+            <i class="fa fa-shopping-cart"></i> Carrinho
+          </button>
+        </li>
+      </ul>
     </div>
-  </nav>
-  
+  </div>
+</nav>
+
+<!-- Overlay -->
+<div class="overlay" *ngIf="cartOpen" (click)="closeCart()"></div>
+
+<!-- Menu lateral do carrinho -->
+<div class="cart-sidebar" [class.open]="cartOpen">
+  <div class="cart-header">
+    <h3>Carrinho</h3>
+    <button class="close-btn" (click)="closeCart()">&times;</button>
+  </div>
+  <div class="cart-body">
+    <ul class="cart-items">
+      <li class="cart-item" *ngFor="let item of cartItems">
+        <div class="item-info">
+          <div class="item-details">
+            <span class="item-name">{{ item.name }}</span>
+            <input type="number" [(ngModel)]="item.quantity" (ngModelChange)="updateQuantity(item, item.quantity)" class="form-control item-quantity">
+          </div>
+          <div class="item-prices">
+            <span class="item-price">{{ item.price | currency:'BRL' }}</span>
+            <span class="item-total">Total: {{ (item.price * item.quantity) | currency:'BRL' }}</span>
+          </div>
+        </div>
+        <button class="btn btn-link btn-sm remove-btn" (click)="removeFromCart(item)">Remover</button>
+      </li>
+    </ul>
+  </div>
+  <div class="cart-footer">
+    <h4>Total do Carrinho: {{ cartTotal | currency:'BRL' }}</h4>
+    <button class="btn btn-primary btn-block">Finalizar Compra</button>
+  </div>
+</div>
+
+<!-- Menu lateral do carrinho -->
+<!-- <div class="cart-sidebar" [class.open]="cartOpen">
+  <div class="cart-header">
+    <h3>Carrinho</h3>
+    <button class="close-btn" (click)="closeCart()">&times;</button>
+  </div>
+  <div class="cart-body">
+    <ul class="cart-items">
+      <li class="cart-item" *ngFor="let item of cartItems">
+        <div class="item-info">
+          <div class="item-details">
+            <span class="item-name">{{ item.name }}</span>
+            <input type="number" [(ngModel)]="item.quantity" (ngModelChange)="updateQuantity(item, item.quantity)" class="form-control item-quantity">
+          </div>
+          <div class="item-prices">
+            <span class="item-price">{{ item.price | currency:'BRL' }}</span>
+            <span class="item-total">Total: {{ (item.price * item.quantity) | currency:'BRL' }}</span>
+          </div>
+        </div>
+        <button class="btn btn-link btn-sm remove-btn" (click)="removeFromCart(item)">Remover</button>
+      </li>
+    </ul>
+  </div>
+  <div class="cart-footer">
+    <h4>Total do Carrinho: {{ cartTotal | currency:'BRL' }}</h4>
+    <button class="btn btn-primary btn-block">Finalizar Compra</button>
+  </div>
+</div> -->
