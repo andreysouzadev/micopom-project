@@ -24,8 +24,6 @@
         <p class="h4 text-primary">{{ coupon.price | currency }}</p>
         <div class="form-group">
           <label for="quantity">Quantidade</label>
-          <input type="number" id="quantity" [(ngModel)]="quantity" class="form-control">
-          <!-- Adicionar min e max ajustado na hora de implementar/ estava dando erro -->
           <input type="number" id="quantity" [(ngModel)]="quantity" class="form-control" >
         </div>
         <button (click)="buyCoupon()" class="btn btn-primary btn-block">Comprar</button>

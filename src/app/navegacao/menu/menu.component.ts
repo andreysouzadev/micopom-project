@@ -24,12 +24,24 @@ export class MenuComponent implements OnInit {
     private cartService: CartService
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.cartService.cartItems$.subscribe(items => {
       this.cartItems = items;
       this.calculateCartTotal();
     });
 
+    
+    this.CategoryService.getCategories().subscribe(
+      (data: Categorias[]) => {
+        console.log(data)
+        this.categorias = data;
+      },
+      (error: any) => {
+        console.error('Erro ao buscar categorias', error)
+      }
+    )
+
+  }
     toggleCart() {
       this.cartOpen = !this.cartOpen;
     }
@@ -38,7 +50,7 @@ export class MenuComponent implements OnInit {
       this.cartOpen = false;
     }
 
-    updateQuantity(item: this.cartItems, quantity: number) {
+    updateQuantity(item: CartItem, quantity: number) {
       if (quantity > 0) {
         this.cartService.updateQuantity(item, quantity);
         this.calculateCartTotal();
@@ -53,17 +65,8 @@ export class MenuComponent implements OnInit {
       this.cartTotal = this.cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
     }
 
-    this.CategoryService.getCategories().subscribe(
-      (data: Categorias[]) => {
-        console.log(data)
-        this.categorias = data;
-      },
-      (error: any) => {
-        console.error('Erro ao buscar categorias', error)
-      }
-    )
+    
 
-  }
 
   // export class MenuComponent {
   //   constructor(
