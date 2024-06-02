@@ -3,6 +3,7 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { usuario } from './models/usuario';
 import { MASKS, NgBrazilValidators } from 'ng-brazil';
 import { CustomValidators } from 'ng2-validation';
+import { AuthService } from 'src/app/auth/auth.service';
 
 
 @Component({
@@ -13,11 +14,15 @@ import { CustomValidators } from 'ng2-validation';
 export class CadastroComponent implements OnInit{
 
   cadastroForm: FormGroup;
+  errorMessage: string = '';
   usuario: usuario;
   formResult: string = '';
   MASKS =  MASKS;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+  ) { }
 
   ngOnInit(): void {
 
@@ -43,4 +48,21 @@ export class CadastroComponent implements OnInit{
     this.usuario = Object.assign({}, this.usuario, this.cadastroForm.value)
     this.formResult = JSON.stringify(this.cadastroForm.value);
   }
+
+  onRegister(): void {
+    console.log("Chamou")
+    if (this.cadastroForm.valid) {
+      const { email, senha, nome, telefone, logradouro, uf, cidade, complemento, nlogradouro } = this.cadastroForm.value;
+      this.authService.register(email, senha, nome, telefone, logradouro, uf, cidade, complemento, nlogradouro).subscribe(
+        response => {
+          console.log('Register successful:', response);
+          // this.router.navigate(['/home']);
+        },
+        error => {
+          console.error('Register failed:', error);
+          this.errorMessage = error;
+        }
+      );
+    }
+}
 }
