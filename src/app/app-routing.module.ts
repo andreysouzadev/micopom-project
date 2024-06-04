@@ -5,6 +5,7 @@ import { LoginComponent } from './acessos/login/login.component';
 import { CadastroComponent } from './acessos/cadastro/cadastro.component';
 import { EsqueceuSenhaComponent } from './acessos/esqueceu-senha/esqueceu-senha.component';
 import { CouponDetailComponent } from './coupon-detail/coupon-detail.component';
+import { RegisterCouponComponent } from './coupon/register-coupon/register-coupon.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'esqueceu-senha', component: EsqueceuSenhaComponent},
   { path: 'coupon/:id', component: CouponDetailComponent},
   { path: 'cadastro', component: CadastroComponent},
+  { path: 'register-coupon', component: RegisterCouponComponent},
   {
     path: '',
     children: [

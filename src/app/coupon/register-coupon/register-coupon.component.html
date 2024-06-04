@@ -1,0 +1,87 @@
+<app-menu></app-menu>
+<div class="container mt-5">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+          <div class="col-lg-3 mb-4">
+            <img src="assets/micoleao1.png" class="img-fluid" />
+          </div>
+        </div>
+    <h2 style="margin-top: 5%;">Cadastre seu cupom</h2>
+    <form [formGroup]="couponForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="couponName">Nome do Cupom</label>
+            <input type="text" class="form-control" id="couponName" formControlName="couponName">
+            <div *ngIf="couponForm.get('couponName')?.invalid && (couponForm.get('couponName')?.dirty || couponForm.get('couponName')?.touched)" class="text-danger">
+              Nome do cupom é requerido.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="originalValue">Valor Original</label>
+            <input type="number" class="form-control" id="originalValue" formControlName="originalValue">
+            <div *ngIf="couponForm.get('originalValue')?.invalid && (couponForm.get('originalValue')?.dirty || couponForm.get('originalValue')?.touched)" class="text-danger">
+              Valor original é requerido.
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="discountValue">Valor Desconto</label>
+            <input type="number" class="form-control" id="discountValue" formControlName="discountValue">
+            <div *ngIf="couponForm.get('discountValue')?.invalid && (couponForm.get('discountValue')?.dirty || couponForm.get('discountValue')?.touched)" class="text-danger">
+              Valor desconto é requerido.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="expirationDate">Data de Validade</label>
+            <input type="date" class="form-control" id="expirationDate" formControlName="expirationDate">
+            <div *ngIf="couponForm.get('expirationDate')?.invalid && (couponForm.get('expirationDate')?.dirty || couponForm.get('expirationDate')?.touched)" class="text-danger">
+              Data de validade é requerido.
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="imageUrl">Upload da Imagem</label>
+            <input type="file" class="form-control" id="imageUrl" (change)="onFileChange($event)">
+            <div *ngIf="fileError" class="text-danger">
+              Arquivo de imagem é requerido.
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="shortDescription">Descrição Resumida</label>
+            <textarea class="form-control" id="shortDescription" formControlName="shortDescription"></textarea>
+            <div *ngIf="couponForm.get('shortDescription')?.invalid && (couponForm.get('shortDescription')?.dirty || couponForm.get('shortDescription')?.touched)" class="text-danger">
+              Descrição resumida é requerido.
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="fullDescription">Descrição Completa</label>
+        <textarea class="form-control" id="fullDescription" formControlName="fullDescription"></textarea>
+        <div *ngIf="couponForm.get('fullDescription')?.invalid && (couponForm.get('fullDescription')?.dirty || couponForm.get('fullDescription')?.touched)" class="text-danger">
+          Descrição completa é requerido.
+        </div>
+      </div>
+  
+      <button type="submit" class="btn btn-warning">Cadastrar</button>
+    </form>
+  </div>
+  <app-footer></app-footer>
+  
