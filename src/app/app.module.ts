@@ -18,6 +18,7 @@ import { EsqueceuSenhaComponent } from './acessos/esqueceu-senha/esqueceu-senha.
 import { HttpClientModule } from '@angular/common/http';
 import { CupomComponent } from './item/item.component';
 import { CouponDetailComponent } from './coupon-detail/coupon-detail.component';
+import { RegisterCouponComponent } from './coupon/register-coupon/register-coupon.component';
 
 
 
@@ -32,6 +33,7 @@ import { CouponDetailComponent } from './coupon-detail/coupon-detail.component';
     EsqueceuSenhaComponent,
     CupomComponent,
     CouponDetailComponent,
+    RegisterCouponComponent,
   ],
   imports: [
     BrowserModule,
