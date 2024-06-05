@@ -6,7 +6,7 @@
             <img src="assets/micoleao1.png" class="img-fluid" />
           </div>
         </div>
-    <h2 style="margin-top: 5%;">Cadastre seu cupom</h2>
+    <h2 style="margin-top: 2%;">Cadastre seu cupom</h2>
     <form [formGroup]="couponForm" (ngSubmit)="onSubmit()">
       <div class="row">
         <div class="col-md-6">
@@ -27,6 +27,32 @@
             </div>
           </div>
         </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="cuponQuantity">Quantidade de Cupons</label>
+            <input type="number" class="form-control" id="cuponQuantity" formControlName="cuponQuantity">
+            <div *ngIf="couponForm.get('cuponQuantity')?.invalid && (couponForm.get('cuponQuantity')?.dirty || couponForm.get('cuponQuantity')?.touched)" class="text-danger">
+              Quantidade de cupons é requerido.
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="categorylist">Categoria do Cupom</label>
+            <select class="form-control" id="categoryList" formControlName="categoryList">
+              <option value="" >Selecione...</option>
+              <option *ngFor="let Categorias of categorias" value ="{{ Categorias.id_categoria }}">
+                {{ Categorias.no_categoria }}
+              </option>
+            </select>
+            <div *ngIf="couponForm.get('categorylist')?.invalid && (couponForm.get('categorylist')?.dirty || couponForm.get('categorylist')?.touched)" class="text-danger">
+              Categoria é requerido.
+            </div>
+          </div>
+        </div>
+
       </div>
   
       <div class="row">

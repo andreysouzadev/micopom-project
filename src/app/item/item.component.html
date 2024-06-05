@@ -1,5 +1,5 @@
 <div class="cupom" (click)="navigateToDetail(cupom.id_cupom)">
-    <img src="{{ cupom.url_imagem }}" alt="Logo do Estabelecimento" style="width: 100px; height: auto; margin-bottom: 10px;">
+    <img [src]="'http://ec2-18-224-64-194.us-east-2.compute.amazonaws.com:3001/api/assets/uploads/' + cupom.url_imagem" alt="Logo do Estabelecimento" style="width: 100px; height: auto; margin-bottom: 10px;">
     <h2>{{ cupom.nome_estabelecimento }}</h2>
     <p class="descricao">{{ cupom.de_cupom }}</p>
     <p><span class="valor-original">R$ {{ cupom.vl_original }}</span> <span class="valor-desconto">R$ {{ cupom.vl_desconto }}</span></p>
