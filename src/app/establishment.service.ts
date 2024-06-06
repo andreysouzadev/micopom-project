@@ -22,17 +22,17 @@ export class EstablishmentService {
     no_uf: string,
     no_cidade: string,
     de_complemento: string,
-    nu_logradouro: number,
-    nu_telefone: number
+    nu_logradouro: string,
+    nu_telefone: string
     ): Observable<any> {
         return this.http.post(`${this.apiUrl}/novo_estabelecimento`,
         { 
-            no_estabelecimento, 
+            no_estabelecimento,
             tp_estabelecimento,
-            logradouro: no_logradouro,
-            uf: no_uf,
-            cidade :no_cidade,
-            complemento: de_complemento,
+            no_logradouro,
+            no_uf,
+            no_cidade,
+            de_complemento,
             nu_logradouro,
             nu_telefone
         });
