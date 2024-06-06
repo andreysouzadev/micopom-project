@@ -12,10 +12,9 @@ export class RegisterCouponService {
   constructor(private http: HttpClient) { }
 
   registerCoupon(
-    couponData: any, file:File
+    couponData: any, file: File, files:File[]
 
     ): Observable<any> {
-
         const formData = new FormData();
         const jsonData = {
             categoryList: couponData.categoryList,
@@ -25,12 +24,21 @@ export class RegisterCouponService {
             expirationDate: couponData.expirationDate,
             fullDescription: couponData.fullDescription,
             originalValue: couponData.originalValue,
-            shortDescription: couponData.shortDescription
+            shortDescription: couponData.shortDescription,
+            establishmentList: couponData.establishmentList
           };
         formData.append('couponData', JSON.stringify(jsonData));
       
           // Adicione o arquivo ao FormData
-        formData.append('imageUrl', file, file.name);
+        formData.append('imageUrl', file, file.name)
+        const x = Array.from(files);
+        x.forEach((file, index) => {
+          formData.append('imageUrl' + index, file, file.name)
+        })
+
+        // TRATA IMAGENS SECUNDARIAS
+        return this.http.post(`${this.apiUrl}/novo_cupom`, 
+        formData);
         // // Adicione os outros campos ao FormData
         // formData.append('categoryList', couponData.categoryList);
         // formData.append('couponName', couponData.couponName);
@@ -42,8 +50,5 @@ export class RegisterCouponService {
         // formData.append('shortDescription', couponData.shortDescription);
         // // Adicione o arquivo ao FormData
         // formData.append('imageUrl', file, file.name);   
-
-        return this.http.post(`${this.apiUrl}/novo_cupom`, 
-        formData);
     }
-}
+  }

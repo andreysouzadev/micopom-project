@@ -3,14 +3,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environment';
+import { CategoriaEstabelecimento, Estabelecimento } from "../establishment/register-establishment/register-establishment.component";
 
 @Injectable({
   providedIn: 'root'
 })
 export class EstablishmentService {
-  getCategories() {
-    throw new Error('Method not implemented.');
-  }
     private apiUrl = environment.apiUrl + 'sponsors';
 
   constructor(private http: HttpClient) { }
@@ -36,5 +34,13 @@ export class EstablishmentService {
             nu_logradouro,
             nu_telefone
         });
+    }
+
+    getCategories(): Observable<CategoriaEstabelecimento[]> {
+      return this.http.get<CategoriaEstabelecimento[]>(`${this.apiUrl}/estabelecimentos_categorias`)
+  }
+
+    getEstablishments(): Observable<Estabelecimento[]> {
+      return this.http.get<Estabelecimento[]>(`${this.apiUrl}/estabelecimentos `)
     }
 }
