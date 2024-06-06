@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CartItem, CartService } from 'src/app/cart/cart.service';
 import { Router } from '@angular/router';
-import { categoryService } from 'src/app/category.service';
+import { categoryService } from 'src/app/services/category.service';
 
 export interface Categorias {
   id_categoria: number;

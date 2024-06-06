@@ -54,6 +54,32 @@
         </div>
 
       </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="establishmentList">Estabelecimento</label>
+            <select class="form-control" id="establishmentList" formControlName="establishmentList">
+              <option value="" >Selecione...</option>
+              <option *ngFor="let Estabelecimento of estabelecimentos" value ="{{ Estabelecimento.id_estabelecimento }}">
+                {{ Estabelecimento.no_estabelecimento }}
+              </option>
+            </select>
+            <div *ngIf="couponForm.get('establishmentList')?.invalid && (couponForm.get('establishmentList')?.dirty || couponForm.get('establishmentList')?.touched)" class="text-danger">
+              Estabelecimento é requerido.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="shortDescription">Descrição Resumida</label>
+            <textarea class="form-control" id="shortDescription" formControlName="shortDescription"></textarea>
+            <div *ngIf="couponForm.get('shortDescription')?.invalid && (couponForm.get('shortDescription')?.dirty || couponForm.get('shortDescription')?.touched)" class="text-danger">
+              Descrição resumida é requerido.
+            </div>
+          </div>
+        </div>
+      </div>
   
       <div class="row">
         <div class="col-md-6">
@@ -79,23 +105,27 @@
       <div class="row">
         <div class="col-md-6">
           <div class="form-group">
-            <label for="imageUrl">Upload da Imagem</label>
-            <input type="file" class="form-control" id="imageUrl" (change)="onFileChange($event)">
+            <label for="imageUrl">Upload da Imagem primária</label>
+            <input type="file" class="form-control" id="imageUrl" (change)="onMainFileChange($event)" accept="image/png, image/jpeg, image/jpg">
             <div *ngIf="fileError" class="text-danger">
               Arquivo de imagem é requerido.
             </div>
           </div>
         </div>
-
         <div class="col-md-6">
           <div class="form-group">
-            <label for="shortDescription">Descrição Resumida</label>
-            <textarea class="form-control" id="shortDescription" formControlName="shortDescription"></textarea>
-            <div *ngIf="couponForm.get('shortDescription')?.invalid && (couponForm.get('shortDescription')?.dirty || couponForm.get('shortDescription')?.touched)" class="text-danger">
-              Descrição resumida é requerido.
+            <label for="imageUrl">Upload de imagens secundarias</label>
+            <input type="file" class="form-control" id="imageUrl" (change)="onFileChange($event)" accept="image/png, image/jpeg, image/jpg" multiple>
+            <div *ngIf="fileError" class="text-danger">
+              Arquivo de imagem é requerido.
+            </div>
+            <div *ngIf="fileLimitExceeded" class="text-danger">
+              Você pode enviar no máximo 3 imagens secundárias
             </div>
           </div>
         </div>
+
+        
       </div>
   
       <div class="form-group">

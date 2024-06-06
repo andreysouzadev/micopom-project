@@ -1,11 +1,16 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { EstablishmentService } from 'src/app/establishment.service';
-import { establishmentCategoryService } from 'src/app/establishmentCategory.service';
+import { EstablishmentService } from 'src/app/services/establishment.service';
+
 
 export interface CategoriaEstabelecimento {
   id_categoria: number;
   no_categoria: string;
+}
+
+export interface Estabelecimento {
+  id_estabelecimento: number;
+  no_estabelecimento: string;
 }
 
 @Component({
@@ -21,7 +26,6 @@ export class RegisterEstablishmentComponent {
   constructor(
     private formBuilder: FormBuilder,
     private establishmentService : EstablishmentService,
-    private establishmentCategoryService: establishmentCategoryService
   ) {}
 
   ngOnInit(): void {
@@ -36,7 +40,7 @@ export class RegisterEstablishmentComponent {
       nu_telefone: ['', Validators.required]
     });
 
-    this.establishmentCategoryService.getCategories().subscribe(
+    this.establishmentService.getCategories().subscribe(
       (data: CategoriaEstabelecimento[]) => {
         console.log(data)
         this.categorias = data;

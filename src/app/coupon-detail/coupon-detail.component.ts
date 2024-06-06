@@ -22,9 +22,18 @@ export class CouponDetailComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
+    
     if (id) {
       this.itemService.getItemById(id).subscribe(data => {
-        this.coupon = data;
+        // this.coupon = data;
+        // console.log(data);
+        // this.coupon = data.map(cupom => ({
+        //   ...cupom,
+        //   imagens: [cupom.url_imagem, cupom.url_imagem2, cupom.url_imagem3, cupom.url_imagem4].filter(url => url !== null)
+        // }));
+
+        this.coupon = {data, imagens:[data.url_imagem, data.url_imagem2, data.url_imagem3, data.url_imagem4].filter(url => url != null)}
+        console.log(this.coupon)
       });
     } else {
       // Redireciona para a página inicial ou exibe uma mensagem de erro
@@ -37,10 +46,11 @@ export class CouponDetailComponent implements OnInit {
       id: this.coupon.id_cupom,
       name: this.coupon.no_cupom,
       price: this.coupon.vl_desconto,
-      quantity: this.quantity,
+      quantity: this.quantity
       // Adicione outras propriedades conforme necessário
     };
     this.cartService.addToCart(newItem);
     alert('Item adicionado ao carrinho!');
     }
+
 }
