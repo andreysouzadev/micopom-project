@@ -19,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CupomComponent } from './item/item.component';
 import { CouponDetailComponent } from './coupon-detail/coupon-detail.component';
 import { RegisterCouponComponent } from './coupon/register-coupon/register-coupon.component';
+import { RegisterEstablishmentComponent } from './establishment/register-establishment/register-establishment.component';
 
 
 
@@ -34,6 +35,7 @@ import { RegisterCouponComponent } from './coupon/register-coupon/register-coupo
     CupomComponent,
     CouponDetailComponent,
     RegisterCouponComponent,
+    RegisterEstablishmentComponent,
   ],
   imports: [
     BrowserModule,
