@@ -21,7 +21,7 @@ export class RegisterCouponComponent implements OnInit {
   couponForm: FormGroup;
   fileError: boolean = false;
   categorias: Categorias[] = []
-  errorMessage: string=""
+  errorMessage: string = ""
   selectedFile: File;
 
   constructor(
