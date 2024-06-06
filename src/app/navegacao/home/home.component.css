@@ -24,7 +24,7 @@
   }
   
   .search-container input[type="text"]:focus {
-    border-color: #007bff;
+    border-color: #ffc107;
     outline: none;
   }
   
@@ -46,4 +46,4 @@
   .search-container button:focus {
     outline: none;
   }
-  
+
