@@ -21,6 +21,7 @@ export class MenuComponent implements OnInit {
   cartTotal: number = 0; // Total do carrinho
   categorias: Categorias[] = []
   user: any;
+  itemCount: number = 0;
 
   constructor(
     private CategoryService: categoryService,
@@ -29,6 +30,8 @@ export class MenuComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
+    
     
     this.authService.getUser().subscribe(user => {
       this.user = user;
@@ -40,6 +43,9 @@ export class MenuComponent implements OnInit {
       this.calculateCartTotal();
     });
 
+    this.cartService.getItemCount().subscribe(count => {
+      this.itemCount = count;
+    })
     
     this.CategoryService.getCategories().subscribe(
       (data: Categorias[]) => {
@@ -78,6 +84,8 @@ export class MenuComponent implements OnInit {
     calculateCartTotal(){
       this.cartTotal = this.cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
     }
+
+    
 
     
 
