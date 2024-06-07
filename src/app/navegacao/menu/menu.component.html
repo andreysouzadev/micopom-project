@@ -68,8 +68,8 @@
             <input type="number" [(ngModel)]="item.quantity" (ngModelChange)="updateQuantity(item, item.quantity)" class="form-control item-quantity">
           </div>
           <div class="item-prices">
-            <span class="item-price">{{ item.price | currency:'BRL' }}</span>
-            <span class="item-total">Total: {{ (item.price * item.quantity) | currency:'BRL' }}</span>
+            <span class="item-price">{{ item.price | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</span>
+            <span class="item-total">Total: {{ (item.price * item.quantity) | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</span>
           </div>
         </div>
         <button class="btn btn-link btn-sm remove-btn" (click)="removeFromCart(item)">Remover</button>
