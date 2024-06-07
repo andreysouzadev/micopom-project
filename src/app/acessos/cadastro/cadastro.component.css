@@ -10,3 +10,19 @@
     border-color: #e4b51a;
     border-width: 2px;
   }
+
+  .container {
+    max-width: 600px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .text-danger {
+    font-size: 0.875em;
+    margin-top: 5px;
+  }
+  
+
+  
