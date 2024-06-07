@@ -26,7 +26,7 @@
       </div>
       <p class="price">
         <span class="valor-original">R$ {{ cupom.vl_original }}</span>
-        <span class="valor-desconto">R$ {{ cupom.vl_desconto }}</span>
+        <span class="valor-desconto">R$ {{ cupom.vl_original - cupom.vl_desconto }}</span>
       </p>
       <p class="validity">Validade: {{ cupom.dt_validade | date:'dd/MM/yyyy' }}</p>
       <p class="availability">Disponíveis: {{ cupom.qt_disponivel }}</p>
