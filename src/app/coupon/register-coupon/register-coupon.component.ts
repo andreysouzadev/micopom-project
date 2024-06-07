@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { categoryService } from 'src/app/services/category.service';
 import { EstablishmentService } from 'src/app/services/establishment.service';
 import { CouponService } from 'src/app/services/coupons.service';
+import { Router } from '@angular/router';
 
 
 export interface Categorias {
@@ -38,7 +39,8 @@ export class RegisterCouponComponent implements OnInit {
     private formBuilder: FormBuilder,
     private CategoryService: categoryService,
     private EstablishmentService: EstablishmentService,
-    private CouponService: CouponService
+    private CouponService: CouponService, 
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -122,7 +124,6 @@ export class RegisterCouponComponent implements OnInit {
         ).subscribe(  
           response => {
             console.log('Register successful:', response);
-            // this.router.navigate(['/home']);
           },
           error => {
             console.error('Register failed:', error);

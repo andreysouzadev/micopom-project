@@ -4,6 +4,7 @@ import { usuario } from './models/usuario';
 import { MASKS, NgBrazilValidators } from 'ng-brazil';
 import { CustomValidators } from 'ng2-validation';
 import { AuthService } from 'src/app/auth/auth.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -22,6 +23,7 @@ export class CadastroComponent implements OnInit{
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -56,7 +58,7 @@ export class CadastroComponent implements OnInit{
       this.authService.register(email, senha, nome, telefone, logradouro, uf, cidade, complemento, nlogradouro).subscribe(
         response => {
           console.log('Register successful:', response);
-          // this.router.navigate(['/home']);
+          this.router.navigate(['/login']);
         },
         error => {
           console.error('Register failed:', error);
