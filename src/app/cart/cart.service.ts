@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 export interface CartItem {
   id: number;
@@ -14,6 +14,7 @@ export interface CartItem {
 export class CartService {
   private cartItems: CartItem[] = [];
   private cartItemsSubject = new BehaviorSubject<CartItem[]>([]);
+  private itemCountSubject = new BehaviorSubject<number>(0);
 
   cartItems$ = this.cartItemsSubject.asObservable();
 
@@ -25,6 +26,11 @@ export class CartService {
     const cart = localStorage.getItem('cart');
     this.cartItems = cart ? JSON.parse(cart) : [];
     this.cartItemsSubject.next(this.cartItems);
+    this.updateItemCount();
+  }
+
+  getItemCount(): Observable<number> {
+    return this.itemCountSubject.asObservable();
   }
 
   addToCart(item: CartItem) {
@@ -35,6 +41,7 @@ export class CartService {
       this.cartItems.push(item);
     }
     this.saveCart();
+    this.updateItemCount();
   }
 
   updateQuantity(item: CartItem, quantity: number) {
@@ -42,16 +49,23 @@ export class CartService {
     if (cartItem) {
       cartItem.quantity = quantity;
       this.saveCart();
+      this.updateItemCount();
     }
   }
 
   removeFromCart(item: CartItem) {
     this.cartItems = this.cartItems.filter(cartItem => cartItem.id !== item.id);
     this.saveCart();
+    this.updateItemCount();
   }
 
   private saveCart() {
+    this.updateItemCount();
     localStorage.setItem('cart', JSON.stringify(this.cartItems));
     this.cartItemsSubject.next(this.cartItems);
+  }
+
+  private updateItemCount(): void {
+    this.itemCountSubject.next(this.cartItems.length);
   }
 }

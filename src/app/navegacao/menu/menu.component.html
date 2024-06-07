@@ -29,6 +29,7 @@
         <li class="nav-item">
           <button class="btn btn-link nav-link" (click)="toggleCart()">
             <i class="fa fa-shopping-cart text-white"></i>
+            <span *ngIf="itemCount > 0">{{ itemCount }}</span>
           </button>
         </li>
         <li *ngIf="!user" class="nav-item" routerLinkActive="active">
