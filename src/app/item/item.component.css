@@ -1,36 +1,124 @@
 .cupom {
-    border: 1px solid #ddd;
-    padding: 15px;
-    border-radius: 10px;
-    background-color: #f9f9f9;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-  }
-  
-  .cupom h2 {
-    font-size: 1.5em;
-    color: #007BFF; /* Cor azul para destacar o nome do estabelecimento */
-  }
-  
-  .cupom p.descricao {
-    font-size: 0.9em;
-    color: #666; /* Cor cinza para a descrição */
-  }
-  
-  .cupom .valor-original {
-    font-size: 0.8em;
-    text-decoration: line-through; /* Tacha o valor original */
-    color: #999; /* Cor cinza para o valor original */
-  }
-  
-  .cupom .valor-desconto {
-    font-size: 1.2em;
-    color: #28a745; /* Cor verde para destacar o valor com desconto */
-    font-weight: bold; /* Torna o valor do desconto em negrito */
-  }
-  
-  .cupom .avaliacoes {
-    font-size: 0.8em;
-    color: #333;
-  }
-  
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 0;
+  margin: 20px;
+  text-align: left;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+  width: 250px;
+  overflow: hidden;
+  background: white;
+  cursor: pointer;
+   display: flex;
+  flex-direction: column;
+  height: 450px; /* Defina uma altura fixa ou mínima para garantir consistência */
+}
+
+.cupom:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.cupom h2.titulo {
+  font-size: 1em;
+  margin: 5px 0;
+  text-align: center; /* Alinha o texto horizontalmente ao centro */
+  height: 3em; /* Altura fixa */
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Limitar a 3 linhas */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.image-wrapper {
+  height: 200px;
+  width: 100%;
+  background: #f9f9f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.image-wrapper img {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+}
+
+.details {
+  padding: 15px;
+}
+
+.cupom h2 {
+  font-size: 1em;
+  margin: 10px 0;
+}
+
+.name-establishment {
+  font-size: 0.8em;
+  color: #888; 
+}
+
+.name-coupon{
+  min-height:30px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cupom .descricao {
+  color: #555;
+  margin: 10px 0;
+  font-size: 0.9em;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Limitar a 3 linhas */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height:40px;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.stars {
+  color: #ffc107;
+  font-size: 1em;
+}
+
+.no-rating .stars {
+  color: #ccc;
+}
+
+.reviews {
+  font-size: 0.8em;
+  color: #888;
+  margin-left: 5px;
+}
+
+.cupom .price {
+  color: #e74c3c;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.cupom .valor-original {
+  text-decoration: line-through;
+  color: #999;
+  margin-right: 10px;
+  font-size: 0.9em;
+}
+
+.cupom .validity, .cupom .availability {
+  font-size: 0.8em;
+  color: #888;
+}
+
+.cupom p {
+  margin: 5px 0;
+}

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { categoryService } from 'src/app/services/category.service';
 import { EstablishmentService } from 'src/app/services/establishment.service';
-import { RegisterCouponService } from 'src/app/services/register-coupon.service';
+import { CouponService } from 'src/app/services/coupons.service';
 
 
 export interface Categorias {
@@ -37,7 +37,7 @@ export class RegisterCouponComponent implements OnInit {
     private formBuilder: FormBuilder,
     private CategoryService: categoryService,
     private EstablishmentService: EstablishmentService,
-    private registerCouponService: RegisterCouponService
+    private CouponService: CouponService
   ) {}
 
   ngOnInit(): void {
@@ -114,7 +114,7 @@ export class RegisterCouponComponent implements OnInit {
         const { shortDescription, originalValue, discountValue, expirationDate, cuponQuantity, imageUrl, fullDescription, couponName, categoryList, establishmentList } = this.couponForm.value;
         // console.log(this.couponForm.value)
         // console.log(imageUrl)
-        this.registerCouponService.registerCoupon(
+        this.CouponService.registerCoupon(
           {shortDescription, originalValue, discountValue, expirationDate, cuponQuantity, imageUrl, fullDescription, couponName, categoryList, establishmentList},
           this.mainFile,
           this.selectedFiles
