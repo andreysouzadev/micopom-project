@@ -31,11 +31,17 @@
             <i class="fa fa-shopping-cart text-white"></i>
           </button>
         </li>
-        <li class="nav-item" routerLinkActive="active">
+        <li *ngIf="!user" class="nav-item" routerLinkActive="active">
           <a class="btn btn-warning text-dark me-2" routerLink="/login">Login</a>
         </li>
-        <li class="nav-item" routerLinkActive="active">
+        <li *ngIf="!user" class="nav-item" routerLinkActive="active">
           <a class="btn btn-warning text-dark" routerLink="/cadastro">Cadastro</a>
+        </li>
+        <li *ngIf="user"  class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/minha-conta">Olá, {{user.no_nome_completo}}</a>
+        </li>
+        <li *ngIf="user" class="nav-item" routerLinkActive="active">
+          <a class="btn btn-warning text-dark" (click)="logout()">Logout</a>
         </li>
       </ul>
     </div>

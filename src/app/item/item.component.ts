@@ -9,6 +9,7 @@ export interface Cupom {
   vl_original: number;
   vl_desconto: number;
   dt_validade: Date;
+  id_categoria: number;
   qt_disponivel: number;
   id_estabelecimento: number;
   url_imagem: string;

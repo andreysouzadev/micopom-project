@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { CartItem, CartService } from 'src/app/cart/cart.service';
 import { Router } from '@angular/router';
 import { categoryService } from 'src/app/services/category.service';
+import { AuthService } from 'src/app/auth/auth.service';
+
 
 export interface Categorias {
   id_categoria: number;
@@ -18,13 +20,21 @@ export class MenuComponent implements OnInit {
   cartItems: CartItem[] = [];
   cartTotal: number = 0; // Total do carrinho
   categorias: Categorias[] = []
+  user: any;
 
   constructor(
     private CategoryService: categoryService,
-    private cartService: CartService
+    private cartService: CartService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
+    
+    this.authService.getUser().subscribe(user => {
+      this.user = user;
+      console.log("USER:", user);
+    })
+
     this.cartService.cartItems$.subscribe(items => {
       this.cartItems = items;
       this.calculateCartTotal();
@@ -48,6 +58,10 @@ export class MenuComponent implements OnInit {
 
     closeCart() {
       this.cartOpen = false;
+    }
+
+    logout(){
+      this.authService.logout();
     }
 
     updateQuantity(item: CartItem, quantity: number) {

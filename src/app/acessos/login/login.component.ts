@@ -38,16 +38,8 @@ export class LoginComponent {
     console.log("Chamou")
     if (this.loginForm.valid) {
       const { email, senha } = this.loginForm.value;
-      this.authService.login(email, senha).subscribe(
-        response => {
-          console.log('Login successful:', response);
-          // this.router.navigate(['/home']);
-        },
-        error => {
-          console.error('Login failed:', error);
-          this.errorMessage = 'Invalid email or password';
-        }
-      );
+      this.authService.login(email, senha);
+     
     }
   }
 
