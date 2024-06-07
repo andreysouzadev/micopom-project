@@ -1,7 +1,7 @@
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
   <div class="container">
-    <a class="navbar-brand" routerLink="/home">Micopom</a>
+    <a class="navbar-brand" routerLink="/home"><img src="assets/micoleao3.png" alt="Logo"  class="img-logo"/></a>
     <div class="dropdown ms-2">
       <button class="btn btn-warning dropdown-toggle text-dark" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
         Categorias
@@ -17,32 +17,24 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/home">Inicio</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
           <a class="nav-link" routerLink="/registro-cupom">Novo Cupom</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" routerLinkActive="active">
           <a class="nav-link" routerLink="/registro-estabelecimento">Estabelecimento</a>
         </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link" routerLink="/sobre">Sobre</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/contato">Contato</a>
-        </li> -->
-        <!-- <li class="nav-item">
-          <button class="btn btn-link nav-link" (click)="toggleCart()">
-            <i class="fa fa-shopping-cart"></i> Carrinho
-          </button>
-        </li> -->
         <li class="nav-item">
           <button class="btn btn-link nav-link" (click)="toggleCart()">
             <i class="fa fa-shopping-cart text-white"></i>
           </button>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" routerLinkActive="active">
           <a class="btn btn-warning text-dark me-2" routerLink="/login">Login</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" routerLinkActive="active">
           <a class="btn btn-warning text-dark" routerLink="/cadastro">Cadastro</a>
         </li>
       </ul>
