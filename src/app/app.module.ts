@@ -22,6 +22,9 @@ import { RegisterCouponComponent } from './coupon/register-coupon/register-coupo
 import { RegisterEstablishmentComponent } from './establishment/register-establishment/register-establishment.component';
 import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './auth/authInterceptor.service';
+import { AuthService } from './auth/auth.service';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -49,13 +52,14 @@ registerLocaleData(localePt, 'pt-BR');
     NgBrazil,
     TextMaskModule,
     CustomFormsModule,
-    
     HttpClientModule,
     FormsModule,
   ],
   providers: [
+    AuthService,
     {provide: APP_BASE_HREF, useValue: '/'},
-    { provide: LOCALE_ID, useValue: 'pt-BR' }
+    { provide: LOCALE_ID, useValue: 'pt-BR' },
+    // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
 })
