@@ -22,6 +22,7 @@ export class RegisterEstablishmentComponent {
   establishmentForm: FormGroup;
   errorMessage: string = ''
   categorias: CategoriaEstabelecimento[] = []
+  estabelecimentoInserido:boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -62,6 +63,9 @@ onSubmit(): void {
       response => {
         console.log('Register successful:', response);
         // this.router.navigate(['/home']);
+        this.estabelecimentoInserido = true;
+        setTimeout(() => this.estabelecimentoInserido = false, 5000);
+        this.establishmentForm.reset();
       },
       error => {
         console.error('Register Failed', error);
