@@ -1,12 +1,87 @@
-.carousel-item img {
-    max-height: 400px;
-    object-fit: cover;
-  }
-  
   .btn-block {
     margin-top: 20px;
   }
 
   .content-wrapper{
     padding-top: 70px;
+}
+
+/* Estilo para as imagens do carrossel */
+.carousel-item img {
+  width: 100%;
+  height: 300px; /* Defina a altura desejada para as imagens */
+  object-fit: fill; /* Assegura que a imagem mantenha a proporção e ocupe todo o espaço */
+}
+
+/* Estilo para as setas de navegação */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  /* Personalize o tamanho, a cor e a aparência das setas de acordo com suas preferências */
+  width: 50px; /* Tamanho da seta */
+  height: 50px;
+  background-size: contain;
+  background-color: rgba(0, 0, 0, 0.5); /* Cor de fundo */
+  border-radius: 50%; /* Formato de círculo */
+  border: 2px solid rgba(0, 0, 0, 0.5); /* Borda */
+}
+
+/* Estilo para a posição das setas de navegação */
+.carousel-control-prev,
+.carousel-control-next {
+  /* Ajuste a posição das setas de acordo com sua necessidade */
+  top: 50%; /* Centraliza verticalmente */
+}
+
+/* Estilo para a cor da seta */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: rgba(0, 0, 0, 0.5); /* Cor de fundo */
+  border: none; /* Sem borda */
+}
+
+
+.review {
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+}
+
+.reviewer-name {
+  margin: 0;
+  font-size: 1.2em;
+}
+
+.review-date {
+  margin: 0;
+  font-size: 0.8em;
+  color: #888;
+}
+
+.rating-wrapper {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.rating-text {
+  margin: 0;
+  margin-right: 10px;
+  font-size: 1.2em;
+}
+
+.coupon-description {
+  margin-bottom: 35px; /* Ajuste o valor conforme necessário */
+}
+
+.rating {
+  font-size: 2.0em;
+  color: #f1c40f;
+}
+
+.rating .filled {
+  color: #f1c40f; /* Cor das estrelas preenchidas */
+}
+
+.review-comment {
+  margin: 0;
+  font-size: 1em;
 }
