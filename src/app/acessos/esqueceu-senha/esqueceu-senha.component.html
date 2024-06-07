@@ -1,30 +1,29 @@
+<app-menu></app-menu>
 <body>
-    <div class="container d-flex align-items-center justify-content-center vh-100">
-      <div class="col-md-10">
-        <div class="row align-items-center">
-          <div class="col-lg-3"> 
-            <img src="assets/micoleao1.png" class="img-fluid"/> 
+  <div class="container d-flex align-items-center justify-content-center vh-50">
+    <div class="col-md-8">
+      <div class="text-center mb-2">
+        <img src="assets/micoleao1.png" class="img-fluid"/>
+      </div>
+      <h2 class="text-center mb-3">Esqueceu a senha?</h2>
+      <form [formGroup]="esqueceusenhaForm">
+        <div class="form-group mb-2">
+          <label for="email">E-mail</label>
+          <input class="form-control" type="email" name="email" id="email" formControlName="email" />
+          <div class="text-danger" *ngIf="esqueceusenhaForm.get('email')?.errors?.['required'] && (esqueceusenhaForm.get('email')?.dirty || esqueceusenhaForm.get('email')?.touched)">
+            E-mail é requerido
           </div>
-          <div class="col-lg-7">
-            <h2 class="text-center mb-3">Esqueceu a senha?</h2>
-            <form [formGroup]="esqueceusenhaForm">
-              <div class="form-group mb-3">
-                <label for="email">E-mail</label>
-                <input class="form-control" type="email" name="email" id="email" formControlName="email" />
-                <span class="text-danger" *ngIf="esqueceusenhaForm.get('email')?.errors?.['required'] && (esqueceusenhaForm.get('email')?.dirty || esqueceusenhaForm.get('email')?.touched)">
-                  <p>E-mail é requerido</p>
-                </span>    
-                <span class="text-danger" *ngIf="esqueceusenhaForm.get('email')?.errors?.['email'] && (esqueceusenhaForm.get('email')?.dirty || esqueceusenhaForm.get('email')?.touched)">
-                  <p>E-mail em formato inválido</p>
-                </span>    
-              </div>
-              <button type="submit" class="btn btn-warning btn-block col-12">Enviar e-mail</button>
-            </form>
+          <div class="text-danger" *ngIf="esqueceusenhaForm.get('email')?.errors?.['email'] && (esqueceusenhaForm.get('email')?.dirty || esqueceusenhaForm.get('email')?.touched)">
+            E-mail em formato inválido
           </div>
         </div>
-      </div>
+        <button type="submit" class="btn btn-warning btn-block col-12 mb-2">Enviar e-mail</button>
+      </form>
     </div>
-    </body>
+  </div>
+</body>
+<app-footer></app-footer>
+
     
     
     
