@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environment';
+import { Rating } from '../coupon-detail/coupon-detail.component';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RegisterCouponService {
+export class CouponService {
     private apiUrl = environment.apiUrl + 'cupons';
 
   constructor(private http: HttpClient) { }
@@ -39,16 +40,11 @@ export class RegisterCouponService {
         // TRATA IMAGENS SECUNDARIAS
         return this.http.post(`${this.apiUrl}/novo_cupom`, 
         formData);
-        // // Adicione os outros campos ao FormData
-        // formData.append('categoryList', couponData.categoryList);
-        // formData.append('couponName', couponData.couponName);
-        // formData.append('cuponQuantity', couponData.cuponQuantity.toString());
-        // formData.append('discountValue', couponData.discountValue.toString());
-        // formData.append('expirationDate', couponData.expirationDate);
-        // formData.append('fullDescription', couponData.fullDescription);
-        // formData.append('originalValue', couponData.originalValue.toString());
-        // formData.append('shortDescription', couponData.shortDescription);
-        // // Adicione o arquivo ao FormData
-        // formData.append('imageUrl', file, file.name);   
+    }
+
+    getRatings(
+      establishmentId: number
+    ): Observable<any> {
+      return this.http.get<Rating[]>(`${this.apiUrl}/avaliacoes/${establishmentId}`)
     }
   }

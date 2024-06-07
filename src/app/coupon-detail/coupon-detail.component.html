@@ -19,9 +19,9 @@
         </div>
       </div>
       <div class="col-md-6">
-        <h2>{{ coupon.no_cupom }}</h2>
-        <p>{{ coupon.de_cupom }}</p>
-        <p class="h4 text-primary">{{ coupon.price | currency }}</p>
+        <h2>{{ coupon.data.no_cupom }}</h2>
+        <p>{{ coupon.data.de_cupom }}</p>
+        <p class="h4 text-primary">{{ coupon.data.vl_original - coupon.data.vl_desconto | currency }}</p>
         <div class="form-group">
           <label for="quantity">Quantidade</label>
           <input type="number" id="quantity" [(ngModel)]="quantity" class="form-control" >
@@ -31,11 +31,22 @@
     </div>
     <div class="mt-5">
       <h4>Descrição</h4>
-      <p>{{ coupon.de_cupom_completa }}</p>
-      <h4>Avaliações</h4>
-      <div *ngFor="let review of coupon.reviews">
-        <p><strong>{{ review.user }}</strong>: {{ review.comment }}</p>
-      </div>
-</div>
+      <p class="coupon-description">{{ coupon.data.de_cupom_completa }}</p>
+      <h4>Avaliações de <b>{{coupon.data.nome_estabelecimento}}</b></h4>
+      <div *ngFor="let review of ratings">
+        <div class="review">
+          <p class="reviewer-name"><strong>{{ review.no_nome_completo }}</strong></p>
+          <p class="review-date">{{ review.dt_avaliacao | date:'dd/MM/yyyy' }}</p>
+          <div class="rating-wrapper">
+            <span class="rating">
+              <span *ngFor="let star of [1, 2, 3, 4, 5]" [ngClass]="{'filled': star <= review.nu_avaliacao}">
+                ★
+              </span>
+            </span>
+          </div>
+          <p class="review-comment">{{ review.de_avaliacao }}</p>
+        </div>
+      </div>      
+    </div>
 
   </div>

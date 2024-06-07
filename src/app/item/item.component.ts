@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 export interface Cupom {
   id_cupom: number;
   de_cupom: string;
+  no_cupom: string;
   de_cupom_completa: string;
   vl_original: number;
   vl_desconto: number;
