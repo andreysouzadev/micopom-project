@@ -61,9 +61,9 @@ export class CouponDetailComponent implements OnInit {
 
   buyCoupon(): void {
     const newItem: CartItem = {
-      id: this.coupon.id_cupom,
-      name: this.coupon.no_cupom,
-      price: this.coupon.vl_desconto,
+      id: this.coupon.data.id_cupom,
+      name: this.coupon.data.no_cupom,
+      price: this.coupon.data.vl_original - this.coupon.data.vl_desconto,
       quantity: this.quantity
       // Adicione outras propriedades conforme necessário
     };
