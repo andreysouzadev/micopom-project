@@ -32,6 +32,7 @@ export class RegisterCouponComponent implements OnInit {
   errorMessage: string = ""
   selectedFiles: File[];
   mainFile: File;
+  cupomInserido: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -127,7 +128,11 @@ export class RegisterCouponComponent implements OnInit {
             console.error('Register failed:', error);
             this.errorMessage = error;
           }
+          
         );
+        this.cupomInserido = true;
+        this.couponForm.reset();
+        setTimeout(() => this.cupomInserido = false, 5000);
     } else {
       this.fileError = !this.couponForm.get('imageUrl')?.value;
 

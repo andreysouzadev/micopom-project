@@ -6,6 +6,9 @@
             <img src="assets/micoleao1.png" class="img-fluid" />
           </div>
         </div>
+        <div *ngIf="cupomInserido" class="alert alert-success alert-dismissible fade show" role="alert">
+          Cupom inserido com sucesso
+        </div>
     <h2 style="margin-top: 2%;">Cadastre seu cupom</h2>
     <form [formGroup]="couponForm" (ngSubmit)="onSubmit()">
       <div class="row">

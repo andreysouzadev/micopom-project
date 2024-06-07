@@ -6,6 +6,9 @@
             <img src="assets/micoleao1.png" class="img-fluid" />
           </div>
         </div>
+        <div *ngIf="estabelecimentoInserido" class="alert alert-success alert-dismissible fade show" role="alert">
+          Estabelecimento inserido com sucesso
+        </div>
     <h2 style="margin-top: 2%;">Cadastre seu estabelecimento</h2>
     <form [formGroup]="establishmentForm" (ngSubmit)="onSubmit()">
       <div class="row">
