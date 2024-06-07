@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,7 +20,10 @@ import { CupomComponent } from './item/item.component';
 import { CouponDetailComponent } from './coupon-detail/coupon-detail.component';
 import { RegisterCouponComponent } from './coupon/register-coupon/register-coupon.component';
 import { RegisterEstablishmentComponent } from './establishment/register-establishment/register-establishment.component';
+import localePt from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
 
+registerLocaleData(localePt, 'pt-BR');
 
 
 @NgModule({
@@ -51,7 +54,8 @@ import { RegisterEstablishmentComponent } from './establishment/register-establi
     FormsModule,
   ],
   providers: [
-    {provide: APP_BASE_HREF, useValue: '/'}
+    {provide: APP_BASE_HREF, useValue: '/'},
+    { provide: LOCALE_ID, useValue: 'pt-BR' }
   ],
   bootstrap: [AppComponent],
 })

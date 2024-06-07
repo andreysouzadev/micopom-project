@@ -25,8 +25,8 @@
         <span class="reviews">{{ cupom.qtd_avaliacoes ? cupom.qtd_avaliacoes + ' avaliações' : 'Não avaliado' }}</span>
       </div>
       <p class="price">
-        <span class="valor-original">R$ {{ cupom.vl_original }}</span>
-        <span class="valor-desconto">R$ {{ cupom.vl_original - cupom.vl_desconto }}</span>
+        <span class="valor-original">{{ cupom.vl_original | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</span>
+        <span class="valor-desconto">{{ (cupom.vl_original - cupom.vl_desconto) | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</span>
       </p>
       <p class="validity">Validade: {{ cupom.dt_validade | date:'dd/MM/yyyy' }}</p>
       <p class="availability">Disponíveis: {{ cupom.qt_disponivel }}</p>
