@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+  <div class="container d-flex justify-content-start align-items-center">
+    <button id="sidebarCollapse" class="btn btn-dark me-2" (click)="toggleSidebar()">
+      <i id="menu-icon" class="fa" [ngClass]="{'fa-bars': !isSidebarOpen, 'fa-times': isSidebarOpen}"></i>
+    </button>
+    <a class="navbar-brand d-flex align-items-center" routerLink="/home">
+      <img src="assets/micoleao3.png" alt="Logo" class="img-logo ms-2"/>
+    </a>
+  </div>
+</nav>
+
+<div class="wrapper" [class.sidebar-open]="isSidebarOpen">
+  <nav id="sidebar" class="bg-dark" [class.active]="isSidebarOpen">
+    <div class="p-4 pt-5">
+      <ul class="list-unstyled components mb-5">
+        <li>
+          <a class="text-white" routerLink="/minha-conta">Minha Conta</a>
+        </li>
+        <li>
+          <a class="text-white" routerLink="/meus-cupons">Meus Cupons</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div id="content" class="p-4">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+  
+  
+  
+  
+  

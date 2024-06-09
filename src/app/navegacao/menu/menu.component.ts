@@ -16,6 +16,10 @@ export interface Categorias {
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
+  notifications = [
+    { message: "20% off na picanha do Bar Figueiras! Apresente o cupom. Válido até 30/06/2024."},
+    { message: "20% off na picanha do Bar Figueiras! Apresente o cupom. Válido até 30/06/2024."}
+  ]
   cartOpen: boolean = false;
   cartItems: CartItem[] = [];
   cartTotal: number = 0; // Total do carrinho
