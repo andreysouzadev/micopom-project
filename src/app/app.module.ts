@@ -25,6 +25,9 @@ import { registerLocaleData } from '@angular/common';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth/authInterceptor.service';
 import { AuthService } from './auth/auth.service';
+import { ManageAccountComponent } from './my-account/manage-account/manage-account.component';
+import { MyCouponsComponent } from './my-account/my-coupons/my-coupons.component';
+import { MyAccountMenuComponent } from './my-account/my-account-menu/my-account-menu.component';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -42,6 +45,9 @@ registerLocaleData(localePt, 'pt-BR');
     CouponDetailComponent,
     RegisterCouponComponent,
     RegisterEstablishmentComponent,
+    ManageAccountComponent,
+    MyCouponsComponent,
+    MyAccountMenuComponent,
   ],
   imports: [
     BrowserModule,

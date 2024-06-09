@@ -134,4 +134,15 @@
     background: rgba(0, 0, 0, 0.5);
     z-index: 1000; /* Certifique-se de que está atrás do carrinho */
   }
+
+  .custom-dropdown-item:hover {
+    background-color: #e4b51a;
+    color: #fff;
+  }
+  
+  .custom-dropdown-item:active,
+  .custom-dropdown-item:focus {
+    background-color: #f0c93b;
+    color: #fff;
+  }
   
