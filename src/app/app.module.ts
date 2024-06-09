@@ -25,6 +25,7 @@ import { registerLocaleData } from '@angular/common';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth/authInterceptor.service';
 import { AuthService } from './auth/auth.service';
+import { PaymentComponent } from './payment/payment.component';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -42,6 +43,7 @@ registerLocaleData(localePt, 'pt-BR');
     CouponDetailComponent,
     RegisterCouponComponent,
     RegisterEstablishmentComponent,
+    PaymentComponent,
   ],
   imports: [
     BrowserModule,

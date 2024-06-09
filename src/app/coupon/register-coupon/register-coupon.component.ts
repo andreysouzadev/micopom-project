@@ -39,7 +39,7 @@ export class RegisterCouponComponent implements OnInit {
     private formBuilder: FormBuilder,
     private CategoryService: categoryService,
     private EstablishmentService: EstablishmentService,
-    private CouponService: CouponService, 
+    private CouponService: CouponService,
     private router: Router,
   ) {}
 

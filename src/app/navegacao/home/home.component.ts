@@ -36,7 +36,8 @@ export class HomeComponent implements OnInit {
   onSearch(): void {
     this.filteredItems = this.cupons.filter(cupom => 
       cupom.de_cupom.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-      cupom.nome_estabelecimento.toLowerCase().includes(this.searchTerm.toLowerCase())
+      cupom.nome_estabelecimento.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      cupom.no_cupom.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
   }
 
