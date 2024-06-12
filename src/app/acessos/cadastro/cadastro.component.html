@@ -15,9 +15,6 @@
           <div class="text-danger" *ngIf="cadastroForm.get('nome')?.errors?.['required'] && (cadastroForm.get('nome')?.dirty || cadastroForm.get('nome')?.touched)">
             Nome é requerido
           </div>
-          <div class="text-danger" *ngIf="cadastroForm.get('nome')?.errors?.rangeLength && (cadastroForm.get('nome')?.dirty || cadastroForm.get('nome')?.touched)">
-            Formato inválido
-          </div>
         </div>
       </div>
       <div class="col-md-6">
@@ -27,9 +24,6 @@
           <div class="text-danger" *ngIf="cadastroForm.get('email')?.errors?.['required'] && (cadastroForm.get('email')?.dirty || cadastroForm.get('email')?.touched)">
             E-mail é requerido
           </div>
-          <div class="text-danger" *ngIf="cadastroForm.get('email')?.errors?.['email'] && (cadastroForm.get('email')?.dirty || cadastroForm.get('email')?.touched)">
-            E-mail em formato inválido
-          </div>
         </div>
       </div>
     </div>
@@ -38,7 +32,7 @@
       <div class="col-md-6">
         <div class="form-group">
           <label for="telefone">Telefone</label>
-          <input class="form-control" type="text" name="telefone" id="telefone" formControlName="telefone" telefone [textMask]="{mask: MASKS.telefone.textMask}"/>
+          <input class="form-control" type="text" name="telefone" id="telefone" formControlName="telefone" telefone>
           <div class="text-danger" *ngIf="cadastroForm.get('telefone')?.errors?.['required'] && (cadastroForm.get('telefone')?.dirty || cadastroForm.get('telefone')?.touched)">
             Telefone é requerido
           </div>
@@ -78,9 +72,6 @@
           <div class="text-danger" *ngIf="cadastroForm.get('cidade')?.errors?.['required'] && (cadastroForm.get('cidade')?.dirty || cadastroForm.get('cidade')?.touched)">
             Cidade é requerido
           </div>
-          <div class="text-danger" *ngIf="cadastroForm.get('cidade')?.errors?.rangeLength && (cadastroForm.get('cidade')?.dirty || cadastroForm.get('cidade')?.touched)">
-            Formato inválido
-          </div>
         </div>
       </div>
     </div>
@@ -93,9 +84,6 @@
           <div class="text-danger" *ngIf="cadastroForm.get('complemento')?.errors?.['required'] && (cadastroForm.get('complemento')?.dirty || cadastroForm.get('complemento')?.touched)">
             Complemento é requerido
           </div>
-          <div class="text-danger" *ngIf="cadastroForm.get('complemento')?.errors?.rangeLength && (cadastroForm.get('complemento')?.dirty || cadastroForm.get('complemento')?.touched)">
-            Formato inválido
-          </div>
         </div>
       </div>
       <div class="col-md-6">
@@ -104,9 +92,6 @@
           <input class="form-control" type="text" name="uf" id="uf" formControlName="uf"/>
           <div class="text-danger" *ngIf="cadastroForm.get('uf')?.errors?.['required'] && (cadastroForm.get('uf')?.dirty || cadastroForm.get('uf')?.touched)">
             UF é requerido
-          </div>
-          <div class="text-danger" *ngIf="cadastroForm.get('uf')?.errors?.rangeLength && (cadastroForm.get('uf')?.dirty || cadastroForm.get('uf')?.touched)">
-            Formato inválido
           </div>
         </div>
       </div>
@@ -120,9 +105,6 @@
           <div class="text-danger" *ngIf="cadastroForm.get('senha')?.errors?.required && (cadastroForm.get('senha')?.dirty || cadastroForm.get('senha')?.touched)">
             Senha é requerido
           </div>
-          <div class="text-danger" *ngIf="cadastroForm.get('senha')?.errors?.rangeLength && (cadastroForm.get('senha')?.dirty || cadastroForm.get('senha')?.touched)">
-            Formato inválido
-          </div>
         </div>
       </div>
       <div class="col-md-6">
@@ -132,12 +114,9 @@
           <div class="text-danger" *ngIf="cadastroForm.get('confirmarsenha')?.errors?.required && (cadastroForm.get('confirmarsenha')?.dirty || cadastroForm.get('confirmarsenha')?.touched)">
             Confirmar senha é requerido
           </div>
-          <div class="text-danger" *ngIf="cadastroForm.get('confirmarsenha')?.errors?.equalTo && (cadastroForm.get('confirmarsenha')?.dirty || cadastroForm.get('confirmarsenha')?.touched)">
-            Senha não correspondente
-          </div>
         </div>
       </div>
     </div>
 
     <button type="submit" class="btn btn-warning">Cadastrar</button>
-    <p class="mt-3">Ao preencher o formulário acima, você concorda com os nossos termos de uso e nossa política de
+    <p class="mt-3">Ao preencher o formulário acima, você concorda com os nossos termos de uso e nossa política de Acesso

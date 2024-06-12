@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { MASKS, NgBrazilValidators } from 'ng-brazil';
-import { CustomValidators } from 'ng2-validation';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -17,7 +15,7 @@ export class EsqueceuSenhaComponent {
   ngOnInit(): void {
 
     this.esqueceusenhaForm = this.fb.group({
-      email: ['',[Validators.required, CustomValidators.email]],
+      email: ['',[Validators.required]],
  
     })
 }

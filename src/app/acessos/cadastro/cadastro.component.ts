@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { usuario } from './models/usuario';
-import { MASKS, NgBrazilValidators } from 'ng-brazil';
-import { CustomValidators } from 'ng2-validation';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Router } from '@angular/router';
 
@@ -17,8 +15,7 @@ export class CadastroComponent implements OnInit{
   cadastroForm: FormGroup;
   errorMessage: string = '';
   usuario: usuario;
-  formResult: string = '';
-  MASKS =  MASKS;
+  formResult: string = ''
 
   constructor(
     private fb: FormBuilder,
@@ -28,17 +25,17 @@ export class CadastroComponent implements OnInit{
 
   ngOnInit(): void {
 
-    let senha = new FormControl('', [Validators.required, CustomValidators.rangeLength([6,10])]);
-    let confirmarsenha = new FormControl('', [Validators.required, CustomValidators.rangeLength([6,10]), CustomValidators.equalTo(senha)]);
+    let senha = new FormControl('', [Validators.required,]);
+    let confirmarsenha = new FormControl('', [Validators.required,]);
 
     this.cadastroForm = this.fb.group({
-      nome: ['', [Validators.required, CustomValidators.rangeLength([10,30])]],
-      email: ['',[Validators.required, CustomValidators.email]],
-      telefone: ['', [Validators.required, NgBrazilValidators.telefone]],
-      logradouro: ['', [Validators.required, CustomValidators.rangeLength([5,100])]],
-      uf: ['', [Validators.required, CustomValidators.rangeLength([2,2])]],
-      cidade: ['', [Validators.required, CustomValidators.rangeLength([2,10])]],
-      complemento: ['', [Validators.required, CustomValidators.rangeLength([5,100])]],
+      nome: ['', [Validators.required,]],
+      email: ['',[Validators.required,]],
+      telefone: ['', [Validators.required,]],
+      logradouro: ['', [Validators]],
+      uf: ['', [Validators.required,]],
+      cidade: ['', [Validators.required,]],
+      complemento: ['', [Validators.required,]],
       nlogradouro: ['', [Validators.required, ]],
       senha: senha,
       confirmarsenha: confirmarsenha
