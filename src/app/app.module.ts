@@ -11,9 +11,6 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 import { APP_BASE_HREF } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgBrazil } from 'ng-brazil';
-import { TextMaskModule } from 'angular2-text-mask';
-import { CustomFormsModule } from 'ng2-validation';
 import { EsqueceuSenhaComponent } from './acessos/esqueceu-senha/esqueceu-senha.component'
 import { HttpClientModule } from '@angular/common/http';
 import { CupomComponent } from './item/item.component';
@@ -55,9 +52,6 @@ registerLocaleData(localePt, 'pt-BR');
     AppRoutingModule,
     ReactiveFormsModule,
     RouterModule,
-    NgBrazil,
-    TextMaskModule,
-    CustomFormsModule,
     HttpClientModule,
     FormsModule,
   ],
