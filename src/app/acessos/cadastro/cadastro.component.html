@@ -1,122 +1,150 @@
 <app-menu></app-menu>
-<div class="container mt-5">
+<div class="container mt-1">
   <div class="row justify-content-center">
-    <div class="col-lg-3 mb-4">
+    <div class="col-lg-3 mb-1">
       <img src="assets/micoleao1.png" class="img-fluid" />
     </div>
   </div>
-  <h2 class="text-center mb-3">Cadastre-se</h2>
+  <h2 class="text-center mb-4">Cadastre-se</h2>
   <form (ngSubmit)="onRegister()" [formGroup]="cadastroForm">
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-4">
         <div class="form-group">
           <label for="nome">Nome Completo</label>
-          <input class="form-control" type="text" name="nome" id="nome" formControlName="nome" [ngClass]="{'is-invalid': cadastroForm.get('nome')?.errors && (cadastroForm.get('nome')?.dirty || cadastroForm.get('nome')?.touched)}"/>
+          <input class="form-control custom-input" type="text" name="nome" id="nome" formControlName="nome" 
+            [ngClass]="{'is-invalid': cadastroForm.get('nome')?.errors && (cadastroForm.get('nome')?.dirty || cadastroForm.get('nome')?.touched)}"/>
           <div class="text-danger" *ngIf="cadastroForm.get('nome')?.errors?.['required'] && (cadastroForm.get('nome')?.dirty || cadastroForm.get('nome')?.touched)">
             Nome é requerido
           </div>
+          <div class="text-danger" *ngIf="cadastroForm.get('nome')?.errors?.['invalidFullName'] && (cadastroForm.get('nome')?.dirty)">
+            Nome completo inválido. Certifique-se de incluir nome e sobrenome.
+          </div>
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-4">
         <div class="form-group">
           <label for="email">E-mail</label>
-          <input class="form-control" type="email" name="email" id="email" formControlName="email"/>
+          <input class="form-control custom-input" type="email" name="email" id="email" formControlName="email" 
+            [ngClass]="{'is-invalid': cadastroForm.get('email')?.errors && (cadastroForm.get('email')?.dirty || cadastroForm.get('email')?.touched)}"/>
           <div class="text-danger" *ngIf="cadastroForm.get('email')?.errors?.['required'] && (cadastroForm.get('email')?.dirty || cadastroForm.get('email')?.touched)">
             E-mail é requerido
+          </div>
+          <div class="text-danger" *ngIf="cadastroForm.get('email')?.errors?.['invalidEmail'] && (cadastroForm.get('email')?.dirty)">
+            E-mail com formato inválido.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="telefone">Telefone</label>
+          <input class="form-control custom-input" type="text" name="telefone" id="telefone" formControlName="telefone" telefone 
+            [ngClass]="{'is-invalid': cadastroForm.get('telefone')?.errors && (cadastroForm.get('telefone')?.dirty || cadastroForm.get('telefone')?.touched)}"/>
+          <div class="text-danger" *ngIf="cadastroForm.get('telefone')?.errors?.['required'] && (cadastroForm.get('telefone')?.dirty || cadastroForm.get('telefone')?.touched)">
+            Telefone é requerido
+          </div>
+          <div class="text-danger" *ngIf="cadastroForm.get('telefone')?.errors?.['invalidTelefone'] && (cadastroForm.get('telefone')?.dirty || cadastroForm.get('telefone')?.touched)">
+            Telefone inválido. Números repetidos não são permitidos.
           </div>
         </div>
       </div>
     </div>
     
     <div class="row">
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="telefone">Telefone</label>
-          <input class="form-control" type="text" name="telefone" id="telefone" formControlName="telefone" telefone>
-          <div class="text-danger" *ngIf="cadastroForm.get('telefone')?.errors?.['required'] && (cadastroForm.get('telefone')?.dirty || cadastroForm.get('telefone')?.touched)">
-            Telefone é requerido
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
+      <div class="col-md-4">
         <div class="form-group">
           <label for="logradouro">Logradouro</label>
-          <input class="form-control" type="text" name="logradouro" id="logradouro" formControlName="logradouro"/>
+          <input class="form-control custom-input" type="text" name="logradouro" id="logradouro" formControlName="logradouro" 
+            [ngClass]="{'is-invalid': cadastroForm.get('logradouro')?.errors && (cadastroForm.get('logradouro')?.dirty || cadastroForm.get('logradouro')?.touched)}"/>
           <div class="text-danger" *ngIf="cadastroForm.get('logradouro')?.errors?.['required'] && (cadastroForm.get('logradouro')?.dirty || cadastroForm.get('logradouro')?.touched)">
             Logradouro é requerido
           </div>
-          <div class="text-danger" *ngIf="cadastroForm.get('logradouro')?.errors?.rangeLength && (cadastroForm.get('logradouro')?.dirty || cadastroForm.get('logradouro')?.touched)">
-            Formato inválido
-          </div>
         </div>
       </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-4">
         <div class="form-group">
           <label for="nlogradouro">N° Logradouro</label>
-          <input class="form-control" type="number" name="nlogradouro" id="nlogradouro" formControlName="nlogradouro"/>
+          <input class="form-control custom-input" type="number" name="nlogradouro" id="nlogradouro" formControlName="nlogradouro" 
+            [ngClass]="{'is-invalid': cadastroForm.get('nlogradouro')?.errors && (cadastroForm.get('nlogradouro')?.dirty || cadastroForm.get('nlogradouro')?.touched)}"/>
           <div class="text-danger" *ngIf="cadastroForm.get('nlogradouro')?.errors?.['required'] && (cadastroForm.get('nlogradouro')?.dirty || cadastroForm.get('nlogradouro')?.touched)">
-            N° é requerido
-          </div>
-          <div class="text-danger" *ngIf="cadastroForm.get('nlogradouro')?.errors?.rangeLength && (cadastroForm.get('nlogradouro')?.dirty || cadastroForm.get('nlogradouro')?.touched)">
-            Formato inválido
+            N° do logradouro é requerido
           </div>
         </div>
       </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="cidade">Cidade</label>
-          <input class="form-control" type="text" name="cidade" id="cidade" formControlName="cidade"/>
-          <div class="text-danger" *ngIf="cadastroForm.get('cidade')?.errors?.['required'] && (cadastroForm.get('cidade')?.dirty || cadastroForm.get('cidade')?.touched)">
-            Cidade é requerido
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-4">
         <div class="form-group">
           <label for="complemento">Complemento</label>
-          <input class="form-control" type="text" name="complemento" id="complemento" formControlName="complemento"/>
+          <input class="form-control custom-input" type="text" name="complemento" id="complemento" formControlName="complemento" 
+            [ngClass]="{'is-invalid': cadastroForm.get('complemento')?.errors && (cadastroForm.get('complemento')?.dirty || cadastroForm.get('complemento')?.touched)}"/>
           <div class="text-danger" *ngIf="cadastroForm.get('complemento')?.errors?.['required'] && (cadastroForm.get('complemento')?.dirty || cadastroForm.get('complemento')?.touched)">
             Complemento é requerido
           </div>
         </div>
       </div>
-      <div class="col-md-6">
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="cidade">Cidade</label>
+          <input class="form-control custom-input" type="text" name="cidade" id="cidade" formControlName="cidade" 
+            [ngClass]="{'is-invalid': cadastroForm.get('cidade')?.errors && (cadastroForm.get('cidade')?.dirty || cadastroForm.get('cidade')?.touched)}"/>
+          <div class="text-danger" *ngIf="cadastroForm.get('cidade')?.errors?.['required'] && (cadastroForm.get('cidade')?.dirty || cadastroForm.get('cidade')?.touched)">
+            Cidade é requerido
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
         <div class="form-group">
           <label for="uf">UF</label>
-          <input class="form-control" type="text" name="uf" id="uf" formControlName="uf"/>
+          <input class="form-control custom-input" type="text" name="uf" id="uf" formControlName="uf" 
+            [ngClass]="{'is-invalid': cadastroForm.get('uf')?.errors && (cadastroForm.get('uf')?.dirty || cadastroForm.get('uf')?.touched)}"/>
           <div class="text-danger" *ngIf="cadastroForm.get('uf')?.errors?.['required'] && (cadastroForm.get('uf')?.dirty || cadastroForm.get('uf')?.touched)">
             UF é requerido
+          </div>
+          <div class="text-danger" *ngIf="cadastroForm.get('uf')?.errors?.['invalidUF'] && (cadastroForm.get('uf')?.dirty || cadastroForm.get('uf')?.touched)">
+            UF inválido. Deve ter exatamente 2 letras.
           </div>
         </div>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-4">
         <div class="form-group">
           <label for="senha">Senha</label>
-          <input class="form-control" type="password" name="senha" id="senha" formControlName="senha"/>
-          <div class="text-danger" *ngIf="cadastroForm.get('senha')?.errors?.required && (cadastroForm.get('senha')?.dirty || cadastroForm.get('senha')?.touched)">
-            Senha é requerido
-          </div>
+          <input class="form-control custom-input" type="password" name="senha" id="senha" formControlName="senha" 
+            [ngClass]="{'is-invalid': cadastroForm.get('senha')?.errors && (cadastroForm.get('senha')?.dirty || cadastroForm.get('senha')?.touched)}"/>
+            <div class="text-danger" *ngIf="cadastroForm.get('senha')?.errors?.['required'] && (cadastroForm.get('senha')?.dirty || cadastroForm.get('senha')?.touched)">
+              Senha é requerida
+            </div>
+            <div class="text-danger" *ngIf="cadastroForm.get('senha')?.errors?.['invalidPassword'] && (cadastroForm.get('senha')?.dirty)">
+              Senha inválida<br>
+              - Deve conter pelo menos um caractere especial: #@$%<br>
+              - Deve conter pelo menos uma letra maiúscula
+            </div>
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-4">
         <div class="form-group">
           <label for="confirmarsenha">Confirme sua senha</label>
-          <input class="form-control" type="password" name="confirmarsenha" id="confirmarsenha" formControlName="confirmarsenha"/>
-          <div class="text-danger" *ngIf="cadastroForm.get('confirmarsenha')?.errors?.required && (cadastroForm.get('confirmarsenha')?.dirty || cadastroForm.get('confirmarsenha')?.touched)">
-            Confirmar senha é requerido
-          </div>
+          <input class="form-control custom-input" type="password" name="confirmarsenha" id="confirmarsenha" formControlName="confirmarsenha" 
+            [ngClass]="{'is-invalid': cadastroForm.get('confirmarsenha')?.errors && (cadastroForm.get('confirmarsenha')?.dirty || cadastroForm.get('confirmarsenha')?.touched)}"/>
+            <div class="text-danger" *ngIf="cadastroForm.get('confirmarsenha')?.errors?.['required'] && (cadastroForm.get('confirmarsenha')?.dirty || cadastroForm.get('confirmarsenha')?.touched)">
+              Confirmar senha é requerido
+            </div>
+            <div class="text-danger" *ngIf="cadastroForm.errors?.['passwordMismatch'] && (cadastroForm.get('confirmarsenha')?.dirty || cadastroForm.get('confirmarsenha')?.touched)">
+              Senhas não coincidem.
+            </div>
         </div>
       </div>
     </div>
 
     <button type="submit" class="btn btn-warning">Cadastrar</button>
-    <p class="mt-3">Ao preencher o formulário acima, você concorda com os nossos termos de uso e nossa política de Acesso
+    <p class="mt-3">Ao preencher o formulário acima, você concorda com os nossos termos de uso e nossa política de acesso.</p>
+  </form>
+</div>
+<app-footer></app-footer>
+

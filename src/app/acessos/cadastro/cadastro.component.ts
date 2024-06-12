@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { usuario } from './models/usuario';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Router } from '@angular/router';
+import { ValidationService } from 'src/app/services/validation.service';
 
 
 @Component({
@@ -21,26 +22,23 @@ export class CadastroComponent implements OnInit{
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
+    private validationService: ValidationService,
   ) { }
 
   ngOnInit(): void {
 
-    let senha = new FormControl('', [Validators.required,]);
-    let confirmarsenha = new FormControl('', [Validators.required,]);
-
     this.cadastroForm = this.fb.group({
-      nome: ['', [Validators.required,]],
-      email: ['',[Validators.required,]],
-      telefone: ['', [Validators.required,]],
-      logradouro: ['', [Validators]],
-      uf: ['', [Validators.required,]],
-      cidade: ['', [Validators.required,]],
-      complemento: ['', [Validators.required,]],
-      nlogradouro: ['', [Validators.required, ]],
-      senha: senha,
-      confirmarsenha: confirmarsenha
-
-    });
+      nome: ['', [Validators.required, this.validationService.fullNameValidator()]],
+      email: ['', [Validators.required, Validators.email, this.validationService.emailValidator()]],
+      telefone: ['', [Validators.required, this.validationService.telefoneValidator()]],
+      logradouro: ['', [Validators.required, this.validationService.logradouroValidator()]],
+      nlogradouro: ['', [Validators.required,]],
+      cidade: ['',[ Validators.required, this.validationService.cidadeValidator()]],
+      complemento: ['', [Validators.required]],
+      uf: ['', [Validators.required, this.validationService.ufValidator]],
+      senha: ['', [Validators.required, this.validationService.passwordValidator()]],
+      confirmarsenha: ['', [Validators.required]]
+    }, { validator: this.validationService.matchPassword });
   }
 
   adicionarUsuario() {
