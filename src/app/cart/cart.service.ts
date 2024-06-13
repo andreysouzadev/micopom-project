@@ -16,8 +16,7 @@ export interface CartItem {
   providedIn: 'root'
 })
 export class CartService {
-  private cartItems: CartItem[] = [];
-  private cartItemsSubject = new BehaviorSubject<CartItem[]>(this.loadCartFromLocalStorage());
+  private cartItemsSubject = new BehaviorSubject<CartItem[]>([]);
   private itemCountSubject = new BehaviorSubject<number>(0);
   apiUrl = environment.apiUrl;
 
@@ -30,24 +29,19 @@ export class CartService {
       this.loadUserCart();
     }
 
+    // Subscribe to the logout event to clear the cart
+    this.authService.getLogoutSubject().subscribe(() => {
+      this.clearLocalStorage();
+    });
+
     this.authService.getUser().subscribe(user => {
       if (user) {
-        this.syncCartWithServer();
+        this.loadUserCart();
       }
     });
   }
 
-  loadCartFromLocalStorage(): CartItem[] {
-    const cart = localStorage.getItem('cart');
-    return cart ? JSON.parse(cart) : [];
-  }
-
-  saveCartToLocalStorage(cartItems: CartItem[]): void {
-    localStorage.setItem('cart', JSON.stringify(cartItems));
-    this.updateItemCount();
-  }
-
-  loadCartFromServer() {
+  loadCartFromServer(): Observable<CartItem[]> {
     return this.http.get<CartItem[]>(`${this.apiUrl}cart/cart`);
   }
 
@@ -62,11 +56,8 @@ export class CartService {
     const updatedCart = [...currentCart, item];
     this.cartItemsSubject.next(updatedCart);
     this.saveCartToLocalStorage(updatedCart);
-    if (this.authService.isLoggedIn()) {
-      this.saveCartToServer(updatedCart);
-    }
+    this.saveCartToServer(updatedCart);
   }
-
 
   updateQuantity(item: CartItem, quantity: number): void {
     const currentCart = this.cartItemsSubject.value;
@@ -75,84 +66,67 @@ export class CartService {
     );
     this.cartItemsSubject.next(updatedCart);
     this.saveCartToLocalStorage(updatedCart);
-    if (this.authService.isLoggedIn()) {
-      this.saveCartToServer(updatedCart);
-    }
+    this.saveCartToServer(updatedCart);
   }
 
   removeItem(item: CartItem): void {
-    const itemId = item.id
+    const itemId = item.id;
     const currentCart = this.cartItemsSubject.value;
     const updatedCart = currentCart.filter(item => item.id !== itemId);
     this.cartItemsSubject.next(updatedCart);
     this.saveCartToLocalStorage(updatedCart);
-    if (this.authService.isLoggedIn()) {
-      this.saveCartToServer(updatedCart);
-    }
+    this.saveCartToServer(updatedCart);
+  }
+
+  getItems(): CartItem[] {
+    return this.cartItemsSubject.value;
+  }
+
+  getTotal(): number {
+    const currentCart = this.cartItemsSubject.value;
+    return currentCart.reduce((acc, item) => acc + item.price * item.quantity, 0)
+  }
+
+  getItensQuantity(): number {
+    const currentCart = this.cartItemsSubject.value;
+    return currentCart.length;
   }
 
   clearCart(): void {
     this.cartItemsSubject.next([]);
     this.saveCartToLocalStorage([]);
-    if (this.authService.isLoggedIn()) {
-      this.saveCartToServer([]);
-    }
+    this.saveCartToServer([]);
   }
 
   loadUserCart(): void {
     if (this.authService.isLoggedIn()) {
       this.loadCartFromServer().subscribe(serverCartItems => {
-        const localCartItems = this.loadCartFromLocalStorage();
-        const combinedCartItems = this.mergeCarts(localCartItems, serverCartItems);
-        this.cartItemsSubject.next(combinedCartItems);
-        this.saveCartToLocalStorage(combinedCartItems);
-        this.saveCartToServer(combinedCartItems);
+        this.cartItemsSubject.next(serverCartItems);
+        this.saveCartToLocalStorage(serverCartItems);
+        this.updateItemCount();  // Adicione esta linha para garantir que o contador de itens seja atualizado
       });
     }
   }
 
-  mergeCarts(localCart: CartItem[], serverCart: CartItem[]): CartItem[] {
-    const mergedCart = [...serverCart];
-    localCart.forEach(localItem => {
-      const existingItem = mergedCart.find(item => item.id === localItem.id);
-      if (existingItem) {
-        existingItem.quantity += localItem.quantity;
-      } else {
-        mergedCart.push(localItem);
-      }
-    });
-    return mergedCart;
-  }
-
   syncCartWithServer() {
-    const localCartItems = this.loadCartFromLocalStorage();
-    if (localCartItems.length > 0) {
-      this.saveCartToServer(localCartItems);
-    } else {
+    if (this.authService.isLoggedIn()) {
       this.loadUserCart();
     }
   }
 
-  getItems(): CartItem[] {
-    return this.cartItems;
-  }
-
-  getTotal(): number {
-    return this.cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-  }
-
-  getItensQuantity(): number {
-    return this.cartItems.length;
-  }
-
-  private loadCart() {
-    const cart = localStorage.getItem('cart');
-    this.cartItems = cart ? JSON.parse(cart) : [];
-    this.cartItemsSubject.next(this.cartItems);
-  }
-
   getItemCount(): Observable<number> {
-    return this.itemCount$
+    return this.itemCount$;
+  }
+
+  private saveCartToLocalStorage(cartItems: CartItem[]): void {
+    localStorage.setItem('cart', JSON.stringify(cartItems));
+    this.updateItemCount();
+  }
+
+  private clearLocalStorage(): void {
+    localStorage.removeItem('cart');
+    this.cartItemsSubject.next([]);
+    this.updateItemCount();
   }
 
   private updateItemCount(): void {
@@ -160,5 +134,4 @@ export class CartService {
     const itemCount = currentCart.reduce((total, item) => total + item.quantity, 0);
     this.itemCountSubject.next(itemCount);
   }
-
 }

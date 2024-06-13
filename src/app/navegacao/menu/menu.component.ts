@@ -39,6 +39,7 @@ export class MenuComponent implements OnInit {
     private authService: AuthService,
     private itemService: ItemService,
     private sharedService: SharedService,
+    private route: Router,
     // private homeComponent: HomeComponent
   ) {}
 
@@ -48,7 +49,6 @@ export class MenuComponent implements OnInit {
 
     this.authService.getUser().subscribe(user => {
       this.user = user;
-      console.log("USER:", user);
     })
 
     this.cartService.cartItems$.subscribe(items => {
@@ -62,7 +62,6 @@ export class MenuComponent implements OnInit {
     
     this.CategoryService.getCategories().subscribe(
       (data: Categorias[]) => {
-        console.log(data)
         this.categorias = data;
       },
       (error: any) => {
@@ -79,6 +78,7 @@ export class MenuComponent implements OnInit {
       error => {
       }
     );
+    
 
   }
 
@@ -86,9 +86,16 @@ export class MenuComponent implements OnInit {
       this.sharedService.filterItems(this.searchTerm)
   }
 
+  
+
     toggleCart() {
-      this.cartOpen = !this.cartOpen;
-    }
+      if(this.authService.isLoggedIn()){
+        this.cartOpen = !this.cartOpen;
+      } else {
+        console.log("A")
+          this.route.navigate(['/login'])
+        }
+      }
 
     closeCart() {
       this.cartOpen = false;
