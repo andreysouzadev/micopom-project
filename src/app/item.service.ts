@@ -25,7 +25,4 @@ export class ItemService {
     return this.http.get<Cupom[]>(`${this.apiUrl}/cupons_categoria/${category}`);
   }
 
-  getCategories(): Observable<string[]> {
-    return this.http.get<string[]>(`${this.apiUrl}/categorias`);
-  }
 }

@@ -12,60 +12,6 @@
       </div>
     </div>
   </header>
-  
-  
-  <!-- <div class="container mt-3">
-    <div class="row">
-      <div class="col-lg-2 mb-2">
-        <button class="btn btn-warning btn-block">Todos</button>
-      </div>
-      <div class="col-lg-2 mb-2">
-        <div class="dropdown">
-          <button class="btn btn-warning dropdown-toggle btn-block" type="button" id="categoryDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-            Categorias
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="categoryDropdown"> -->
-            <!-- <li *ngFor="let categoria of categorias">
-              <a class="dropdown-item">{{ categoria.nome }}</a>
-            </li> -->
-          <!-- </ul>
-        </div>
-      </div>
-      <div class="col-lg-2 mb-2">
-        <div class="dropdown">
-          <button class="btn btn-warning dropdown-toggle btn-block" type="button" id="priceDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-            Preço
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="priceDropdown">
-            <li><a class="dropdown-item">Menor preço</a></li>
-            <li><a class="dropdown-item">Maior preço</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-lg-2 mb-2">
-        <div class="dropdown">
-          <button class="btn btn-warning dropdown-toggle btn-block" type="button" id="discountDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-            Desconto
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="discountDropdown">
-            <li><a class="dropdown-item">Maior desconto</a></li>
-            <li><a class="dropdown-item">Menor desconto</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-lg-2 mb-2">
-        <div class="dropdown">
-          <button class="btn btn-warning dropdown-toggle btn-block" type="button" id="dateDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-            Data
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="dateDropdown">
-            <li><a class="dropdown-item">Mais recentes</a></li>
-            <li><a class="dropdown-item">Mais antigos</a></li>
-          </ul>
-        </div>
-      </div>
-    </div> -->
-  <!-- </div> -->
 
   <div class="container mt-3">
     <div class="card p-3">
@@ -73,19 +19,19 @@
         <div class="col-lg-3 mb-2">
           <div class="input-group">
             <span class="input-group-text bg-warning text-dark">Categorias</span>
-            <select class="form-select" aria-label="Categoria">
-              <option selected>Todos</option>
-              <!-- <option *ngFor="let categoria of categorias">{{ categoria.nome }}</option> -->
+            <select class="form-select" [(ngModel)]="selectedCategory" aria-label="Categoria">
+              <option value="todos" selected>Todos</option>
+              <option *ngFor="let categoria of categorias" [value]="categoria.id_categoria">{{ categoria.no_categoria }}</option>
             </select>
           </div>
         </div>
         <div class="col-lg-3 mb-2">
           <div class="input-group">
             <span class="input-group-text bg-warning text-dark">Preço</span>
-            <select class="form-select" aria-label="Preço">
-              <option selected>Todos</option>
-              <option>Menor preço</option>
-              <option>Maior preço</option>
+            <select class="form-select" [(ngModel)]="selectedPrice" aria-label="Preço">
+              <option value="todos" selected>Todos</option>
+              <option value="low">Menor preço</option>
+              <option value="high">Maior preço</option>
             </select>
           </div>
         </div>
@@ -112,7 +58,7 @@
       </div>
       <div class="row mt-3">
         <div class="col-lg-3 mb-2">
-          <button class="btn btn-warning w-100">Aplicar Filtros</button>
+          <button class="btn btn-warning w-100" (click)="applyFilters()">Aplicar Filtros</button>
         </div>
         <div class="col-lg-3 mb-2">
           <button class="btn btn-secondary w-100">Limpar Filtros</button>
@@ -120,25 +66,11 @@
       </div>
     </div>
   </div>
-  
-  <!-- <div class="container main-container">
-    <div class="row text-center">
-      <div class="search-container">
-        <input
-          type="text"
-          placeholder="Buscar itens..."
-          [(ngModel)]="searchTerm"
-          (keydown.enter)="onSearch()"
-        />
-        <button (click)="onSearch()">Buscar</button>
-      </div> -->
+
       <div class="grid-container">
         <app-cupom *ngFor="let cupom of cupons" [cupom]="cupom"></app-cupom>
-      </div>            
-    <!-- </div>
-  </div> -->
+      </div> 
 
-  
   <app-footer></app-footer>
-  <!-- Fim Content -->
+
   
