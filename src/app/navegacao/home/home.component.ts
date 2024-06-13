@@ -77,6 +77,14 @@ export class HomeComponent implements OnInit {
   }
 
   onSearch(): void {
+<<<<<<< HEAD
+    this.filteredItems = this.cupons.filter(cupom => 
+      cupom.de_cupom.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      cupom.nome_estabelecimento.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      cupom.no_cupom.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+=======
+>>>>>>> 039177c567358b0c6907aeac2ee64d2886742813
   }
 
   navigateToDetail(id: string): void {

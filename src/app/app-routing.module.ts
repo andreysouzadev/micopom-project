@@ -8,6 +8,8 @@ import { CouponDetailComponent } from './coupon-detail/coupon-detail.component';
 import { RegisterCouponComponent } from './coupon/register-coupon/register-coupon.component';
 import { RegisterEstablishmentComponent } from './establishment/register-establishment/register-establishment.component';
 import { AuthGuard } from './auth/auth.guard';
+import { PaymentComponent } from './payment/payment.component';
+import { OrderSummaryComponent } from './order-summary/order-summary.component';
 import { ManageAccountComponent } from './my-account/manage-account/manage-account.component';
 import { MyCouponsComponent } from './my-account/my-coupons/my-coupons.component';
 
@@ -21,6 +23,8 @@ const routes: Routes = [
   { path: 'cadastro', component: CadastroComponent},
   { path: 'registro-cupom', component: RegisterCouponComponent, canActivate: [AuthGuard]},
   { path: 'registro-estabelecimento', component: RegisterEstablishmentComponent, canActivate: [AuthGuard]},
+  { path: 'payment', component: PaymentComponent},
+  { path: 'order-summary', component: OrderSummaryComponent},
   { path: 'minha-conta', component: ManageAccountComponent},
   { path: 'meus-cupons', component: MyCouponsComponent},
   {

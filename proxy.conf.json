@@ -1,0 +1,10 @@
+{
+    "/pagseguro-sdk": {
+      "target": "https://assets.pagseguro.com.br/checkout-sdk-js/rc/dist/browser/pagseguro.min.js",
+      "secure": true,
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/pagseguro-sdk": ""
+      }
+    }
+  }

@@ -6,6 +6,7 @@ export interface CartItem {
   name: string;
   price: number;
   quantity: number;
+  img: string;
 }
 
 @Injectable({
@@ -20,6 +21,18 @@ export class CartService {
 
   constructor() {
     this.loadCart();
+  }
+
+  getItems(): CartItem[] {
+    return this.cartItems;
+  }
+
+  getTotal(): number {
+    return this.cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  }
+
+  getItensQuantity(): number {
+    return this.cartItems.length;
   }
 
   private loadCart() {
@@ -63,6 +76,10 @@ export class CartService {
     this.updateItemCount();
     localStorage.setItem('cart', JSON.stringify(this.cartItems));
     this.cartItemsSubject.next(this.cartItems);
+  }
+
+  clearCart() {
+    this.cartItems = [];
   }
 
   private updateItemCount(): void {

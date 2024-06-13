@@ -64,7 +64,8 @@ export class CouponDetailComponent implements OnInit {
       id: this.coupon.data.id_cupom,
       name: this.coupon.data.no_cupom,
       price: this.coupon.data.vl_original - this.coupon.data.vl_desconto,
-      quantity: this.quantity
+      quantity: this.quantity,
+      img: this.coupon.imagens[0]
       // Adicione outras propriedades conforme necessário
     };
     this.cartService.addToCart(newItem);

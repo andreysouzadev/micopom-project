@@ -1,0 +1,144 @@
+<app-menu></app-menu>
+<div class="container mt-5">
+    <div class="row">
+      <div class="col-md-8">
+        <h3>Informações do Cliente</h3>
+        <form [formGroup]="customerForm">
+          <div class="form-group">
+            <label for="fullName">Nome Completo</label>
+            <input type="text" class="form-control" id="fullName" formControlName="fullName" placeholder="Nome Completo">
+            <div *ngIf="customerForm.get('fullName')?.invalid && (customerForm.get('fullName')?.dirty || customerForm.get('fullName')?.touched)" class="text-danger">
+              Nome completo é obrigatório.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" formControlName="email" placeholder="Email">
+            <div *ngIf="customerForm.get('email')?.invalid && (customerForm.get('email')?.dirty || customerForm.get('email')?.touched)" class="text-danger">
+              Email inválido.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="cpf">CPF</label>
+            <input type="text" class="form-control" id="cpf" formControlName="cpf" placeholder="CPF">
+            <div *ngIf="customerForm.get('cpf')?.invalid && (customerForm.get('cpf')?.dirty || customerForm.get('cpf')?.touched)" class="text-danger">
+              CPF inválido.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="phone">Telefone</label>
+            <input type="text" class="form-control" id="phone" formControlName="phone" placeholder="Telefone">
+            <div *ngIf="customerForm.get('phone')?.invalid && (customerForm.get('phone')?.dirty || customerForm.get('phone')?.touched)" class="text-danger">
+              Telefone inválido.
+            </div>
+          </div>
+        </form>
+        <h3>Método de Pagamento</h3>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="paymentMethod" id="creditCard" value="CREDIT_CARD" (change)="selectPaymentMethod('creditCard')">
+          <label class="form-check-label" for="creditCard">
+            Cartão de Crédito
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="paymentMethod" id="pix" value="PIX" (change)="selectPaymentMethod('pix')">
+          <label class="form-check-label" for="pix">
+            PIX
+          </label>
+        </div>
+        <div *ngIf="selectedPaymentMethod === 'creditCard'">
+          <h3>Pagar com cartão de crédito</h3>
+          <form [formGroup]="paymentForm" (ngSubmit)="processPayment()">
+            <div class="form-group">
+              <label for="cardNumber">Número do Cartão</label>
+              <input type="text" class="form-control" id="cardNumber" formControlName="cardNumber" placeholder="Número do Cartão">
+              <div *ngIf="paymentForm.get('cardNumber')?.invalid && (paymentForm.get('cardNumber')?.dirty || paymentForm.get('cardNumber')?.touched)" class="text-danger">
+                Número do cartão inválido.
+              </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="expirationMonth">Mês de Validade</label>
+                  <input type="text" class="form-control" id="expirationMonth" formControlName="expirationMonth" placeholder="MM">
+                  <div *ngIf="paymentForm.get('expirationMonth')?.invalid && (paymentForm.get('expirationMonth')?.dirty || paymentForm.get('expirationMonth')?.touched)" class="text-danger">
+                    Mês de validade inválido.
+                  </div>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="expirationYear">Ano de Validade</label>
+                  <input type="text" class="form-control" id="expirationYear" formControlName="expirationYear" placeholder="AAAA">
+                  <div *ngIf="paymentForm.get('expirationYear')?.invalid && (paymentForm.get('expirationYear')?.dirty || paymentForm.get('expirationYear')?.touched)" class="text-danger">
+                    Ano de validade inválido.
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+              <div class="form-group col-md-6">
+                <label for="cardCVC">Código de Segurança</label>
+                <input type="text" class="form-control" id="cardCVC" formControlName="cardCVC" placeholder="CVC">
+                <div *ngIf="paymentForm.get('cardCVC')?.invalid && (paymentForm.get('cardCVC')?.dirty || paymentForm.get('cardCVC')?.touched)" class="text-danger">
+                  Código de segurança inválido.
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="cardHolder">Nome Completo</label>
+              <input type="text" class="form-control" id="cardHolder" formControlName="cardHolder" placeholder="Nome Completo">
+              <div *ngIf="paymentForm.get('cardHolder')?.invalid && (paymentForm.get('cardHolder')?.dirty || paymentForm.get('cardHolder')?.touched)" class="text-danger">
+                Nome completo é obrigatório.
+              </div>
+            </div>
+            <div class="form-group">
+                <label for="cardHolder">CPF do titular do cartão</label>
+                <input type="text" class="form-control" id="cardHolderDocument" formControlName="cardHolderDocument" placeholder="000.000.000-00">
+                <div *ngIf="paymentForm.get('cardHolderDocument')?.invalid && (paymentForm.get('cardHolderDocument')?.dirty || paymentForm.get('cardHolderDocument')?.touched)" class="text-danger">
+                  CPF do titular do cartão é obrigatório.
+                </div>
+              </div>
+            <button type="submit" class="btn btn-primary btn-block mt-4">Finalizar Compra</button>
+          </form>
+        </div>
+        <div *ngIf="selectedPaymentMethod === 'pix'">
+          <h3>Pagar com PIX</h3>
+          <p>Escaneie o código QR ou copie o código abaixo para fazer o pagamento via PIX.</p>
+          <div class="text-center">
+            <img src="path-to-qr-code.png" alt="QR Code PIX" class="img-fluid"> <!-- Altere para o caminho do seu QR Code -->
+            <p>Código PIX: <strong>1234567890</strong></p>
+          </div>
+          <button class="btn btn-primary btn-block mt-4" (click)="processPayment()">Finalizar Compra</button>
+        </div>
+        <div class="mt-3 text-center">
+          <script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
+          <a href="https://pagseguro.uol.com.br" target="_blank">
+            <img src="https://stc.pagseguro.uol.com.br/public/img/banners/diversos/seguro.gif" alt="PagSeguro - Pagamento Seguro" />
+          </a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <h2>Resumo da compra</h2>
+        <ul class="list-group mb-3">
+          <li class="list-group-item" *ngFor="let item of cartItems">
+            <div>
+              <strong>{{ item.name }}</strong>
+              <div>Quantidade: {{ item.quantity }}</div>
+              <div>Preço: {{ item.price | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</div>
+              <div>Total: {{ (item.price * item.quantity) | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</div>
+            </div>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <span>Subtotal</span>
+            <strong>{{ total | currency:'BRL':'symbol':'1.2-2':'pt-BR'}}</strong>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <span>Desconto</span>
+            <strong>{{ discount| currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</strong>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <span>Total</span>
+            <strong>{{ (total - discount)| currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</strong>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
