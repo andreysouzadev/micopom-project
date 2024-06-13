@@ -113,7 +113,7 @@ export class MenuComponent implements OnInit {
     }
 
     removeFromCart(item: CartItem) {
-      this.cartService.removeFromCart(item);
+      this.cartService.removeItem(item);
     }
 
     calculateCartTotal(){
