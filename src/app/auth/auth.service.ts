@@ -1,10 +1,9 @@
 // auth.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { environment } from 'src/environment';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +12,7 @@ export class AuthService {
     private apiUrl = environment.apiUrl + 'accounts';
     private tokenKey = 'authToken';
     private userSubject = new BehaviorSubject<any>(null);
+    private logoutSubject = new Subject<void>(); // Adicionar Subject para logout
 
   constructor(private http: HttpClient, private router: Router) {
     const token = this.getToken();
@@ -46,12 +46,17 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem(this.tokenKey);
+    this.logoutSubject.next(); // Emite o evento de logout
     this.userSubject.next(null);
     this.router.navigate(['/home']);
   }
 
   getToken() {
     return localStorage.getItem(this.tokenKey);
+  }
+
+  getLogoutSubject(): Observable<void> { // Método para obter o Subject de logout
+    return this.logoutSubject.asObservable();
   }
 
   isLoggedIn() {

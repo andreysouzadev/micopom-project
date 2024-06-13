@@ -13,7 +13,6 @@ export class ItemService {
   constructor(private http: HttpClient) {}
 
   getItems(): Observable<Cupom[]> {
-    console.log("Fetching items from API:", this.apiUrl);
     return this.http.get<Cupom[]>(`${this.apiUrl}/cupons_disponiveis`);
   }
 

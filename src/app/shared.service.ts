@@ -28,13 +28,11 @@ export class SharedService {
 
 
   getItems(): Cupom[] {
-    console.log("Returning items from sharedService:", this.items);
     return this.items;
   }
 
   setItems(items: Cupom[] = []){
     this.items = items.length ? items : this.loadInitialItems();
-    console.log("Items set in sharedService:", this.items);
     this.filteredItemsSubject.next(this.items);
   }
 

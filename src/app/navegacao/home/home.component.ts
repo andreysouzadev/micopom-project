@@ -39,7 +39,6 @@ export class HomeComponent implements OnInit {
       (data: Cupom[]) => {
         this.sharedService.setItems(data);
         this.cupons = this.sharedService.getItems();
-        console.log("Received Items:", this.cupons);
       },
       error => {
         console.error('Erro ao buscar itens:', error);
@@ -48,7 +47,6 @@ export class HomeComponent implements OnInit {
     
     this.sharedService.filteredItems$.subscribe((items: Cupom[]) => {
       this.cupons = items;
-      console.log("Updated cupons in Home component:", this.cupons);
     });
 
     // Inicializar com todos os itens
@@ -59,7 +57,6 @@ export class HomeComponent implements OnInit {
     this.categoryService.getCategories().subscribe(
       (data: Categorias[]) => {
         this.categorias = data;
-        console.log("Received Categories:", this.categorias);
       },
       error => {
         console.error('Erro ao buscar categorias:', error);
