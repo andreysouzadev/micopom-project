@@ -11,9 +11,6 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 import { APP_BASE_HREF } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgBrazil } from 'ng-brazil';
-import { TextMaskModule } from 'angular2-text-mask';
-import { CustomFormsModule } from 'ng2-validation';
 import { EsqueceuSenhaComponent } from './acessos/esqueceu-senha/esqueceu-senha.component'
 import { HttpClientModule } from '@angular/common/http';
 import { CupomComponent } from './item/item.component';
@@ -25,9 +22,15 @@ import { registerLocaleData } from '@angular/common';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth/authInterceptor.service';
 import { AuthService } from './auth/auth.service';
+<<<<<<< HEAD
 import { PaymentComponent } from './payment/payment.component';
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
 import { LoadingComponent } from './loading/loading.component';
+=======
+import { ManageAccountComponent } from './my-account/manage-account/manage-account.component';
+import { MyCouponsComponent } from './my-account/my-coupons/my-coupons.component';
+import { MyAccountMenuComponent } from './my-account/my-account-menu/my-account-menu.component';
+>>>>>>> 039177c567358b0c6907aeac2ee64d2886742813
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -45,9 +48,15 @@ registerLocaleData(localePt, 'pt-BR');
     CouponDetailComponent,
     RegisterCouponComponent,
     RegisterEstablishmentComponent,
+<<<<<<< HEAD
     PaymentComponent,
     OrderSummaryComponent,
     LoadingComponent,
+=======
+    ManageAccountComponent,
+    MyCouponsComponent,
+    MyAccountMenuComponent,
+>>>>>>> 039177c567358b0c6907aeac2ee64d2886742813
   ],
   imports: [
     BrowserModule,
@@ -55,9 +64,6 @@ registerLocaleData(localePt, 'pt-BR');
     AppRoutingModule,
     ReactiveFormsModule,
     RouterModule,
-    NgBrazil,
-    TextMaskModule,
-    CustomFormsModule,
     HttpClientModule,
     FormsModule,
   ],

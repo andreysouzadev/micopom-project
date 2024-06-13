@@ -12,29 +12,65 @@
       </div>
     </div>
   </header>
-  
-  
 
-  
-  
-  
-  
-  <div class="container main-container">
-    <div class="row text-center">
-      <div class="search-container">
-        <input
-          type="text"
-          placeholder="Buscar itens..."
-          [(ngModel)]="searchTerm"
-          (keydown.enter)="onSearch()"
-        />
-        <button (click)="onSearch()">Buscar</button>
+  <div class="container mt-3">
+    <div class="card p-3">
+      <div class="row">
+        <div class="col-lg-3 mb-2">
+          <div class="input-group">
+            <span class="input-group-text bg-warning text-dark">Categorias</span>
+            <select class="form-select" [(ngModel)]="selectedCategory" aria-label="Categoria">
+              <option value="todos" selected>Todos</option>
+              <option *ngFor="let categoria of categorias" [value]="categoria.id_categoria">{{ categoria.no_categoria }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-lg-3 mb-2">
+          <div class="input-group">
+            <span class="input-group-text bg-warning text-dark">Preço</span>
+            <select class="form-select" [(ngModel)]="selectedPrice" aria-label="Preço">
+              <option value="todos" selected>Todos</option>
+              <option value="low">Menor preço</option>
+              <option value="high">Maior preço</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-lg-3 mb-2">
+          <div class="input-group">
+            <span class="input-group-text bg-warning text-dark">Desconto</span>
+            <select class="form-select" aria-label="Desconto">
+              <option selected>Todos</option>
+              <option>Maior desconto</option>
+              <option>Menor desconto</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-lg-3 mb-2">
+          <div class="input-group">
+            <span class="input-group-text bg-warning text-dark">Data</span>
+            <select class="form-select" aria-label="Data">
+              <option selected>Todos</option>
+              <option>Mais recentes</option>
+              <option>Mais antigos</option>
+            </select>
+          </div>
+        </div>
       </div>
-      <div class="grid-container">
-        <app-cupom *ngFor="let cupom of filteredItems" [cupom]="cupom"></app-cupom>
-      </div>            
+      <div class="row mt-3">
+        <div class="col-lg-3 mb-2">
+          <button class="btn btn-warning w-100" (click)="applyFilters()">Aplicar Filtros</button>
+        </div>
+        <div class="col-lg-3 mb-2">
+          <button class="btn btn-secondary w-100">Limpar Filtros</button>
+        </div>
+      </div>
     </div>
   </div>
+
+      <div class="grid-container">
+        <app-cupom *ngFor="let cupom of cupons" [cupom]="cupom"></app-cupom>
+      </div> 
+
   <app-footer></app-footer>
-  <!-- Fim Content -->
+
   

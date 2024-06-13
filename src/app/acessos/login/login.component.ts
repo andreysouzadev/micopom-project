@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MASKS, NgBrazilValidators } from 'ng-brazil';
-import { CustomValidators } from 'ng2-validation';
 import { AuthService } from 'src/app/auth/auth.service';
 
 
@@ -24,10 +22,10 @@ export class LoginComponent {
 
   ngOnInit(): void {
 
-    let senha = new FormControl('', [Validators.required, CustomValidators.rangeLength([6,10])]);
+    let senha = new FormControl('', [Validators.required,]);
 
     this.loginForm = this.fb.group({
-      email: ['',[Validators.required, CustomValidators.email]],
+      email: ['',[Validators.required,]],
       senha: senha,
 
 

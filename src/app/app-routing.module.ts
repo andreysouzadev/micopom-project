@@ -10,6 +10,8 @@ import { RegisterEstablishmentComponent } from './establishment/register-establi
 import { AuthGuard } from './auth/auth.guard';
 import { PaymentComponent } from './payment/payment.component';
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
+import { ManageAccountComponent } from './my-account/manage-account/manage-account.component';
+import { MyCouponsComponent } from './my-account/my-coupons/my-coupons.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -23,11 +25,14 @@ const routes: Routes = [
   { path: 'registro-estabelecimento', component: RegisterEstablishmentComponent, canActivate: [AuthGuard]},
   { path: 'payment', component: PaymentComponent},
   { path: 'order-summary', component: OrderSummaryComponent},
+  { path: 'minha-conta', component: ManageAccountComponent},
+  { path: 'meus-cupons', component: MyCouponsComponent},
   {
     path: '',
     children: [
       { path:'', redirectTo: 'login', pathMatch: 'full' },
       { path: 'login', component: LoginComponent},
+      
     ]
   }
 
