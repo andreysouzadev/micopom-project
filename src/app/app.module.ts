@@ -28,6 +28,7 @@ import { LoadingComponent } from './loading/loading.component';
 import { ManageAccountComponent } from './my-account/manage-account/manage-account.component';
 import { MyCouponsComponent } from './my-account/my-coupons/my-coupons.component';
 import { MyAccountMenuComponent } from './my-account/my-account-menu/my-account-menu.component';
+import { ConfirmationComponent } from './confirmation/confirmation.component';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -51,6 +52,7 @@ registerLocaleData(localePt, 'pt-BR');
     ManageAccountComponent,
     MyCouponsComponent,
     MyAccountMenuComponent,
+    ConfirmationComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,7 +67,7 @@ registerLocaleData(localePt, 'pt-BR');
     AuthService,
     {provide: APP_BASE_HREF, useValue: '/'},
     { provide: LOCALE_ID, useValue: 'pt-BR' },
-    // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
 })

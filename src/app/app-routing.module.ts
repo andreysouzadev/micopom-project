@@ -12,6 +12,7 @@ import { PaymentComponent } from './payment/payment.component';
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
 import { ManageAccountComponent } from './my-account/manage-account/manage-account.component';
 import { MyCouponsComponent } from './my-account/my-coupons/my-coupons.component';
+import { ConfirmationComponent } from './confirmation/confirmation.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'order-summary', component: OrderSummaryComponent},
   { path: 'minha-conta', component: ManageAccountComponent},
   { path: 'meus-cupons', component: MyCouponsComponent},
+  { path: 'confirmation', component: ConfirmationComponent},
   {
     path: '',
     children: [
