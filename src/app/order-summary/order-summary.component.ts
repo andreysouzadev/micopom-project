@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from '../cart/cart.service';
 import { CartItem } from '../cart/cart.service';
 import { LoadingService } from '../services/loading.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order-summary',
@@ -17,7 +18,8 @@ export class OrderSummaryComponent implements OnInit {
 
   constructor(
     private cartService: CartService,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -49,7 +51,7 @@ export class OrderSummaryComponent implements OnInit {
   }
 
   removeItem(itemId: CartItem) {
-    this.cartService.removeFromCart(itemId);
+    this.cartService.removeItem(itemId);
     this.loadCart();
   }
 
@@ -58,5 +60,6 @@ export class OrderSummaryComponent implements OnInit {
     // alert('Compra finalizada com sucesso!');
     // this.cartService.clearCart();
     // this.loadCart();
+    this.router.navigate(['/payment'])
   }
 }

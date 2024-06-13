@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environment';
-import { Rating } from '../coupon-detail/coupon-detail.component';
+import { Rating } from '../models/rating.model';
 
 @Injectable({
   providedIn: 'root'

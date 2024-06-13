@@ -35,18 +35,18 @@
         </form>
         <h3>Método de Pagamento</h3>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="paymentMethod" id="creditCard" value="CREDIT_CARD" (change)="selectPaymentMethod('creditCard')">
+          <input class="form-check-input" type="radio" name="paymentMethod" id="creditCard" value="CREDIT_CARD" (change)="selectPaymentMethod('CREDIT_CARD')">
           <label class="form-check-label" for="creditCard">
             Cartão de Crédito
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="paymentMethod" id="pix" value="PIX" (change)="selectPaymentMethod('pix')">
+          <input class="form-check-input" type="radio" name="paymentMethod" id="pix" value="PIX" (change)="selectPaymentMethod('PIX')">
           <label class="form-check-label" for="pix">
             PIX
           </label>
         </div>
-        <div *ngIf="selectedPaymentMethod === 'creditCard'">
+        <div *ngIf="selectedPaymentMethod === 'CREDIT_CARD'">
           <h3>Pagar com cartão de crédito</h3>
           <form [formGroup]="paymentForm" (ngSubmit)="processPayment()">
             <div class="form-group">
@@ -98,7 +98,7 @@
             <button type="submit" class="btn btn-warning btn-block mt-4">Finalizar Compra</button>
           </form>
         </div>
-        <div *ngIf="selectedPaymentMethod === 'pix'">
+        <div *ngIf="selectedPaymentMethod === 'PIX'">
           <h3>Pagar com PIX</h3>
           <p>Escaneie o código QR ou copie o código abaixo para fazer o pagamento via PIX.</p>
           <div class="text-center">

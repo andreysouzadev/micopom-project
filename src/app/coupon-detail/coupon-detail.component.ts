@@ -4,13 +4,7 @@ import { ItemService } from '../item.service'; // Ajuste o caminho conforme nece
 import { Cupom } from '../item/item.component'; // Ajuste o caminho conforme necessário
 import { CartItem, CartService} from '../cart/cart.service';
 import { CouponService } from '../services/coupons.service';
-
-export interface Rating {
-  nu_avaliacao: number;
-  de_avaliacao: string;
-  dt_avaliacao: Date;
-  no_nome_completo: string
-}
+import { Rating } from '../models/rating.model';
 
 @Component({
   selector: 'app-coupon-detail',
@@ -19,7 +13,7 @@ export interface Rating {
 })
 export class CouponDetailComponent implements OnInit {
   coupon: any;
-  ratings: any;
+  ratings: Rating[];
   quantity: number=1;
 
   constructor(
@@ -68,7 +62,7 @@ export class CouponDetailComponent implements OnInit {
       img: this.coupon.imagens[0]
       // Adicione outras propriedades conforme necessário
     };
-    this.cartService.addToCart(newItem);
+    this.cartService.addItemToCart(newItem);
     alert('Item adicionado ao carrinho!');
     }
 

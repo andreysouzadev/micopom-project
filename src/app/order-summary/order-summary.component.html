@@ -16,8 +16,8 @@
                 <input type="number" [value]="item.quantity" (change)="updateQuantity(item, $event)" class="form-control" style="width: 70px; display: inline-block; margin-right: 10px;">
                 <button class="btn btn-danger btn-sm" (click)="removeItem(item)">Remover</button>
             </p>
-            <p class="card-text">Preço: R$ {{ item.price }}</p>
-            <p class="card-text">Total: R$ {{ item.price * item.quantity }}</p>
+            <p class="card-text">Preço: {{ item.price | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</p>
+            <p class="card-text">Total: {{ (item.price * item.quantity) | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</p>
             </div>
         </div>
         </div>
@@ -28,15 +28,15 @@
     <ul class="list-group mb-3">
         <li class="list-group-item d-flex justify-content-between">
         <span>Subtotal ({{ itensQuantity }} itens)</span>
-        <strong>R$ {{ total }}</strong>
+        <strong>{{ total | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</strong>
         </li>
         <li class="list-group-item d-flex justify-content-between">
         <span>Desconto</span>
-        <strong>R$ {{ discount }}</strong>
+        <strong>{{ discount | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</strong>
         </li>
         <li class="list-group-item d-flex justify-content-between">
         <span>Total</span>
-        <strong>R$ {{ total }}</strong>
+        <strong>{{ total | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</strong>
         </li>
     </ul>
     <div class="input-group mb-3">

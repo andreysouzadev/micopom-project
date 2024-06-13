@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PagseguroService } from '../services/pagseguro.service';
 import { CartItem, CartService } from '../cart/cart.service';
 import { LoadingService } from '../services/loading.service';
+import { Router } from '@angular/router';
 
 declare var PagSeguro: any
 
@@ -26,7 +27,8 @@ export class PaymentComponent implements OnInit{
     private fb: FormBuilder,
     private pagseguroService: PagseguroService,
     private cartService: CartService,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private router: Router
   ) {
     const currentYear = new Date().getFullYear();
     this.paymentForm = this.fb.group({
@@ -64,13 +66,7 @@ export class PaymentComponent implements OnInit{
       const customerData = this.customerForm.value;
       const paymentData = this.paymentForm.value;
 
-      const combinedData = {
-        ...customerData,
-        ...paymentData,
-        paymentMethod: this.selectPaymentMethod,
-        valueTotal: this.total,
-        cartItems: this.cartItems
-      }
+      this.loadingService.show();
 
       //GERA TOKEN DO CARTAO
       const card = PagSeguro.encryptCard({
@@ -84,7 +80,15 @@ export class PaymentComponent implements OnInit{
         holder: this.paymentForm.get('cardHolder')
       });
       console.log(card)
-      this.loadingService.show();
+
+      const combinedData = {
+        ...customerData,
+        // ...paymentData,
+        inputPaymentMethod: this.selectedPaymentMethod,
+        valueTotal: this.total,
+        cartItems: this.cartItems,
+        paymentData: card
+      }
 
       //Simulando chamada de API
       // this.pagseguroService.createPayment(combinedData).subscribe(
@@ -101,7 +105,14 @@ export class PaymentComponent implements OnInit{
 
         this.pagseguroService.createPayment(combinedData).subscribe(
           response => {
+            //Aqui criar logica para verificar se o pagamento foi aprovado ou nao
             console.log('Payment response: ', response)
+            const paymentSuccess = true;
+            if (paymentSuccess) {
+              this.router.navigate(['/confirmation'], { queryParams: { status: 'success' } });
+            } else {
+              this.router.navigate(['/confirmation'], { queryParams: { status: 'failure' } });
+            }
           },
           error => {
             console.log('Error processing payment:', error);
