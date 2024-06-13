@@ -1,0 +1,58 @@
+<app-menu></app-menu>
+<div class="container mt-5">
+<div class="row">
+    <div class="col-md-8">
+    <h2>Meu carrinho</h2>
+    <div class="card mb-3" *ngFor="let item of cartItems">
+        <div class="row no-gutters">
+        <div class="col-md-4">
+            <img [src]="'http://ec2-18-224-64-194.us-east-2.compute.amazonaws.com:3001/api/assets/uploads/' + item.img" alt="Logo do Estabelecimento" class="card-img" alt="..."> <!-- Altere para o caminho da sua imagem -->                            <!-- Altere para o caminho da sua imagem -->
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+            <h5 class="card-title">{{ item.name }}</h5>
+            <p class="card-text">
+                Quantidade:
+                <input type="number" [value]="item.quantity" (change)="updateQuantity(item, $event)" class="form-control" style="width: 70px; display: inline-block; margin-right: 10px;">
+                <button class="btn btn-danger btn-sm" (click)="removeItem(item)">Remover</button>
+            </p>
+            <p class="card-text">Preço: R$ {{ item.price }}</p>
+            <p class="card-text">Total: R$ {{ item.price * item.quantity }}</p>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+    <div class="col-md-4">
+    <h2>Resumo da compra</h2>
+    <ul class="list-group mb-3">
+        <li class="list-group-item d-flex justify-content-between">
+        <span>Subtotal ({{ itensQuantity }} itens)</span>
+        <strong>R$ {{ total }}</strong>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+        <span>Desconto</span>
+        <strong>R$ {{ discount }}</strong>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+        <span>Total</span>
+        <strong>R$ {{ total }}</strong>
+        </li>
+    </ul>
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Código do Cupom" (focusout)="applyCoupon()" [(ngModel)]="couponCode">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="button" (click)="applyCoupon()">Aplicar</button>
+        </div>
+    </div>
+    <button class="btn btn-primary btn-block" (click)="finalizePurchase()">Finalizar Compra</button>
+    <!-- SELO DE SEGURANCA -->
+    <!-- <div class="mt-3 text-center">
+        <script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
+        <a href="https://pagseguro.uol.com.br" target="_blank">
+          <img src="https://stc.pagseguro.uol.com.br/public/img/banners/diversos/seguro.gif" alt="PagSeguro - Pagamento Seguro" />
+        </a>
+    </div> -->
+    </div>
+</div>
+</div>

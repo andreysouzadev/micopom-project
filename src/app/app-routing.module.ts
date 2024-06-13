@@ -9,6 +9,7 @@ import { RegisterCouponComponent } from './coupon/register-coupon/register-coupo
 import { RegisterEstablishmentComponent } from './establishment/register-establishment/register-establishment.component';
 import { AuthGuard } from './auth/auth.guard';
 import { PaymentComponent } from './payment/payment.component';
+import { OrderSummaryComponent } from './order-summary/order-summary.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'registro-cupom', component: RegisterCouponComponent, canActivate: [AuthGuard]},
   { path: 'registro-estabelecimento', component: RegisterEstablishmentComponent, canActivate: [AuthGuard]},
   { path: 'payment', component: PaymentComponent},
+  { path: 'order-summary', component: OrderSummaryComponent},
   {
     path: '',
     children: [

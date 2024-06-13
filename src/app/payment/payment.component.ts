@@ -1,163 +1,115 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environment';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PagseguroService } from '../services/pagseguro.service';
+import { CartItem, CartService } from '../cart/cart.service';
+import { LoadingService } from '../services/loading.service';
 
-declare let window: any;
+declare var PagSeguro: any
 
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
   styleUrls: ['./payment.component.css']
 })
-export class PaymentComponent implements OnInit, AfterViewInit {
-  @ViewChild('checkoutBtn', { static: false }) checkoutBtn: ElementRef;
-  private mp: any;
-  private apiUrl = environment.apiUrl + 'payments';
-  constructor(
-    private http: HttpClient,
-  ) { }
+export class PaymentComponent implements OnInit{
+  cartItems: CartItem[] = []
+  paymentForm: FormGroup;
+  customerForm: FormGroup;
+  sessionId = 'YOUR_SESSION_ID';
+  productIsPhysical = false
+  total: number = 0;
+  discount: number = 0;
+  couponCode: string = '';
+  selectedPaymentMethod: string = '';
 
-  ngOnInit(): void { 
-    const cardForm = this.mp.cardForm({
-      amount: "100.5",
-      iframe: true,
-      form: {
-        id: "form-checkout",
-        cardNumber: {
-          id: "form-checkout__cardNumber",
-          placeholder: "Número do cartão",
-        },
-        expirationDate: {
-          id: "form-checkout__expirationDate",
-          placeholder: "MM/YY",
-        },
-        securityCode: {
-          id: "form-checkout__securityCode",
-          placeholder: "Código de segurança",
-        },
-        cardholderName: {
-          id: "form-checkout__cardholderName",
-          placeholder: "Titular do cartão",
-        },
-        issuer: {
-          id: "form-checkout__issuer",
-          placeholder: "Banco emissor",
-        },
-        installments: {
-          id: "form-checkout__installments",
-          placeholder: "Parcelas",
-        },       
-        identificationType: {
-          id: "form-checkout__identificationType",
-          placeholder: "Tipo de documento",
-        },
-        identificationNumber: {
-          id: "form-checkout__identificationNumber",
-          placeholder: "Número do documento",
-        },
-        cardholderEmail: {
-          id: "form-checkout__cardholderEmail",
-          placeholder: "E-mail",
-        },
-      },
-      callbacks: {
-        onFormMounted: (error: any) => {
-          if (error) return console.warn("Form Mounted handling error: ", error);
-          console.log("Form mounted");
-        },
-        onSubmit: (event: any) => {
-          event.preventDefault();
-           const {
-            paymentMethodId: payment_method_id,
-            issuerId: issuer_id,
-            cardholderEmail: email,
-            amount,
-            token,
-            installments,
-            identificationNumber,
-            identificationType,
-          } = cardForm.getCardFormData();
-           fetch("/process_payment", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              token,
-              issuer_id,
-              payment_method_id,
-              transaction_amount: Number(amount),
-              installments: Number(installments),
-              description: "Descrição do produto",
-              payer: {
-                email,
-                identification: {
-                  type: identificationType,
-                  number: identificationNumber,
-                },
-              },
-            }),
-          });
-        },
-        onFetching: (resource: any) => {
-          console.log("Fetching resource: ", resource);
-           // Animate progress bar
-          const progressBar = document.querySelector(".progress-bar");
-          // progressBar.removeAttribute("value");
-           return () => {
-            // progressBar.setAttribute("value", "0");
-          };
-        }
-      },
+  constructor(
+    private fb: FormBuilder,
+    private pagseguroService: PagseguroService,
+    private cartService: CartService,
+    private loadingService: LoadingService
+  ) {
+    const currentYear = new Date().getFullYear();
+    this.paymentForm = this.fb.group({
+      cardNumber: ['', [Validators.required, Validators.pattern(/^[0-9]{4} ?[0-9]{4} ?[0-9]{4} ?[0-9]{4}$/)]],
+      expirationMonth: ['', [Validators.required, Validators.pattern(/^(0[1-9]|1[0-2])$/)]],
+      expirationYear: ['', [Validators.required, Validators.pattern(`^(${currentYear}|${currentYear + 1}|${currentYear + 2}|${currentYear + 3}|${currentYear + 4}|${currentYear + 5}|${currentYear + 6}|${currentYear + 7}|${currentYear + 8}|${currentYear + 9})$`)]],
+      cardCVC: ['', [Validators.required, Validators.pattern(/^[0-9]{3,4}$/)]],
+      cardHolder: ['', [Validators.required]],
+      cardHolderDocument: ['', [Validators.required, Validators.pattern(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/)]]
     });
 
+    this.customerForm = this.fb.group({
+      fullName: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      cpf: ['', [Validators.required, Validators.pattern(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/)]],
+      phone: ['', [Validators.required, Validators.pattern(/^\(\d{2}\) \d{4,5}-\d{4}$/)]]
+    });
   }
 
-  ngAfterViewInit(): void {
-    console.log(window.MercadoPago)
-      if (typeof window.MercadoPago !== 'undefined') {
-        this.mp = new window.MercadoPago('TEST-eb522a44-b6cc-4acc-b6b4-2f7b4d623ab8', {
-          locale: 'pt-BR'
-        });
-      } else {
-        console.error('MercadoPago SDK não está disponível');
-      }
-    };
+  ngOnInit(): void {
+    this.loadCart();
+  }
+  selectPaymentMethod(method: string) {
+    this.selectedPaymentMethod = method;
+  }
+
+  loadCart() {
+    this.cartItems = this.cartService.getItems();
+    this.total = this.cartService.getTotal();
+  }
+
 
   processPayment(): void {
-    console.log('chamou')
-//     const amount = "100.5"
-//     const 
-//     if (this.mp) {
-//       const body = JSON.stringify({
-//         token,
-//         issuer_id,
-//         payment_method_id,
-//         transaction_amount: Number(amount),
-//         installments: Number(installments),
-//         description: "Descrição do produto",
-//         payer: {
-//           email,
-//           identification: {
-//             type: identificationType,
-//             number: identificationNumber,
-//           }
-//         }
-//       })
-//       this.http.post(`${this.apiUrl}/create_preference`, body)
-//       .subscribe((preference: any) => {
-//         this.mp.checkout({
-//           preference: {
-//             id: preference.id
-//           },
-//           autoOpen: true // abre automaticamente o checkout
-//         });
-//       }, error => {
-//         console.log(error);
-//       });
-//     } else {
-//       console.error('MercadoPago SDK não está inicializado');
-//     }
-//   }
+    if(this.paymentForm.valid && this.customerForm.valid){
+      const customerData = this.customerForm.value;
+      const paymentData = this.paymentForm.value;
 
-  }}
+      const combinedData = {
+        ...customerData,
+        ...paymentData,
+        paymentMethod: this.selectPaymentMethod,
+        valueTotal: this.total,
+        cartItems: this.cartItems
+      }
+
+      //GERA TOKEN DO CARTAO
+      const card = PagSeguro.encryptCard({
+        //Publickey do sandbox, em prod precisa gerar uma
+        publicKey: 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAr+ZqgD892U9/HXsa7XqBZUayPquAfh9xx4iwUbTSUAvTlmiXFQNTp0Bvt/5vK2FhMj39qSv1zi2OuBjvW38q1E374nzx6NNBL5JosV0+SDINTlCG0cmigHuBOyWzYmjgca+mtQu4WczCaApNaSuVqgb8u7Bd9GCOL4YJotvV5+81frlSwQXralhwRzGhj/A57CGPgGKiuPT+AOGmykIGEZsSD9RKkyoKIoc0OS8CPIzdBOtTQCIwrLn2FxI83Clcg55W8gkFSOS6rWNbG5qFZWMll6yl02HtunalHmUlRUL66YeGXdMDC2PuRcmZbGO5a/2tbVppW6mfSWG3NPRpgwIDAQAB',
+        number: this.paymentForm.get('cardNumber')?.value,
+        brand: this.paymentForm.get('cardBrand')?.value, // GERAR
+        cvv: this.paymentForm.get('cvv')?.value,
+        expMonth: Number(this.paymentForm.get('expirationMonth')?.value),
+        expYear: Number(this.paymentForm.get('expirationYear')?.value),
+        holder: this.paymentForm.get('cardHolder')
+      });
+      console.log(card)
+      this.loadingService.show();
+
+      //Simulando chamada de API
+      // this.pagseguroService.createPayment(combinedData).subscribe(
+      //   response => {
+      //     console.log('Payment response: ', response)
+      //   },
+      //   error => {
+      //     console.log('Error processing payment:', error);
+      //   }
+      // )
+      setTimeout(() => {
+        this.loadingService.hide();
+        console.log('Dados combinados: ', combinedData);
+
+        this.pagseguroService.createPayment(combinedData).subscribe(
+          response => {
+            console.log('Payment response: ', response)
+          },
+          error => {
+            console.log('Error processing payment:', error);
+          }
+        )
+      }, 2000);  
+    } else {
+      alert('Formulario invalido');
+    }
+  }
+}
