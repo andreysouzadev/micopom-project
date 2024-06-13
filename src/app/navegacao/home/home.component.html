@@ -29,7 +29,7 @@
           <div class="input-group">
             <span class="input-group-text bg-warning text-dark">Preço</span>
             <select class="form-select" [(ngModel)]="selectedPrice" aria-label="Preço">
-              <option value="todos" selected>Todos</option>
+              <option value="all">Todos</option>
               <option value="low">Menor preço</option>
               <option value="high">Maior preço</option>
             </select>
@@ -38,20 +38,20 @@
         <div class="col-lg-3 mb-2">
           <div class="input-group">
             <span class="input-group-text bg-warning text-dark">Desconto</span>
-            <select class="form-select" aria-label="Desconto">
-              <option selected>Todos</option>
-              <option>Maior desconto</option>
-              <option>Menor desconto</option>
+            <select class="form-select" [(ngModel)]="selectedDiscount" aria-label="Desconto">
+              <option value="all" selected>Todos</option>
+              <option value="low">Menor desconto</option>
+              <option value="high">Maior desconto</option>
             </select>
           </div>
         </div>
         <div class="col-lg-3 mb-2">
           <div class="input-group">
             <span class="input-group-text bg-warning text-dark">Data</span>
-            <select class="form-select" aria-label="Data">
-              <option selected>Todos</option>
-              <option>Mais recentes</option>
-              <option>Mais antigos</option>
+            <select class="form-select" [(ngModel)]="selectedDate" aria-label="Data">
+              <option value="all" selected>Todos</option>
+              <option value="new">Mais recentes</option>
+              <option value="old">Mais antigos</option>
             </select>
           </div>
         </div>
@@ -61,7 +61,7 @@
           <button class="btn btn-warning w-100" (click)="applyFilters()">Aplicar Filtros</button>
         </div>
         <div class="col-lg-3 mb-2">
-          <button class="btn btn-secondary w-100">Limpar Filtros</button>
+          <button class="btn btn-secondary w-100" (click)="resetFilters()">Limpar Filtros</button>
         </div>
       </div>
     </div>

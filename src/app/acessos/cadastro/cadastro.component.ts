@@ -31,6 +31,7 @@ export class CadastroComponent implements OnInit{
       nome: ['', [Validators.required, this.validationService.fullNameValidator()]],
       email: ['', [Validators.required, Validators.email, this.validationService.emailValidator()]],
       telefone: ['', [Validators.required, this.validationService.telefoneValidator()]],
+      cep: ['', [Validators.required]],
       logradouro: ['', [Validators.required, this.validationService.logradouroValidator()]],
       nlogradouro: ['', [Validators.required,]],
       cidade: ['',[ Validators.required, this.validationService.cidadeValidator()]],

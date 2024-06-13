@@ -5,7 +5,6 @@ import { categoryService } from 'src/app/services/category.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Cupom } from 'src/app/item/item.component';
 import { ItemService } from 'src/app/item.service';
-// import { HomeComponent } from '../home/home.component';
 import { SharedService } from 'src/app/shared.service';
 
 
@@ -85,12 +84,6 @@ export class MenuComponent implements OnInit {
 
     onSearch(): void {
       this.sharedService.filterItems(this.searchTerm)
-    //   this.sharedService.onSearch(this.searchTerm)
-    //   this.homeComponent.updateItems()
-    //   this.filteredItems = this.cupons.filter(cupom => 
-    //   cupom.de_cupom.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-    //   cupom.nome_estabelecimento.toLowerCase().includes(this.searchTerm.toLowerCase())
-    // );
   }
 
     toggleCart() {
@@ -121,15 +114,4 @@ export class MenuComponent implements OnInit {
     }
 
     
-
-    
-
-
-  // export class MenuComponent {
-  //   constructor(
-  //     private router: Router
-  //   ) {}
-  //   @Input() categorias!: Categorias;
-  
-  //   }
 }
