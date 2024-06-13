@@ -22,7 +22,9 @@ export class HomeComponent implements OnInit {
   cupons: Cupom[] = [];
   searchTerm: string = '';
   selectedCategory: string = 'todos';
-  selectedPrice: string = 'todos';
+  selectedPrice: string = 'all';
+  selectedDiscount: string = 'all';
+  selectedDate: string = 'all';
   categorias: Categorias[] = [];
 
   constructor(
@@ -65,10 +67,42 @@ export class HomeComponent implements OnInit {
     );
   }
 
+  // applyFilters() {
+  //   this.sharedService.filterByCategory(this.selectedCategory);
+  //   // this.sharedService.filterByPrice(this.selectedPrice);
+  // }
+
+  onCategoryChange(categoryId: string) {
+    this.selectedCategory = categoryId;
+  }
+
+  onPriceChange(priceFilter: string) {
+    this.selectedPrice = priceFilter;
+  }
+
+  onDiscountChange(discountFilter: string) {
+    this.selectedDiscount = discountFilter;
+  }
+
+  onDateChange(dateFilter: string) {
+    this.selectedDate = dateFilter;
+  }
+
   applyFilters() {
     this.sharedService.filterByCategory(this.selectedCategory);
-    // this.sharedService.filterByPrice(this.selectedPrice);
+    this.sharedService.filterByPrice(this.selectedPrice);
+    this.sharedService.filterByDiscount(this.selectedDiscount);
+    this.sharedService.filterByDate(this.selectedDate);
   }
+
+  resetFilters() {
+    this.selectedCategory = 'todos';
+    this.selectedPrice = 'all';
+    this.selectedDiscount = 'all';
+    this.selectedDate = 'all';
+    this.sharedService.resetFilters();
+  }
+
 
   
   updateItems(){

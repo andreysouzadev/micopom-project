@@ -21,7 +21,7 @@
       <div class="col-md-6">
         <h2>{{ coupon.data.no_cupom }}</h2>
         <p>{{ coupon.data.de_cupom }}</p>
-        <p class="h4 text-primary">{{ coupon.data.vl_original - coupon.data.vl_desconto | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</p>
+        <p class="h4 text-warning">{{ coupon.data.vl_original - coupon.data.vl_desconto | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</p>
         <div class="form-group">
           <label for="quantity">Quantidade</label>
           <input type="number" id="quantity" [(ngModel)]="quantity" class="form-control" >

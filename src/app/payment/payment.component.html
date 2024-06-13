@@ -95,7 +95,7 @@
                   CPF do titular do cartão é obrigatório.
                 </div>
               </div>
-            <button type="submit" class="btn btn-primary btn-block mt-4">Finalizar Compra</button>
+            <button type="submit" class="btn btn-warning btn-block mt-4">Finalizar Compra</button>
           </form>
         </div>
         <div *ngIf="selectedPaymentMethod === 'PIX'">
@@ -105,7 +105,7 @@
             <img src="path-to-qr-code.png" alt="QR Code PIX" class="img-fluid"> <!-- Altere para o caminho do seu QR Code -->
             <p>Código PIX: <strong>1234567890</strong></p>
           </div>
-          <button class="btn btn-primary btn-block mt-4" (click)="processPayment()">Finalizar Compra</button>
+          <button class="btn btn-warning btn-block mt-4" (click)="processPayment()">Finalizar Compra</button>
         </div>
         <div class="mt-3 text-center">
           <script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>

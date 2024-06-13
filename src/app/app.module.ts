@@ -28,7 +28,13 @@ import { LoadingComponent } from './loading/loading.component';
 import { ManageAccountComponent } from './my-account/manage-account/manage-account.component';
 import { MyCouponsComponent } from './my-account/my-coupons/my-coupons.component';
 import { MyAccountMenuComponent } from './my-account/my-account-menu/my-account-menu.component';
+<<<<<<< HEAD
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+
+
+=======
 import { ConfirmationComponent } from './confirmation/confirmation.component';
+>>>>>>> b9a1a04345ca380f5e343046d4dc9f9fae061580
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -62,9 +68,12 @@ registerLocaleData(localePt, 'pt-BR');
     RouterModule,
     HttpClientModule,
     FormsModule,
+    NgxMaskDirective,
+
   ],
   providers: [
     AuthService,
+    provideNgxMask(),
     {provide: APP_BASE_HREF, useValue: '/'},
     { provide: LOCALE_ID, useValue: 'pt-BR' },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }

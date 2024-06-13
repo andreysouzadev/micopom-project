@@ -120,7 +120,7 @@
         <li class="nav-item" routerLinkActive="active">
           <a class="nav-link text-white" routerLink="/registro-estabelecimento">Estabelecimento</a>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown" *ngIf="user">
           <button class="btn btn-link nav-link" id="notificationsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fa fa-bell text-white"></i>
           </button>
@@ -194,35 +194,6 @@
   </div>
   <div class="cart-footer">
     <h4>Total do Carrinho: {{ cartTotal | currency:'BRL' }}</h4>
-    <button class="btn btn-primary btn-block mt-4" routerLink="/order-summary">Finalizar Compra</button>
+    <button class="btn btn-warning btn-block mt-4" routerLink="/order-summary">Finalizar Compra</button>
   </div>
 </div>
-
-<!-- Menu lateral do carrinho -->
-<!-- <div class="cart-sidebar" [class.open]="cartOpen">
-  <div class="cart-header">
-    <h3>Carrinho</h3>
-    <button class="close-btn" (click)="closeCart()">&times;</button>
-  </div>
-  <div class="cart-body">
-    <ul class="cart-items">
-      <li class="cart-item" *ngFor="let item of cartItems">
-        <div class="item-info">
-          <div class="item-details">
-            <span class="item-name">{{ item.name }}</span>
-            <input type="number" [(ngModel)]="item.quantity" (ngModelChange)="updateQuantity(item, item.quantity)" class="form-control item-quantity">
-          </div>
-          <div class="item-prices">
-            <span class="item-price">{{ item.price | currency:'BRL' }}</span>
-            <span class="item-total">Total: {{ (item.price * item.quantity) | currency:'BRL' }}</span>
-          </div>
-        </div>
-        <button class="btn btn-link btn-sm remove-btn" (click)="removeFromCart(item)">Remover</button>
-      </li>
-    </ul>
-  </div>
-  <div class="cart-footer">
-    <h4>Total do Carrinho: {{ cartTotal | currency:'BRL' }}</h4>
-    <button class="btn btn-primary btn-block">Finalizar Compra</button>
-  </div>
-</div> -->
