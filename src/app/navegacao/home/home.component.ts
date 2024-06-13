@@ -3,6 +3,13 @@ import { ItemService } from '../../item.service'; // Ajuste o caminho conforme n
 import { Cupom } from '../../item/item.component'; // Ajuste o caminho conforme necessário
 import { Router } from '@angular/router';
 import { SharedService } from 'src/app/shared.service';
+import { categoryService } from 'src/app/services/category.service';
+
+
+export interface Categorias {
+  id_categoria: number;
+  no_categoria: string;
+};
 
 @Component({
   selector: 'app-home',
@@ -14,11 +21,15 @@ export class HomeComponent implements OnInit {
   //CUPONS = OBJETOS MOSTRADOS NA HOME ORIUNDOS DO SERVICO SHARED
   cupons: Cupom[] = [];
   searchTerm: string = '';
+  selectedCategory: string = 'todos';
+  selectedPrice: string = 'todos';
+  categorias: Categorias[] = [];
 
   constructor(
     private itemService: ItemService,
     private router: Router,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private categoryService: categoryService,
   ) {}
 
   ngOnInit() {
@@ -26,7 +37,6 @@ export class HomeComponent implements OnInit {
       (data: Cupom[]) => {
         this.sharedService.setItems(data);
         this.cupons = this.sharedService.getItems();
-        // this.filteredItems = data;
         console.log("Received Items:", this.cupons);
       },
       error => {
@@ -41,7 +51,25 @@ export class HomeComponent implements OnInit {
 
     // Inicializar com todos os itens
     this.cupons = this.sharedService.getItems();
+
+    //Buscar categorias para filtragem
+
+    this.categoryService.getCategories().subscribe(
+      (data: Categorias[]) => {
+        this.categorias = data;
+        console.log("Received Categories:", this.categorias);
+      },
+      error => {
+        console.error('Erro ao buscar categorias:', error);
+      }
+    );
   }
+
+  applyFilters() {
+    this.sharedService.filterByCategory(this.selectedCategory);
+    // this.sharedService.filterByPrice(this.selectedPrice);
+  }
+
   
   updateItems(){
     // this.filteredItems = this.sharedService.getItems()
@@ -49,12 +77,6 @@ export class HomeComponent implements OnInit {
   }
 
   onSearch(): void {
-    // this.filteredItems=this.sharedService.onSearch(this.searchTerm.toLowerCase())
-    // console.log(this.filteredItems)
-    // this.filteredItems = this.cupons.filter(cupom => 
-    //   cupom.de_cupom.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-    //   cupom.nome_estabelecimento.toLowerCase().includes(this.searchTerm.toLowerCase())
-    // );
   }
 
   navigateToDetail(id: string): void {
