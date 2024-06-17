@@ -33,7 +33,7 @@ export class CadastroComponent implements OnInit{
       telefone: ['', [Validators.required, this.validationService.telefoneValidator()]],
       cep: ['', [Validators.required]],
       logradouro: ['', [Validators.required, this.validationService.logradouroValidator()]],
-      nlogradouro: ['', [Validators.required,]],
+      nlogradouro: ['', [Validators.required]],
       cidade: ['',[ Validators.required, this.validationService.cidadeValidator()]],
       complemento: ['', [Validators.required]],
       uf: ['', [Validators.required, this.validationService.ufValidator]],
