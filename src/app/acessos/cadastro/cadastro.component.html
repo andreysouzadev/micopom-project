@@ -1,11 +1,11 @@
 <app-menu></app-menu>
-<div class="container mt-1">
+<div class="container">
   <div class="row justify-content-center">
-    <div class="col-lg-3 mb-1">
+    <div class="col-lg-3">
       <img src="assets/micoleao1.png" class="img-fluid" />
     </div>
   </div>
-  <h2 class="text-center mb-4">Cadastre-se</h2>
+  <h2 class="text-center mb-3">Cadastre-se</h2>
   <form (ngSubmit)="onRegister()" [formGroup]="cadastroForm">
     <div class="row">
       <div class="col-md-4">
@@ -73,7 +73,7 @@
       <div class="col-md-4">
         <div class="form-group">
           <label for="nlogradouro">N° Logradouro</label>
-          <input class="form-control custom-input" type="number" name="nlogradouro" id="nlogradouro" formControlName="nlogradouro" mask="000000"
+          <input class="form-control custom-input" type="text" name="nlogradouro" id="nlogradouro" formControlName="nlogradouro"
             [ngClass]="{'is-invalid': cadastroForm.get('nlogradouro')?.errors && (cadastroForm.get('nlogradouro')?.dirty || cadastroForm.get('nlogradouro')?.touched)}"/>
           <div class="text-danger" *ngIf="cadastroForm.get('nlogradouro')?.errors?.['required'] && (cadastroForm.get('nlogradouro')?.dirty || cadastroForm.get('nlogradouro')?.touched)">
             N° do logradouro é requerido
