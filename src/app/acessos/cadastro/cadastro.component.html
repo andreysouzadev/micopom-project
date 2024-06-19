@@ -124,34 +124,39 @@
 
     <div class="row">
       <div class="col-md-4">
-        <div class="form-group">
+        <div class="form-group position-relative">
           <label for="senha">Senha</label>
-          <input class="form-control custom-input" type="password" name="senha" id="senha" formControlName="senha" 
+          <input class="form-control custom-input" [type]="senhaFieldType" name="senha" id="senha" formControlName="senha" 
             [ngClass]="{'is-invalid': cadastroForm.get('senha')?.errors && (cadastroForm.get('senha')?.dirty || cadastroForm.get('senha')?.touched)}"/>
-            <div class="text-danger" *ngIf="cadastroForm.get('senha')?.errors?.['required'] && (cadastroForm.get('senha')?.dirty || cadastroForm.get('senha')?.touched)">
-              Senha é requerida
-            </div>
-            <div class="text-danger" *ngIf="cadastroForm.get('senha')?.errors?.['invalidPassword'] && (cadastroForm.get('senha')?.dirty)">
-              Senha inválida<br>
-              - Deve conter pelo menos um caractere especial: #@$%<br>
-              - Deve conter pelo menos uma letra maiúscula
-            </div>
+          <i class="fa" [ngClass]="{'fa-eye': senhaFieldType === 'password', 'fa-eye-slash': senhaFieldType === 'text'}"
+             (click)="togglePasswordVisibility('senha')" style="position: absolute; right: 10px; top: 36px; cursor: pointer;"></i>
+          <div class="text-danger" *ngIf="cadastroForm.get('senha')?.errors?.['required'] && (cadastroForm.get('senha')?.dirty || cadastroForm.get('senha')?.touched)">
+            Senha é requerida
+          </div>
+          <div class="text-danger" *ngIf="cadastroForm.get('senha')?.errors?.['invalidPassword'] && (cadastroForm.get('senha')?.dirty)">
+            Senha inválida<br>
+            - Deve conter pelo menos um caractere especial: #@$%<br>
+            - Deve conter pelo menos uma letra maiúscula
+          </div>
         </div>
       </div>
       <div class="col-md-4">
-        <div class="form-group">
+        <div class="form-group position-relative">
           <label for="confirmarsenha">Confirme sua senha</label>
-          <input class="form-control custom-input" type="password" name="confirmarsenha" id="confirmarsenha" formControlName="confirmarsenha" 
+          <input class="form-control custom-input" [type]="confirmarsenhaFieldType" name="confirmarsenha" id="confirmarsenha" formControlName="confirmarsenha" 
             [ngClass]="{'is-invalid': cadastroForm.get('confirmarsenha')?.errors && (cadastroForm.get('confirmarsenha')?.dirty || cadastroForm.get('confirmarsenha')?.touched)}"/>
-            <div class="text-danger" *ngIf="cadastroForm.get('confirmarsenha')?.errors?.['required'] && (cadastroForm.get('confirmarsenha')?.dirty || cadastroForm.get('confirmarsenha')?.touched)">
-              Confirmar senha é requerido
-            </div>
-            <div class="text-danger" *ngIf="cadastroForm.errors?.['passwordMismatch'] && (cadastroForm.get('confirmarsenha')?.dirty || cadastroForm.get('confirmarsenha')?.touched)">
-              Senhas não coincidem.
-            </div>
+          <i class="fa" [ngClass]="{'fa-eye': confirmarsenhaFieldType === 'password', 'fa-eye-slash': confirmarsenhaFieldType === 'text'}"
+             (click)="togglePasswordVisibility('confirmarsenha')" style="position: absolute; right: 10px; top: 36px; cursor: pointer;"></i>
+          <div class="text-danger" *ngIf="cadastroForm.get('confirmarsenha')?.errors?.['required'] && (cadastroForm.get('confirmarsenha')?.dirty || cadastroForm.get('confirmarsenha')?.touched)">
+            Confirmar senha é requerido
+          </div>
+          <div class="text-danger" *ngIf="cadastroForm.errors?.['passwordMismatch'] && (cadastroForm.get('confirmarsenha')?.dirty || cadastroForm.get('confirmarsenha')?.touched)">
+            Senhas não coincidem.
+          </div>
         </div>
       </div>
     </div>
+    
 
     <button type="submit" class="btn btn-warning">Cadastrar</button>
     <p class="mt-3">Ao preencher o formulário acima, você concorda com os nossos termos de uso e nossa política de acesso.</p>

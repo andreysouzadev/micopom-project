@@ -10,10 +10,10 @@
     <div class="col-md-9">
       <div class="card mb-3">
         <div class="card-header">
-          <h5>Seus Dados</h5>
+          <h5>Meus Dados</h5>
         </div>
         <div class="card-body">
-          <form [formGroup]="userForm">
+          <form [formGroup]="userForm" (ngSubmit)="saveChanges()">
             <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
             <div class="form-row">
               <div class="form-group col-md-6">
@@ -43,10 +43,10 @@
               <div class="form-group col-md-6">
                 <label for="cep">CEP</label>
                 <div class="input-group">
-                  <input class="form-control" type="text" formControlName="cep" id="cep">
+                  <input class="form-control" type="text" formControlName="nu_cep" id="nu_cep">
                   <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" (click)="toggleEdit('cep')">
-                      <i class="fa" [ngClass]="isEditing.cep ? 'fa-check' : 'fa-pencil'"></i>
+                    <button class="btn btn-outline-secondary" type="button" (click)="toggleEdit('nu_cep')">
+                      <i class="fa" [ngClass]="isEditing.nu_cep ? 'fa-check' : 'fa-pencil'"></i>
                     </button>
                   </div>
                 </div>
@@ -116,58 +116,37 @@
         </div>
       </div>
 
-
-
-      <div class="row">
-        <div class="col-md-6">
-          <div class="card mb-3">
-            <div class="card-header">
-              <h5>Alterar Senha</h5>
-            </div>
-            <div class="card-body">
-              <form>
-                <div class="form-group">
-                  <label for="senhaAtual">Senha Atual</label>
-                  <input class="form-control" type="password" name="senhaAtual" id="senhaAtual">
-                </div>
-                <div class="form-group">
-                  <label for="novaSenha">Nova Senha</label>
-                  <input class="form-control" type="password" name="novaSenha" id="novaSenha">
-                </div>
-                <div class="form-group">
-                  <label for="confirmarNovaSenha">Confirmar Nova Senha</label>
-                  <input class="form-control" type="password" name="confirmarNovaSenha" id="confirmarNovaSenha">
-                </div>
-                <button type="submit" class="btn btn-warning btn-block mt-3">Salvar Nova Senha</button>
-              </form>
-            </div>
-          </div>
+      <div class="card mb-3">
+        <div class="card-header">
+          <h5>Alterar Senha</h5>
         </div>
-        <div class="col-md-6">
-          <div class="card mb-3">
-            <div class="card-header">
-              <h5>Alterar E-mail</h5>
+        <div class="card-body">
+          <form [formGroup]="passwordForm" (ngSubmit)="changePassword()">
+            <div class="form-group position-relative">
+              <label for="currentPassword">Senha Atual</label>
+              <input class="form-control" [type]="currentPasswordFieldType" formControlName="currentPassword" id="currentPassword">
+              <i class="fa" [ngClass]="{'fa-eye': currentPasswordFieldType === 'password', 'fa-eye-slash': currentPasswordFieldType === 'text'}"
+                 (click)="togglePasswordVisibility('current')" style="position: absolute; right: 30px; top: 36px; cursor: pointer;"></i>
             </div>
-            <div class="card-body">
-              <form>
-                <div class="form-group">
-                  <label for="emailAtual">E-mail Atual</label>
-                  <input class="form-control" type="email" name="emailAtual" id="emailAtual">
-                </div>
-                <div class="form-group">
-                  <label for="novoEmail">Novo E-mail</label>
-                  <input class="form-control" type="email" name="novoEmail" id="novoEmail">
-                </div>
-                <div class="form-group">
-                  <label for="confirmarNovoEmail">Confirmar Novo E-mail</label>
-                  <input class="form-control" type="email" name="confirmarNovoEmail" id="confirmarNovoEmail">
-                </div>
-                <button type="submit" class="btn btn-warning btn-block mt-3">Salvar Novo E-mail</button>
-              </form>
+            <div class="form-group position-relative">
+              <label for="newPassword">Nova Senha</label>
+              <input class="form-control" [type]="newPasswordFieldType" formControlName="newPassword" id="newPassword">
+              <i class="fa" [ngClass]="{'fa-eye': newPasswordFieldType === 'password', 'fa-eye-slash': newPasswordFieldType === 'text'}"
+                 (click)="togglePasswordVisibility('new')" style="position: absolute; right: 30px; top: 36px; cursor: pointer;"></i>
             </div>
-          </div>
+            <div class="form-group position-relative">
+              <label for="confirmNewPassword">Confirmar Nova Senha</label>
+              <input class="form-control" [type]="confirmNewPasswordFieldType" formControlName="confirmNewPassword" id="confirmNewPassword">
+              <i class="fa" [ngClass]="{'fa-eye': confirmNewPasswordFieldType === 'password', 'fa-eye-slash': confirmNewPasswordFieldType === 'text'}"
+                 (click)="togglePasswordVisibility('confirm')" style="position: absolute; right: 30px; top: 36px; cursor: pointer;"></i>
+            </div>
+            <button type="submit" class="btn btn-warning btn-block mt-3">Salvar Nova Senha</button>
+          </form>
         </div>
       </div>
+      
+      
+
     </div>
   </div>
 </div>

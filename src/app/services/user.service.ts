@@ -22,7 +22,25 @@ export class UserService {
       })
     );
   }
+
+  updateUserData(userData: any): Observable<any> {
+    const headers = this.authService.getAuthHeaders();
+    return this.http.post<any>(`${this.apiUrl}/change-informations`, userData, {headers}). pipe(
+      catchError(error => {
+        console.error('Error updating user data', error);
+        return throwError(error);
+      })
+    )
+  }
+
+  changePassword(passwordData: any): Observable<any> {
+    const headers = this.authService.getAuthHeaders();
+    return this.http.post<any>(`${this.apiUrl}/change-password-page`, passwordData, { headers }).pipe(
+      catchError(error => {
+        console.error('Error changing password:', error);
+        return throwError(error);
+      })
+    );
+  }
+
 }
-
-
-
