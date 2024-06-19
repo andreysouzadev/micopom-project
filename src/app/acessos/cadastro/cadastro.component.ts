@@ -17,6 +17,8 @@ export class CadastroComponent implements OnInit{
   errorMessage: string = '';
   usuario: usuario;
   formResult: string = ''
+  senhaFieldType: string = 'password';
+  confirmarsenhaFieldType: string = 'password';
 
   constructor(
     private fb: FormBuilder,
@@ -48,10 +50,9 @@ export class CadastroComponent implements OnInit{
   }
 
   onRegister(): void {
-    console.log("Chamou")
     if (this.cadastroForm.valid) {
-      const { email, senha, nome, telefone, logradouro, uf, cidade, complemento, nlogradouro } = this.cadastroForm.value;
-      this.authService.register(email, senha, nome, telefone, logradouro, uf, cidade, complemento, nlogradouro).subscribe(
+      const { email, senha, nome, telefone, logradouro, uf, cidade, complemento, nlogradouro, cep } = this.cadastroForm.value;
+      this.authService.register(email, senha, nome, logradouro, uf, cidade, complemento, nlogradouro, telefone, cep).subscribe(
         response => {
           console.log('Register successful:', response);
           this.router.navigate(['/login']);
@@ -62,5 +63,16 @@ export class CadastroComponent implements OnInit{
         }
       );
     }
+  }
+
+  togglePasswordVisibility(field: string): void {
+    if (field === 'senha') {
+      this.senhaFieldType = this.senhaFieldType === 'password' ? 'text' : 'password';
+    } else if (field === 'confirmarsenha') {
+      this.confirmarsenhaFieldType = this.confirmarsenhaFieldType === 'password' ? 'text' : 'password';
+    }
+  }
+  
 }
-}
+
+
