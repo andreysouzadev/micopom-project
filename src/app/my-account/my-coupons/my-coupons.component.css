@@ -1,4 +1,33 @@
-.my-coupons {
-    padding-left: 17%;
-    margin-top: 5%;
-}
+  .nav-link.active {
+    font-weight: bold;
+    background-color: #e4b51a;
+    color: black; 
+  }
+  
+  .nav-link {
+    color: black;
+    border: none;
+    background: none;
+    padding: 10px 15px;
+    text-align: left;
+    width: 100%;
+  }
+  
+  
+  .card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+  }
+  
+  .card-body {
+    padding: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .btn-block {
+    width: 100%;
+  }
+  

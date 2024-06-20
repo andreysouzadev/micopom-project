@@ -13,6 +13,7 @@ export class LoginComponent {
   
   loginForm: FormGroup;
   errorMessage: string = '';
+  passwordFieldType: string = 'password';
 
   constructor(
     private fb: FormBuilder,
@@ -40,6 +41,11 @@ export class LoginComponent {
      
     }
   }
+
+  togglePasswordVisibility(): void {
+    this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
+  }
+
 
 
 }

@@ -27,7 +27,6 @@ import { OrderSummaryComponent } from './order-summary/order-summary.component';
 import { LoadingComponent } from './loading/loading.component';
 import { ManageAccountComponent } from './my-account/manage-account/manage-account.component';
 import { MyCouponsComponent } from './my-account/my-coupons/my-coupons.component';
-import { MyAccountMenuComponent } from './my-account/my-account-menu/my-account-menu.component';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
 
@@ -54,7 +53,6 @@ registerLocaleData(localePt, 'pt-BR');
     LoadingComponent,
     ManageAccountComponent,
     MyCouponsComponent,
-    MyAccountMenuComponent,
     ConfirmationComponent,
   ],
   imports: [

@@ -21,7 +21,7 @@ export class AuthService {
     }
   }
 
-  private getAuthHeaders(): HttpHeaders {
+  public getAuthHeaders(): HttpHeaders {
     const token = this.getToken();
     return new HttpHeaders({
       'Authorization': `Bearer ${token}`
@@ -78,27 +78,54 @@ export class AuthService {
   }
 
   register(
-    email: string, 
+    email: string,
     password: string,
     nome: string,
-    no_logradouro: string,
-    no_uf: string,
-    no_cidade: string,
-    de_complemento: string,
-    nu_logradouro: string,
-    nu_telefone: string
-    ): Observable<any> {
-        return this.http.post(`${this.apiUrl}/register`, 
-        { 
-            email, 
-            password,
-            nome_completo: nome,
-            logradouro: no_logradouro,
-            uf: no_uf,
-            cidade :no_cidade,
-            complemento: de_complemento,
-            nu_logradouro,
-            nu_telefone
-        });
-    }
+    logradouro: string,
+    uf: string,
+    cidade: string,
+    complemento: string,
+    nlogradouro: string,
+    telefone: string,
+    cep: string
+  ): Observable<any> {
+    return this.http.post(`${this.apiUrl}/register`, {
+      email,
+      password,
+      nome_completo: nome,
+      logradouro,
+      uf,
+      cidade,
+      complemento,
+      nu_logradouro: nlogradouro,
+      nu_telefone: telefone,
+      nu_cep: cep
+    });
+  }
 }
+
+//   register(
+//     email: string, 
+//     password: string,
+//     nome: string,
+//     no_logradouro: string,
+//     no_uf: string,
+//     no_cidade: string,
+//     de_complemento: string,
+//     nu_logradouro: string,
+//     nu_telefone: string
+//     ): Observable<any> {
+//         return this.http.post(`${this.apiUrl}/register`, 
+//         { 
+//             email, 
+//             password,
+//             nome_completo: nome,
+//             logradouro: no_logradouro,
+//             uf: no_uf,
+//             cidade :no_cidade,
+//             complemento: de_complemento,
+//             nu_logradouro,
+//             nu_telefone
+//         });
+//     }
+// }

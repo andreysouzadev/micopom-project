@@ -1,9 +1,153 @@
-<app-my-account-menu></app-my-account-menu>
-
-    <div>
-      <div class="manage-account">
-         <h2>Minha conta</h2>
-        <!-- Conteúdo dos meus cupons -->
-       </div>
+<app-menu></app-menu>
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
+        <a class="nav-link" [routerLink]="['/minha-conta']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Meus Dados</a>
+        <a class="nav-link" [routerLink]="['/meus-cupons']" routerLinkActive="active">Meus Cupons</a>
+      </div>
     </div>
+    <div class="col-md-9">
+      <div class="card mb-3">
+        <div class="card-header">
+          <h5>Meus Dados</h5>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="userForm" (ngSubmit)="saveChanges()">
+            <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="no_nome_completo">Nome Completo</label>
+                <div class="input-group">
+                  <input class="form-control" type="text" formControlName="no_nome_completo" id="no_nome_completo">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" (click)="toggleEdit('no_nome_completo')">
+                      <i class="fa" [ngClass]="isEditing.no_nome_completo ? 'fa-check' : 'fa-pencil'"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="nu_telefone">Telefone</label>
+                <div class="input-group">
+                  <input class="form-control" type="text" formControlName="nu_telefone" id="nu_telefone">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" (click)="toggleEdit('nu_telefone')">
+                      <i class="fa" [ngClass]="isEditing.nu_telefone ? 'fa-check' : 'fa-pencil'"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="cep">CEP</label>
+                <div class="input-group">
+                  <input class="form-control" type="text" formControlName="nu_cep" id="nu_cep">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" (click)="toggleEdit('nu_cep')">
+                      <i class="fa" [ngClass]="isEditing.nu_cep ? 'fa-check' : 'fa-pencil'"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="no_logradouro">Logradouro</label>
+                <div class="input-group">
+                  <input class="form-control" type="text" formControlName="no_logradouro" id="no_logradouro">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" (click)="toggleEdit('no_logradouro')">
+                      <i class="fa" [ngClass]="isEditing.no_logradouro ? 'fa-check' : 'fa-pencil'"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="nu_logradouro">N° Logradouro</label>
+                <div class="input-group">
+                  <input class="form-control" type="number" formControlName="nu_logradouro" id="nu_logradouro">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" (click)="toggleEdit('nu_logradouro')">
+                      <i class="fa" [ngClass]="isEditing.nu_logradouro ? 'fa-check' : 'fa-pencil'"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="de_complemento">Complemento</label>
+                <div class="input-group">
+                  <input class="form-control" type="text" formControlName="de_complemento" id="de_complemento">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" (click)="toggleEdit('de_complemento')">
+                      <i class="fa" [ngClass]="isEditing.de_complemento ? 'fa-check' : 'fa-pencil'"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="no_cidade">Cidade</label>
+                <div class="input-group">
+                  <input class="form-control" type="text" formControlName="no_cidade" id="no_cidade">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" (click)="toggleEdit('no_cidade')">
+                      <i class="fa" [ngClass]="isEditing.no_cidade ? 'fa-check' : 'fa-pencil'"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="no_uf">UF</label>
+                <div class="input-group">
+                  <input class="form-control" type="text" formControlName="no_uf" id="no_uf">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" (click)="toggleEdit('no_uf')">
+                      <i class="fa" [ngClass]="isEditing.no_uf ? 'fa-check' : 'fa-pencil'"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-warning btn-block mt-3">Salvar Informações</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="card mb-3">
+        <div class="card-header">
+          <h5>Alterar Senha</h5>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="passwordForm" (ngSubmit)="changePassword()">
+            <div class="form-group position-relative">
+              <label for="currentPassword">Senha Atual</label>
+              <input class="form-control" [type]="currentPasswordFieldType" formControlName="currentPassword" id="currentPassword">
+              <i class="fa" [ngClass]="{'fa-eye': currentPasswordFieldType === 'password', 'fa-eye-slash': currentPasswordFieldType === 'text'}"
+                 (click)="togglePasswordVisibility('current')" style="position: absolute; right: 30px; top: 36px; cursor: pointer;"></i>
+            </div>
+            <div class="form-group position-relative">
+              <label for="newPassword">Nova Senha</label>
+              <input class="form-control" [type]="newPasswordFieldType" formControlName="newPassword" id="newPassword">
+              <i class="fa" [ngClass]="{'fa-eye': newPasswordFieldType === 'password', 'fa-eye-slash': newPasswordFieldType === 'text'}"
+                 (click)="togglePasswordVisibility('new')" style="position: absolute; right: 30px; top: 36px; cursor: pointer;"></i>
+            </div>
+            <div class="form-group position-relative">
+              <label for="confirmNewPassword">Confirmar Nova Senha</label>
+              <input class="form-control" [type]="confirmNewPasswordFieldType" formControlName="confirmNewPassword" id="confirmNewPassword">
+              <i class="fa" [ngClass]="{'fa-eye': confirmNewPasswordFieldType === 'password', 'fa-eye-slash': confirmNewPasswordFieldType === 'text'}"
+                 (click)="togglePasswordVisibility('confirm')" style="position: absolute; right: 30px; top: 36px; cursor: pointer;"></i>
+            </div>
+            <button type="submit" class="btn btn-warning btn-block mt-3">Salvar Nova Senha</button>
+          </form>
+        </div>
+      </div>
+      
+      
+
+    </div>
+  </div>
+</div>
 <app-footer></app-footer>
