@@ -109,9 +109,9 @@ export class PaymentComponent implements OnInit{
             console.log('Payment response: ', response)
             const paymentSuccess = true;
             if (paymentSuccess) {
-              this.router.navigate(['/confirmation'], { queryParams: { status: 'success' } });
+              // this.router.navigate(['/confirmation'], { queryParams: { status: 'success' } });
             } else {
-              this.router.navigate(['/confirmation'], { queryParams: { status: 'failure' } });
+              // this.router.navigate(['/confirmation'], { queryParams: { status: 'failure' } });
             }
           },
           error => {
