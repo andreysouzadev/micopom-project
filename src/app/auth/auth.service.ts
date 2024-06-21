@@ -64,6 +64,7 @@ export class AuthService {
   }
 
   getUser() {
+    this.loadUserDetails()
     return this.userSubject.asObservable();
   }
 
