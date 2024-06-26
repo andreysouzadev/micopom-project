@@ -112,11 +112,7 @@ export class RegisterCouponComponent implements OnInit {
   onSubmit(): void {
     console.log("chamou")
     if (this.couponForm.valid) {
-
-      //Submeteu
         const { shortDescription, originalValue, discountValue, expirationDate, cuponQuantity, imageUrl, fullDescription, couponName, categoryList, establishmentList } = this.couponForm.value;
-        // console.log(this.couponForm.value)
-        // console.log(imageUrl)
         this.CouponService.registerCoupon(
           {shortDescription, originalValue, discountValue, expirationDate, cuponQuantity, imageUrl, fullDescription, couponName, categoryList, establishmentList},
           this.mainFile,

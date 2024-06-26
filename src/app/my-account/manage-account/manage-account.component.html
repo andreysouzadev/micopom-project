@@ -9,6 +9,9 @@
     </div>
     <div class="col-md-9">
       <div class="card mb-3">
+        <div *ngIf="changeInformationsNotification" class="alert alert-success alert-dismissible fade show" role="alert">
+          Alterações realizadas com sucesso
+        </div>
         <div class="card-header">
           <h5>Meus Dados</h5>
         </div>
@@ -117,6 +120,9 @@
       </div>
 
       <div class="card mb-3">
+        <!-- <div *ngIf="changePasswordNotification" class="alert alert-success alert-dismissible fade show" role="alert">
+          Senha alterada com sucesso
+        </div> -->
         <div class="card-header">
           <h5>Alterar Senha</h5>
         </div>
