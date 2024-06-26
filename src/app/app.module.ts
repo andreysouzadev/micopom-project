@@ -71,7 +71,7 @@ registerLocaleData(localePt, 'pt-BR');
     provideNgxMask(),
     {provide: APP_BASE_HREF, useValue: '/'},
     { provide: LOCALE_ID, useValue: 'pt-BR' },
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
 })

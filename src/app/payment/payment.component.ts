@@ -62,63 +62,82 @@ export class PaymentComponent implements OnInit{
 
 
   processPayment(): void {
-    if(this.paymentForm.valid && this.customerForm.valid){
+    if(
+      (this.selectedPaymentMethod === "CREDIT_CARD" && this.paymentForm.valid && this.customerForm.valid) ||
+      (this.selectedPaymentMethod === "PIX" && this.customerForm.valid)
+    ){
       const customerData = this.customerForm.value;
       const paymentData = this.paymentForm.value;
 
-      this.loadingService.show();
+      // this.loadingService.show();
 
-      //GERA TOKEN DO CARTAO
-      const card = PagSeguro.encryptCard({
-        //Publickey do sandbox, em prod precisa gerar uma
-        publicKey: 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAr+ZqgD892U9/HXsa7XqBZUayPquAfh9xx4iwUbTSUAvTlmiXFQNTp0Bvt/5vK2FhMj39qSv1zi2OuBjvW38q1E374nzx6NNBL5JosV0+SDINTlCG0cmigHuBOyWzYmjgca+mtQu4WczCaApNaSuVqgb8u7Bd9GCOL4YJotvV5+81frlSwQXralhwRzGhj/A57CGPgGKiuPT+AOGmykIGEZsSD9RKkyoKIoc0OS8CPIzdBOtTQCIwrLn2FxI83Clcg55W8gkFSOS6rWNbG5qFZWMll6yl02HtunalHmUlRUL66YeGXdMDC2PuRcmZbGO5a/2tbVppW6mfSWG3NPRpgwIDAQAB',
-        number: this.paymentForm.get('cardNumber')?.value,
-        brand: this.paymentForm.get('cardBrand')?.value, // GERAR
-        cvv: this.paymentForm.get('cvv')?.value,
-        expMonth: Number(this.paymentForm.get('expirationMonth')?.value),
-        expYear: Number(this.paymentForm.get('expirationYear')?.value),
-        holder: this.paymentForm.get('cardHolder')
-      });
-      console.log(card)
+      if(this.selectedPaymentMethod === "PIX"){
+        const userData = {
+          ...customerData,
+          inputPaymentMethod: this.selectedPaymentMethod,
+          valueTotal: this.total,
+          cartItems: this.cartItems,
+        }
 
-      const combinedData = {
-        ...customerData,
-        // ...paymentData,
-        inputPaymentMethod: this.selectedPaymentMethod,
-        valueTotal: this.total,
-        cartItems: this.cartItems,
-        paymentData: card
-      }
-
-      //Simulando chamada de API
-      // this.pagseguroService.createPayment(combinedData).subscribe(
-      //   response => {
-      //     console.log('Payment response: ', response)
-      //   },
-      //   error => {
-      //     console.log('Error processing payment:', error);
-      //   }
-      // )
-      setTimeout(() => {
-        this.loadingService.hide();
-        console.log('Dados combinados: ', combinedData);
-
-        this.pagseguroService.createPayment(combinedData).subscribe(
-          response => {
-            //Aqui criar logica para verificar se o pagamento foi aprovado ou nao
-            console.log('Payment response: ', response)
-            const paymentSuccess = true;
-            if (paymentSuccess) {
-              // this.router.navigate(['/confirmation'], { queryParams: { status: 'success' } });
-            } else {
-              // this.router.navigate(['/confirmation'], { queryParams: { status: 'failure' } });
+        setTimeout(() => {
+          this.pagseguroService.createPaymentPix(userData).subscribe(
+            response => {
+              //Aqui criar logica para verificar se o pagamento foi aprovado ou nao
+              console.log('Payment response: ', response)
+              const paymentSuccess = true;
+              if (paymentSuccess) {
+                // this.router.navigate(['/confirmation'], { queryParams: { status: 'success' } });
+              } else {
+                // this.router.navigate(['/confirmation'], { queryParams: { status: 'failure' } });
+              }
+              // this.loadingService.hide();
+            },
+            error => {
+              console.log('Error processing payment PIX:', error);
             }
-          },
-          error => {
-            console.log('Error processing payment:', error);
-          }
-        )
-      }, 2000);  
+          )
+        }, 2000); 
+      } else if (this.selectedPaymentMethod === "CREDIT_CARD"){
+        //GERA TOKEN DO CARTAO
+        const card = PagSeguro.encryptCard({
+          //Publickey do sandbox, em prod precisa gerar uma
+          publicKey: 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAr+ZqgD892U9/HXsa7XqBZUayPquAfh9xx4iwUbTSUAvTlmiXFQNTp0Bvt/5vK2FhMj39qSv1zi2OuBjvW38q1E374nzx6NNBL5JosV0+SDINTlCG0cmigHuBOyWzYmjgca+mtQu4WczCaApNaSuVqgb8u7Bd9GCOL4YJotvV5+81frlSwQXralhwRzGhj/A57CGPgGKiuPT+AOGmykIGEZsSD9RKkyoKIoc0OS8CPIzdBOtTQCIwrLn2FxI83Clcg55W8gkFSOS6rWNbG5qFZWMll6yl02HtunalHmUlRUL66YeGXdMDC2PuRcmZbGO5a/2tbVppW6mfSWG3NPRpgwIDAQAB',
+          number: this.paymentForm.get('cardNumber')?.value,
+          brand: this.paymentForm.get('cardBrand')?.value, // GERAR
+          cvv: this.paymentForm.get('cvv')?.value,
+          expMonth: Number(this.paymentForm.get('expirationMonth')?.value),
+          expYear: Number(this.paymentForm.get('expirationYear')?.value),
+          holder: this.paymentForm.get('cardHolder')
+        });
+
+        const combinedData = {
+          ...customerData,
+          // ...paymentData,
+          inputPaymentMethod: this.selectedPaymentMethod,
+          valueTotal: this.total,
+          cartItems: this.cartItems,
+          paymentData: card
+        }
+
+        setTimeout(() => {
+          this.pagseguroService.createPayment(combinedData).subscribe(
+            response => {
+              //Aqui criar logica para verificar se o pagamento foi aprovado ou nao
+              console.log('Payment response: ', response)
+              const paymentSuccess = true;
+              if (paymentSuccess) {
+                // this.router.navigate(['/confirmation'], { queryParams: { status: 'success' } });
+              } else {
+                // this.router.navigate(['/confirmation'], { queryParams: { status: 'failure' } });
+              }
+              this.loadingService.hide();
+            },
+            error => {
+              console.log('Error processing payment:', error);
+            }
+          )
+        }, 2000); 
+      } 
     } else {
       alert('Formulario invalido');
     }
