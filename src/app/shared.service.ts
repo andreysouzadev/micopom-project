@@ -42,7 +42,6 @@ export class SharedService {
       item.no_cupom.toLowerCase().includes(param.toLowerCase()) ||
       item.nome_estabelecimento.toLowerCase().includes(param.toLowerCase())
     ); // Ajuste someProperty para a propriedade relevante do seu Cupom
-    console.log("Filtered items:", filtered);
     this.filteredItemsSubject.next(filtered);
   }
 
@@ -115,7 +114,6 @@ export class SharedService {
       filtered = filtered.sort((a, b) => new Date(a.dt_validade).getTime() - new Date(b.dt_validade).getTime());
     }
 
-    console.log("Filtered by category and price:", filtered);
     this.filteredItemsSubject.next(filtered);
   }
 
@@ -125,7 +123,6 @@ export class SharedService {
   //   } else {
   //     const categoryIdNumber = parseInt(categoryId, 10);
   //     const filtered = this.items.filter(item => item.id_categoria === categoryIdNumber);
-  //     console.log("Filtered by category:", filtered);
   //     this.filteredItemsSubject.next(filtered);
   //   }
   // }
@@ -138,7 +135,6 @@ export class SharedService {
   //   } else if (priceFilter === 'high') {
   //     filtered = filtered.sort((a, b) => b.vl_original - a.vl_original);
   //   }
-  //   console.log("Filtered by price:", filtered);
   //   this.filteredItemsSubject.next(filtered);
   // }
 }

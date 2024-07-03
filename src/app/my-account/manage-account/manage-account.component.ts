@@ -104,7 +104,6 @@ export class ManageAccountComponent implements OnInit {
   }
 
   changePassword() {
-    console.log('chamou aqui')
     if (this.passwordForm.valid) {
       this.userService.changePassword(this.passwordForm.value).subscribe({
         next: () => {

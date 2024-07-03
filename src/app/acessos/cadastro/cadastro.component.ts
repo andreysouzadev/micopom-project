@@ -54,7 +54,6 @@ export class CadastroComponent implements OnInit{
       const { email, senha, nome, telefone, logradouro, uf, cidade, complemento, nlogradouro, cep } = this.cadastroForm.value;
       this.authService.register(email, senha, nome, logradouro, uf, cidade, complemento, nlogradouro, telefone, cep).subscribe(
         response => {
-          console.log('Register successful:', response);
           this.router.navigate(['/login']);
         },
         error => {

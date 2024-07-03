@@ -29,19 +29,16 @@ export class CouponDetailComponent implements OnInit {
     if (id) {
       this.itemService.getItemById(id).subscribe(data => {
         // this.coupon = data;
-        // console.log(data);
         // this.coupon = data.map(cupom => ({
         //   ...cupom,
         //   imagens: [cupom.url_imagem, cupom.url_imagem2, cupom.url_imagem3, cupom.url_imagem4].filter(url => url !== null)
         // }));
 
         this.coupon = {data, imagens:[data.url_imagem, data.url_imagem2, data.url_imagem3, data.url_imagem4].filter(url => url != null)}
-        console.log(this.coupon)
 
         this.CouponService.getRatings(data.id_estabelecimento).subscribe(
           ratingsData => {
             this.ratings = ratingsData;
-            console.log(ratingsData)
           }
         )
       });

@@ -1,0 +1,23 @@
+.container {
+    max-width: 600px;
+    margin: auto;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  .img-fluid {
+    max-width: 300px;
+  }
+  
+  .input-group {
+    width: 100%;
+  }
+  
+  .btn-primary {
+    display: flex;
+    align-items: center;
+  }
+  

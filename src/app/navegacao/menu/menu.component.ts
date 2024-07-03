@@ -44,9 +44,6 @@ export class MenuComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
-    
-
     this.authService.getUser().subscribe(user => {
       this.user = user;
     })
@@ -92,7 +89,6 @@ export class MenuComponent implements OnInit {
       if(this.authService.isLoggedIn()){
         this.cartOpen = !this.cartOpen;
       } else {
-        console.log("A")
           this.route.navigate(['/login'])
         }
       }

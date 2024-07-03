@@ -43,7 +43,6 @@ export class RegisterEstablishmentComponent {
 
     this.establishmentService.getCategories().subscribe(
       (data: CategoriaEstabelecimento[]) => {
-        console.log(data)
         this.categorias = data;
       },
       (error: any) => {
@@ -56,12 +55,10 @@ export class RegisterEstablishmentComponent {
 
 
 onSubmit(): void {
-  console.log('AQUI DEU CERTO')
   if(this.establishmentForm.valid) {
     const { no_estabelecimento, tp_estabelecimento, no_logradouro, no_uf, no_cidade, de_complemento, nu_logradouro, nu_telefone} = this.establishmentForm.value;
     this.establishmentService.registerEstablishment(no_estabelecimento, tp_estabelecimento, no_logradouro, no_uf, no_cidade, de_complemento, nu_logradouro, nu_telefone).subscribe(
       response => {
-        console.log('Register successful:', response);
         // this.router.navigate(['/home']);
         this.estabelecimentoInserido = true;
         setTimeout(() => this.estabelecimentoInserido = false, 5000);
