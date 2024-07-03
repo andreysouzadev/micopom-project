@@ -31,6 +31,7 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
 
 import { ConfirmationComponent } from './confirmation/confirmation.component';
+import { PaymentPixComponent } from './payment-pix/payment-pix.component';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -54,6 +55,7 @@ registerLocaleData(localePt, 'pt-BR');
     ManageAccountComponent,
     MyCouponsComponent,
     ConfirmationComponent,
+    PaymentPixComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,7 +73,7 @@ registerLocaleData(localePt, 'pt-BR');
     provideNgxMask(),
     {provide: APP_BASE_HREF, useValue: '/'},
     { provide: LOCALE_ID, useValue: 'pt-BR' },
-    // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
 })

@@ -16,10 +16,9 @@ export class PagseguroService {
   }
 
   createPayment(paymentData: any): Observable<any> {
-    return this.http.post(`${environment.apiUrl}payments/process-payment`, {paymentData});
+    return this.http.post(`${environment.apiUrl}payments/process-payment-card`, {paymentData});
   }
   createPaymentPix(paymentData: any): Observable<any> {
-    console.log("CHAMOU O CREATEPAYMENT PIX")
     return this.http.post(`${environment.apiUrl}payments/process-payment-pix`, {paymentData});
   }
 }

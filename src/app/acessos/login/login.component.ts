@@ -34,7 +34,6 @@ export class LoginComponent {
   }
 
   onLogin(): void {
-    console.log("Chamou")
     if (this.loginForm.valid) {
       const { email, senha } = this.loginForm.value;
       this.authService.login(email, senha);

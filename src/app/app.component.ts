@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoadingService } from './services/loading.service';
 import { Subscription } from 'rxjs';
+import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -13,8 +14,12 @@ export class AppComponent implements OnInit {
 
   private loadingSubscription: Subscription;
 
-  constructor(private loadingService: LoadingService){}
+  constructor(
+    private loadingService: LoadingService,
+    private authService: AuthService
+  ){}
   ngOnInit() {
+    const token = this.authService.getToken();
     this.loadingSubscription = this.loadingService.loadingState.subscribe(
       (state: boolean) => {
         this.isLoading = state;

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PagseguroService } from '../services/pagseguro.service';
 import { CartItem, CartService } from '../cart/cart.service';
 import { LoadingService } from '../services/loading.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 declare var PagSeguro: any
 
@@ -14,6 +15,7 @@ declare var PagSeguro: any
 })
 export class PaymentComponent implements OnInit{
   cartItems: CartItem[] = []
+  private cartSubscription: Subscription;
   paymentForm: FormGroup;
   customerForm: FormGroup;
   sessionId = 'YOUR_SESSION_ID';
@@ -49,7 +51,15 @@ export class PaymentComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.loadCart();
+    this.cartSubscription = this.cartService.cartItems$.subscribe(items => {
+      this.loadCart();
+    })
+  }
+
+  ngOnDestroy() {
+    if (this.cartSubscription) {
+      this.cartSubscription.unsubscribe();
+    }
   }
   selectPaymentMethod(method: string) {
     this.selectedPaymentMethod = method;
@@ -69,7 +79,7 @@ export class PaymentComponent implements OnInit{
       const customerData = this.customerForm.value;
       const paymentData = this.paymentForm.value;
 
-      // this.loadingService.show();
+      this.loadingService.show();
 
       if(this.selectedPaymentMethod === "PIX"){
         const userData = {
@@ -79,24 +89,27 @@ export class PaymentComponent implements OnInit{
           cartItems: this.cartItems,
         }
 
-        setTimeout(() => {
-          this.pagseguroService.createPaymentPix(userData).subscribe(
-            response => {
-              //Aqui criar logica para verificar se o pagamento foi aprovado ou nao
-              console.log('Payment response: ', response)
-              const paymentSuccess = true;
-              if (paymentSuccess) {
-                // this.router.navigate(['/confirmation'], { queryParams: { status: 'success' } });
-              } else {
-                // this.router.navigate(['/confirmation'], { queryParams: { status: 'failure' } });
-              }
-              // this.loadingService.hide();
-            },
-            error => {
-              console.log('Error processing payment PIX:', error);
+        this.pagseguroService.createPaymentPix(userData).subscribe(
+          response => {
+            //Aqui criar logica para verificar se o pagamento foi aprovado ou nao
+            const paymentSuccess = true;
+            const qrCodeUrl = response.qr_codes[0].links[0].href
+            const qrCodeCode = response.qr_codes[0].text
+            if (paymentSuccess) {
+              this.router.navigate(['payment-pix'], { queryParams: {qrCodeUrl, qrCodeCode}})
+              this.cartService.clearCart();
+              this.loadingService.hide();
+              // this.router.navigate(['/confirmation'], { queryParams: { status: 'success' } });
+            } else {
+              this.loadingService.hide();
+              // this.router.navigate(['/confirmation'], { queryParams: { status: 'failure' } });
             }
-          )
-        }, 2000); 
+          },
+          error => {
+            console.log('Error processing payment PIX:', error);
+            this.loadingService.hide();
+          }
+        )
       } else if (this.selectedPaymentMethod === "CREDIT_CARD"){
         //GERA TOKEN DO CARTAO
         const card = PagSeguro.encryptCard({
@@ -119,24 +132,27 @@ export class PaymentComponent implements OnInit{
           paymentData: card
         }
 
-        setTimeout(() => {
-          this.pagseguroService.createPayment(combinedData).subscribe(
-            response => {
-              //Aqui criar logica para verificar se o pagamento foi aprovado ou nao
-              console.log('Payment response: ', response)
-              const paymentSuccess = true;
-              if (paymentSuccess) {
-                // this.router.navigate(['/confirmation'], { queryParams: { status: 'success' } });
-              } else {
-                // this.router.navigate(['/confirmation'], { queryParams: { status: 'failure' } });
-              }
+        this.pagseguroService.createPayment(combinedData).subscribe(
+          response => {
+            //Aqui criar logica para verificar se o pagamento foi aprovado ou nao
+            console.log('Payment response: ', response)
+            const paymentSuccess = true;
+            if (paymentSuccess) {
+              this.router.navigate(['/confirmation'], { queryParams: { status: 'success' } });
+              this.cartService.clearCart();
               this.loadingService.hide();
-            },
-            error => {
-              console.log('Error processing payment:', error);
+            } else {
+              this.router.navigate(['/confirmation'], { queryParams: { status: 'failure' } });
+              this.loadingService.hide();  
             }
-          )
-        }, 2000); 
+          },
+          error => {
+            console.log('Error processing payment:', error);
+            this.router.navigate(['/confirmation'], { queryParams: { status: 'failure' } });  
+            this.loadingService.hide();
+
+          }
+        ) 
       } 
     } else {
       alert('Formulario invalido');

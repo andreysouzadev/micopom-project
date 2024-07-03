@@ -1,0 +1,15 @@
+<app-menu></app-menu>
+<div class="container text-center mt-5">
+    <h2 class="mb-4">Sua compra está quase concluída. Basta realizar o pagamento escaneando o QR Code abaixo</h2>
+    <div *ngIf="qrCodeUrl">
+      <img [src]="qrCodeUrl" alt="QR Code" class="img-fluid mb-3">
+      <p class="mb-2">Código do QR:</p>
+      <div class="d-flex justify-content-center align-items-center mb-3">
+        <input type="text" class="form-control w-50 text-center" [value]="qrCodeCode" readonly>
+        <button class="btn btn-primary ml-2" (click)="copyToClipboard()">
+          <i class="bi bi-clipboard"></i> Copiar
+        </button>
+      </div>
+    </div>
+  </div>
+  
