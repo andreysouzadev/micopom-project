@@ -8,7 +8,24 @@
       </div>
     </div>
     <div class="col-md-9">
-      <h2>Meus Cupons</h2>
+      <div class="coupon-card mb-3" *ngFor="let coupon of coupons">
+        <div class="coupon-details">
+          <h5>{{ coupon.name }}</h5>
+          <p><strong>Valor:</strong> {{ coupon.value }}</p>
+          <p><strong>Data de compra:</strong> {{ coupon.purchaseDate }}</p>
+          <p><strong>Data de validade:</strong> {{ coupon.expiryDate }}</p>
+        </div>
+        <div class="coupon-status">
+          <span [ngClass]="{
+              'badge-success': coupon.status === 'Disponível',
+              'badge-secondary': coupon.status === 'Utilizado',
+              'badge-danger': coupon.status === 'Vencido',
+              'badge-warning': coupon.status === 'Aguardando Pagamento',
+            }">
+            {{ coupon.status }}
+          </span>
+        </div>
+      </div>
     </div>
   </div>
 </div>

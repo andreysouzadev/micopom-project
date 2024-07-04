@@ -118,27 +118,4 @@ export class SharedService {
     console.log("Filtered by category and price:", filtered);
     this.filteredItemsSubject.next(filtered);
   }
-
-  // filterByCategory(categoryId: string) {
-  //   if (categoryId === 'todos') {
-  //     this.filteredItemsSubject.next(this.items);
-  //   } else {
-  //     const categoryIdNumber = parseInt(categoryId, 10);
-  //     const filtered = this.items.filter(item => item.id_categoria === categoryIdNumber);
-  //     console.log("Filtered by category:", filtered);
-  //     this.filteredItemsSubject.next(filtered);
-  //   }
-  // }
-
-
-  // filterByPrice(priceFilter: string) {
-  //   let filtered = this.items;
-  //   if (priceFilter === 'low') {
-  //     filtered = filtered.sort((a, b) => a.vl_original - b.vl_original);
-  //   } else if (priceFilter === 'high') {
-  //     filtered = filtered.sort((a, b) => b.vl_original - a.vl_original);
-  //   }
-  //   console.log("Filtered by price:", filtered);
-  //   this.filteredItemsSubject.next(filtered);
-  // }
 }

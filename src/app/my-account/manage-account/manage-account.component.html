@@ -33,7 +33,7 @@
               <div class="form-group col-md-6">
                 <label for="nu_telefone">Telefone</label>
                 <div class="input-group">
-                  <input class="form-control" type="text" formControlName="nu_telefone" id="nu_telefone">
+                  <input class="form-control" type="text" formControlName="nu_telefone" id="nu_telefone"  mask="(00) 00000-0000">
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary" type="button" (click)="toggleEdit('nu_telefone')">
                       <i class="fa" [ngClass]="isEditing.nu_telefone ? 'fa-check' : 'fa-pencil'"></i>
@@ -46,7 +46,7 @@
               <div class="form-group col-md-6">
                 <label for="cep">CEP</label>
                 <div class="input-group">
-                  <input class="form-control" type="text" formControlName="nu_cep" id="nu_cep">
+                  <input class="form-control" type="text" formControlName="nu_cep" id="nu_cep" mask="00000-000">
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary" type="button" (click)="toggleEdit('nu_cep')">
                       <i class="fa" [ngClass]="isEditing.nu_cep ? 'fa-check' : 'fa-pencil'"></i>
@@ -120,9 +120,12 @@
       </div>
 
       <div class="card mb-3">
-        <!-- <div *ngIf="changePasswordNotification" class="alert alert-success alert-dismissible fade show" role="alert">
+        <div *ngIf="changePasswordSuccess" class="alert alert-success alert-dismissible fade show" role="alert">
           Senha alterada com sucesso
-        </div> -->
+        </div>
+        <div *ngIf="changePasswordError" class="alert alert-danger alert-dismissible fade show" role="alert">
+          {{ changePasswordErrorMessage }}
+        </div>
         <div class="card-header">
           <h5>Alterar Senha</h5>
         </div>

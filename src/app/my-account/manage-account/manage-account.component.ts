@@ -17,6 +17,10 @@ export class ManageAccountComponent implements OnInit {
   newPasswordFieldType: string = 'password';
   confirmNewPasswordFieldType: string = 'password';
   changeInformationsNotification: boolean = false;
+  changePasswordNotification: boolean = false;
+  changePasswordSuccess: boolean = false;
+  changePasswordError: boolean = false;
+  changePasswordErrorMessage: string = '';
 
 
   constructor(private fb: FormBuilder, private userService: UserService) {
@@ -104,17 +108,19 @@ export class ManageAccountComponent implements OnInit {
   }
 
   changePassword() {
-    console.log('chamou aqui')
     if (this.passwordForm.valid) {
       this.userService.changePassword(this.passwordForm.value).subscribe({
         next: () => {
-          this.successMessage = 'Senha alterada com sucesso!';
-          this.errorMessage = null;
+          this.changePasswordSuccess = true;
+          this.changePasswordError = false;
           this.passwordForm.reset();
+          setTimeout(() => this.changePasswordSuccess = false, 5000);
         },
         error: (error) => {
-          this.errorMessage = error.error.msg || 'Erro ao alterar a senha. Tente novamente mais tarde.';
-          this.successMessage = null;
+          this.changePasswordErrorMessage = error.error.msg || 'Erro ao alterar a senha. Senha atual não confere.';
+          this.changePasswordError = true;
+          this.changePasswordSuccess = false;
+          setTimeout(() => this.changePasswordError = false, 5000);
           console.error('Erro ao alterar a senha:', error);
         }
       });

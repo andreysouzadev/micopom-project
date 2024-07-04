@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable} from 'rxjs';
 import { environment } from 'src/environment';
 import { Rating } from '../models/rating.model';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,13 @@ import { Rating } from '../models/rating.model';
 export class CouponService {
     private apiUrl = environment.apiUrl + 'cupons';
 
-  constructor(private http: HttpClient) { }
+
+    constructor(private http: HttpClient, private authService: AuthService) { }
+
+  getUserCoupons(): Observable<any> {
+    const headers = this.authService.getAuthHeaders();
+    return this.http.get<any>(`${this.apiUrl}/my-coupons`, { headers })
+  }
 
   registerCoupon(
     couponData: any, file: File, files:File[]
