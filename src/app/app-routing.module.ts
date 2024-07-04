@@ -13,6 +13,7 @@ import { OrderSummaryComponent } from './order-summary/order-summary.component';
 import { ManageAccountComponent } from './my-account/manage-account/manage-account.component';
 import { MyCouponsComponent } from './my-account/my-coupons/my-coupons.component';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
+import { PaymentPixComponent } from './payment-pix/payment-pix.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -24,11 +25,12 @@ const routes: Routes = [
   { path: 'cadastro', component: CadastroComponent},
   { path: 'registro-cupom', component: RegisterCouponComponent, canActivate: [AuthGuard]},
   { path: 'registro-estabelecimento', component: RegisterEstablishmentComponent, canActivate: [AuthGuard]},
-  { path: 'payment', component: PaymentComponent},
-  { path: 'order-summary', component: OrderSummaryComponent},
-  { path: 'minha-conta', component: ManageAccountComponent},
-  { path: 'meus-cupons', component: MyCouponsComponent},
-  { path: 'confirmation', component: ConfirmationComponent},
+  { path: 'payment', component: PaymentComponent, canActivate: [AuthGuard]},
+  { path: 'order-summary', component: OrderSummaryComponent, canActivate: [AuthGuard]},
+  { path: 'minha-conta', component: ManageAccountComponent, canActivate: [AuthGuard]},
+  { path: 'meus-cupons', component: MyCouponsComponent, canActivate: [AuthGuard]},
+  { path: 'confirmation', component: ConfirmationComponent, canActivate: [AuthGuard]},
+  { path: 'payment-pix', component: PaymentPixComponent, canActivate: [AuthGuard]},
   {
     path: '',
     children: [

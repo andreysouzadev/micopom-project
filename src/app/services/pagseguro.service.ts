@@ -9,43 +9,16 @@ declare var PagSeguroDirectPayment: any;
   providedIn: 'root'
 })
 export class PagseguroService {
-  private sessionId: string;
-
-  constructor(private http: HttpClient) {
-    // this.getSessionId().subscribe((data: any) => {
-    //   this.sessionId = data.sessionId;
-    //   PagSeguroDirectPayment.setSessionId(this.sessionId);
-    // });
-  }
-
-//   setSessionId(sessionId: string): void {
-//     PagSeguroDirectPayment.setSessionId(sessionId);
-//   }
-
-//   createCardToken(card: any): Promise<string>{
-//     return new Promise((resolve, reject) => {
-//         PagSeguroDirectPayment.createCardToken({
-//             cardNumber: card.number,
-//             brand: card.brand,
-//             cvv: card.cvv,
-//             expirationMonth: card.expirationMonth,
-//             expirationYear: card.expirationYear,
-//             success: function(response: any) {
-//               resolve(response.card.token);
-//             },
-//             error: function(response: any) {
-//               reject(response.errors);
-//             }
-//         })
-//     })
-//   }
+  constructor(private http: HttpClient) {}
 
   getSessionId() {
     return this.http.get(`${environment.apiUrl}payments/createOrder`);
   }
 
   createPayment(paymentData: any): Observable<any> {
-    console.log("CHAMOU O SERVICOXXX")
-    return this.http.post(`${environment.apiUrl}payments/process-payment`, {paymentData});
+    return this.http.post(`${environment.apiUrl}payments/process-payment-card`, {paymentData});
+  }
+  createPaymentPix(paymentData: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}payments/process-payment-pix`, {paymentData});
   }
 }

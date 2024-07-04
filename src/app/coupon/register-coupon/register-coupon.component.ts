@@ -61,7 +61,6 @@ export class RegisterCouponComponent implements OnInit {
 
     this.CategoryService.getCategories().subscribe(
       (data: Categorias[]) => {
-        console.log(data)
         this.categorias = data;
       },
       (error: any) => {
@@ -71,7 +70,6 @@ export class RegisterCouponComponent implements OnInit {
 
     this.EstablishmentService.getEstablishments().subscribe(
       (data: Estabelecimento[]) => {
-        console.log(data)
         this.estabelecimentos = data;
       },
       (error: any) => {
@@ -110,7 +108,6 @@ export class RegisterCouponComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log("chamou")
     if (this.couponForm.valid) {
         const { shortDescription, originalValue, discountValue, expirationDate, cuponQuantity, imageUrl, fullDescription, couponName, categoryList, establishmentList } = this.couponForm.value;
         this.CouponService.registerCoupon(
@@ -119,7 +116,6 @@ export class RegisterCouponComponent implements OnInit {
           this.selectedFiles
         ).subscribe(  
           response => {
-            console.log('Register successful:', response);
           },
           error => {
             console.error('Register failed:', error);

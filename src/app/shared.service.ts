@@ -3,7 +3,6 @@ import { ItemService } from './item.service';
 import { BehaviorSubject, filter } from 'rxjs';
 import { Cupom } from './item/item.component';
 import { Observable } from 'rxjs';
-// import { HomeComponent } from './navegacao/home/home.component';
 
 @Injectable({
   providedIn: 'root'
@@ -42,7 +41,6 @@ export class SharedService {
       item.no_cupom.toLowerCase().includes(param.toLowerCase()) ||
       item.nome_estabelecimento.toLowerCase().includes(param.toLowerCase())
     ); // Ajuste someProperty para a propriedade relevante do seu Cupom
-    console.log("Filtered items:", filtered);
     this.filteredItemsSubject.next(filtered);
   }
 
@@ -115,7 +113,7 @@ export class SharedService {
       filtered = filtered.sort((a, b) => new Date(a.dt_validade).getTime() - new Date(b.dt_validade).getTime());
     }
 
-    console.log("Filtered by category and price:", filtered);
     this.filteredItemsSubject.next(filtered);
   }
+
 }
