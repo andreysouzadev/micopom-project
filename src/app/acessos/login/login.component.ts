@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 
 
@@ -10,16 +10,21 @@ import { AuthService } from 'src/app/auth/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  
+  @ViewChild('email') emailInput: ElementRef;
   loginForm: FormGroup;
   errorMessage: string = '';
   passwordFieldType: string = 'password';
+  errorLogin: boolean = false;
+  returnUrl: string;
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private route: ActivatedRoute
+  ) { 
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
+  }
 
   ngOnInit(): void {
 
@@ -33,11 +38,18 @@ export class LoginComponent {
     });
   }
 
-  onLogin(): void {
+  async onLogin(){
     if (this.loginForm.valid) {
       const { email, senha } = this.loginForm.value;
-      this.authService.login(email, senha);
-     
+      const result = await this.authService.login(email, senha).toPromise();
+      if(result === 200){
+        this.router.navigate([this.returnUrl]);
+      } else if(result === 204){
+        this.errorLogin = true;
+
+        this.loginForm.reset();
+        this.emailInput.nativeElement.focus();
+      }
     }
   }
 

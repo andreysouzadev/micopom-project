@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoadingService } from './services/loading.service';
 import { Subscription } from 'rxjs';
 import { AuthService } from './auth/auth.service';
+import { TrackingService } from './services/tracking.service';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,8 @@ export class AppComponent implements OnInit {
 
   constructor(
     private loadingService: LoadingService,
-    private authService: AuthService
+    private authService: AuthService,
+    private trackingService: TrackingService
   ){}
   ngOnInit() {
     const token = this.authService.getToken();

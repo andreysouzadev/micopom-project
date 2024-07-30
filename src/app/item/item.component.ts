@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { InteractionService } from '../services/interaction.service';
 
 export interface Cupom {
   categoryId: string;
@@ -26,11 +27,19 @@ export interface Cupom {
   templateUrl: './item.component.html',
   styleUrls: ['./item.component.css']
 })
-export class CupomComponent {
-  constructor(
-    private router: Router
-  ) {}
+export class CupomComponent implements AfterViewInit{
+
   @Input() cupom!: Cupom; // Ajuste conforme o modelo Item
+
+  constructor(
+    private router: Router,
+    private el: ElementRef,
+    private interactionService: InteractionService
+  ) {}
+
+  ngAfterViewInit(): void {
+    this.interactionService.trackClicks(this.el.nativeElement, this.cupom.id_cupom);
+  }
 
   navigateToDetail(id: number): void {
     this.router.navigate(['/coupon', id]);

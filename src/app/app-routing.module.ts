@@ -14,6 +14,7 @@ import { ManageAccountComponent } from './my-account/manage-account/manage-accou
 import { MyCouponsComponent } from './my-account/my-coupons/my-coupons.component';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { PaymentPixComponent } from './payment-pix/payment-pix.component';
+import { ValidateCouponComponent } from './coupon/validate-coupon/validate-coupon.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'meus-cupons', component: MyCouponsComponent, canActivate: [AuthGuard]},
   { path: 'confirmation', component: ConfirmationComponent, canActivate: [AuthGuard]},
   { path: 'payment-pix', component: PaymentPixComponent, canActivate: [AuthGuard]},
+  { path: 'validate-coupon/:activateCode', component: ValidateCouponComponent, canActivate: [AuthGuard]},
   {
     path: '',
     children: [

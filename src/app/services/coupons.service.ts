@@ -54,4 +54,12 @@ export class CouponService {
     ): Observable<any> {
       return this.http.get<Rating[]>(`${this.apiUrl}/avaliacoes/${establishmentId}`)
     }
+
+    validateCoupon(
+      activateToken: string
+    ):Observable<any>{
+      console.log('Chamou Servico')
+      console.log(activateToken)
+      return this.http.post(`${this.apiUrl}/activate_coupon`, {"activateToken":activateToken})
+    }
   }

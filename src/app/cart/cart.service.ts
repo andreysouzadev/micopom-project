@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { environment } from 'src/environment';
+import { TrackingService } from '../services/tracking.service';
 
 export interface CartItem {
   id: number;
@@ -23,7 +24,11 @@ export class CartService {
   cartItems$ = this.cartItemsSubject.asObservable();
   itemCount$ = this.itemCountSubject.asObservable();
 
-  constructor(private http: HttpClient, private authService: AuthService) {
+  constructor(
+    private http: HttpClient, 
+    private authService: AuthService,
+    private trackingService: TrackingService
+  ) {
     this.updateItemCount();
     if (this.authService.isLoggedIn()) {
       this.loadUserCart();
@@ -33,7 +38,7 @@ export class CartService {
     this.authService.getLogoutSubject().subscribe(() => {
       this.clearLocalStorage();
     });
-
+    
     this.authService.getUser().subscribe(user => {
       if (user) {
         this.loadUserCart();
@@ -45,9 +50,12 @@ export class CartService {
     return this.http.get<CartItem[]>(`${this.apiUrl}cart/cart`);
   }
 
-  saveCartToServer(cartItems: CartItem[]): void {
+  saveCartToServer(cartItems: CartItem[], item_id?: number): void {
     this.http.post(`${this.apiUrl}cart/cart`, { cartItems }).subscribe(() => {
       this.updateItemCount();
+      if(item_id){
+        this.trackingService.logAction('add_to_cart', 'button', item_id)
+      }
     });
   }
 
@@ -56,7 +64,7 @@ export class CartService {
     const updatedCart = [...currentCart, item];
     this.cartItemsSubject.next(updatedCart);
     this.saveCartToLocalStorage(updatedCart);
-    this.saveCartToServer(updatedCart);
+    this.saveCartToServer(updatedCart, item.id);
   }
 
   updateQuantity(item: CartItem, quantity: number): void {

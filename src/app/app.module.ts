@@ -32,6 +32,9 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
 import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { PaymentPixComponent } from './payment-pix/payment-pix.component';
+import { ValidateCouponComponent } from './coupon/validate-coupon/validate-coupon.component';
+import { TrackingService } from './services/tracking.service';
+import { InteractionService } from './services/interaction.service';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -56,6 +59,7 @@ registerLocaleData(localePt, 'pt-BR');
     MyCouponsComponent,
     ConfirmationComponent,
     PaymentPixComponent,
+    ValidateCouponComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,6 +75,8 @@ registerLocaleData(localePt, 'pt-BR');
   providers: [
     AuthService,
     provideNgxMask(),
+    TrackingService,
+    InteractionService,
     {provide: APP_BASE_HREF, useValue: '/'},
     { provide: LOCALE_ID, useValue: 'pt-BR' },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
