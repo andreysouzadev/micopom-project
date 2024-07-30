@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable} from 'rxjs';
+import { catchError, Observable} from 'rxjs';
 import { environment } from 'src/environment';
 import { Rating } from '../models/rating.model';
 import { AuthService } from '../auth/auth.service';
@@ -10,14 +10,19 @@ import { AuthService } from '../auth/auth.service';
 })
 export class CouponService {
     private apiUrl = environment.apiUrl + 'cupons';
-
+    private userId: (number | null) = null;
 
     constructor(private http: HttpClient, private authService: AuthService) { }
 
-  getUserCoupons(): Observable<any> {
-    const headers = this.authService.getAuthHeaders();
-    return this.http.get<any>(`${this.apiUrl}/my-coupons`, { headers })
-  }
+    getUserCoupons(): Observable<any> {
+      const headers = this.authService.getAuthHeaders();
+      return this.http.get<any>(`${this.apiUrl}/my-coupons`, { headers }).pipe(
+        catchError((error) => {
+          console.error('Error fetching user coupons:', error);
+          throw error;
+        })
+      );
+    }
 
   registerCoupon(
     couponData: any, file: File, files:File[]

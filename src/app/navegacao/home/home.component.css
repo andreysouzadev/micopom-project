@@ -32,3 +32,26 @@
     border-radius: 10px;
   }
 
+  .pagination .page-item.active .page-link {
+    background-color: #ffc107;
+    border-color: #ffc107;
+    color: black; 
+  }
+  
+  .pagination .page-link {
+    color: #ffc107; 
+  }
+  
+  .pagination .page-link:hover {
+    background-color: #ffecb3;
+    color: #ffc107; 
+  }
+  
+  .page-item.disabled .page-link {
+    cursor: not-allowed;
+  }
+  
+  .page-item .page-link {
+    cursor: pointer;
+  }
+

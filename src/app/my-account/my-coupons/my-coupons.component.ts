@@ -8,19 +8,41 @@ import { CouponService } from 'src/app/services/coupons.service';
 })
 export class MyCouponsComponent implements OnInit {
   coupons: any[] = [];
+  pagedCoupons: any[] = [];
   errorMessage: string | null = null;
+  itemsPerPage = 3;
+  currentPage = 1;
+  totalPages = 0;
+
 
   constructor(private couponService: CouponService) {}
 
   ngOnInit(): void {
     this.couponService.getUserCoupons().subscribe({
-      next: (data) => {
-        this.coupons = data;
+      next: (coupons) => {
+        this.coupons = coupons;
+        this.totalPages = Math.ceil(this.coupons.length / this.itemsPerPage);
+        this.updatePagedCoupons();
       },
       error: (error) => {
         console.error('Error fetching coupons:', error);
       }
     });
+  }
+
+  updatePagedCoupons(): void {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    this.pagedCoupons = this.coupons.slice(start, end);
+  }
+
+  changePage(event: Event, page: number): void {
+    event.preventDefault(); 
+    if (page > 0 && page <= this.totalPages) {
+      this.currentPage = page;
+      this.updatePagedCoupons();
+
+    }
   }
 
   updateCouponStatuses(): void {

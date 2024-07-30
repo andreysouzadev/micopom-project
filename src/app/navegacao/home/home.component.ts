@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { SharedService } from 'src/app/shared.service';
 import { categoryService } from 'src/app/services/category.service';
 
-
 export interface Categorias {
   id_categoria: number;
   no_categoria: string;
@@ -18,14 +17,19 @@ export interface Categorias {
 })
 
 export class HomeComponent implements OnInit {
-  //CUPONS = OBJETOS MOSTRADOS NA HOME ORIUNDOS DO SERVICO SHARED
   cupons: Cupom[] = [];
+  displayedCupons: Cupom[] = [];
   searchTerm: string = '';
   selectedCategory: string = 'todos';
   selectedPrice: string = 'all';
   selectedDiscount: string = 'all';
   selectedDate: string = 'all';
   categorias: Categorias[] = [];
+
+  // Variáveis de paginação
+  currentPage: number = 1;
+  itemsPerPage: number = 6;
+  totalPages: number[] = [];
 
   constructor(
     private itemService: ItemService,
@@ -39,6 +43,7 @@ export class HomeComponent implements OnInit {
       (data: Cupom[]) => {
         this.sharedService.setItems(data);
         this.cupons = this.sharedService.getItems();
+        this.updateDisplayedCupons();
       },
       error => {
         console.error('Erro ao buscar itens:', error);
@@ -47,12 +52,11 @@ export class HomeComponent implements OnInit {
     
     this.sharedService.filteredItems$.subscribe((items: Cupom[]) => {
       this.cupons = items;
+      this.updateDisplayedCupons();
     });
 
-    // Inicializar com todos os itens
     this.cupons = this.sharedService.getItems();
-
-    //Buscar categorias para filtragem
+    this.updateDisplayedCupons();
 
     this.categoryService.getCategories().subscribe(
       (data: Categorias[]) => {
@@ -64,32 +68,13 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  // applyFilters() {
-  //   this.sharedService.filterByCategory(this.selectedCategory);
-  //   // this.sharedService.filterByPrice(this.selectedPrice);
-  // }
-
-  onCategoryChange(categoryId: string) {
-    this.selectedCategory = categoryId;
-  }
-
-  onPriceChange(priceFilter: string) {
-    this.selectedPrice = priceFilter;
-  }
-
-  onDiscountChange(discountFilter: string) {
-    this.selectedDiscount = discountFilter;
-  }
-
-  onDateChange(dateFilter: string) {
-    this.selectedDate = dateFilter;
-  }
-
   applyFilters() {
     this.sharedService.filterByCategory(this.selectedCategory);
     this.sharedService.filterByPrice(this.selectedPrice);
     this.sharedService.filterByDiscount(this.selectedDiscount);
     this.sharedService.filterByDate(this.selectedDate);
+    this.currentPage = 1;
+    this.updateDisplayedCupons();
   }
 
   resetFilters() {
@@ -98,16 +83,20 @@ export class HomeComponent implements OnInit {
     this.selectedDiscount = 'all';
     this.selectedDate = 'all';
     this.sharedService.resetFilters();
+    this.currentPage = 1;
+    this.updateDisplayedCupons();
   }
 
-
-  
-  updateItems(){
-    // this.filteredItems = this.sharedService.getItems()
-
+  updateDisplayedCupons() {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.displayedCupons = this.cupons.slice(startIndex, endIndex);
+    this.totalPages = Array(Math.ceil(this.cupons.length / this.itemsPerPage)).fill(0).map((x, i) => i + 1);
   }
 
-  onSearch(): void {
+  goToPage(page: number) {
+    this.currentPage = page;
+    this.updateDisplayedCupons();
   }
 
   navigateToDetail(id: string): void {
