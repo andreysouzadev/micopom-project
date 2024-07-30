@@ -13,6 +13,64 @@
   </div>
 </header>
 
+  <div class="container mt-3">
+    <div class="card p-3">
+      <div class="row">
+        <div class="col-lg-3 mb-2">
+          <div class="input-group">
+            <span class="input-group-text bg-warning text-dark">Categorias</span>
+            <select class="form-select" [(ngModel)]="selectedCategory" aria-label="Categoria">
+              <option value="todos" selected>Todos</option>
+              <option *ngFor="let categoria of categorias" [value]="categoria.id_categoria">{{ categoria.no_categoria }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-lg-3 mb-2">
+          <div class="input-group">
+            <span class="input-group-text bg-warning text-dark">Preço</span>
+            <select class="form-select" [(ngModel)]="selectedPrice" aria-label="Preço">
+              <option value="all">Todos</option>
+              <option value="low">Menor preço</option>
+              <option value="high">Maior preço</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-lg-3 mb-2">
+          <div class="input-group">
+            <span class="input-group-text bg-warning text-dark">Desconto</span>
+            <select class="form-select" [(ngModel)]="selectedDiscount" aria-label="Desconto">
+              <option value="all" selected>Todos</option>
+              <option value="low">Menor desconto</option>
+              <option value="high">Maior desconto</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-lg-3 mb-2">
+          <div class="input-group">
+            <span class="input-group-text bg-warning text-dark">Data</span>
+            <select class="form-select" [(ngModel)]="selectedDate" aria-label="Data">
+              <option value="all" selected>Todos</option>
+              <option value="new">Mais recentes</option>
+              <option value="old">Mais antigos</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-lg-3 mb-2">
+          <button class="btn btn-warning w-100" (click)="applyFilters()">Aplicar Filtros</button>
+        </div>
+        <div class="col-lg-3 mb-2">
+          <button class="btn btn-secondary w-100" (click)="resetFilters()">Limpar Filtros</button>
+        </div>
+      </div>
+    </div>
+  </div>
+      <div class="x">
+      <div class="grid-container">
+        <app-cupom *ngFor="let cupom of cupons" [cupom]="cupom"></app-cupom>
+      </div> 
+    </div>
 <div class="container mt-3">
   <div class="card p-3">
     <div class="row">

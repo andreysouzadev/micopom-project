@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, BehaviorSubject, Subject } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { Observable, BehaviorSubject, Subject, of } from 'rxjs';
 import { environment } from 'src/environment';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs';
@@ -42,17 +43,21 @@ export class AuthService {
     this.tokenSubject.next(null);
   }
 
-  login(email: string, password: string){
-    return this.http.post<{token: string}>(`${this.apiUrl}/login`, { email, password }).subscribe(
-        response => {
+  login(email: string, password: string): Observable<any>{
+    return this.http.post<{token: string}>(`${this.apiUrl}/login`, { email, password }).pipe(
+        map(response => {
             if (response && response.token) {
                 this.setToken(response.token);
                 this.loadUserDetails();
-                this.router.navigate(['/home']);
+                return 200;
             } else {
+              return 204;
             }
-        }, error => {
-        }
+        }), 
+        catchError(err => {
+          console.log(err)
+          return of(204);
+        })
     );
   }
 

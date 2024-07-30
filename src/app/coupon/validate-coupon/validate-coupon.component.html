@@ -1,0 +1,22 @@
+<app-menu></app-menu>
+<div class="container mt-5">
+    <div *ngIf="accessDenied" class="alert alert-danger text-center d-flex align-items-center justify-content-center ">
+      <i class="fas fa-times-circle fa-4x me-3" style="font-size: 1.5rem;"></i>
+      <strong>Acesso negado.</strong> Você não tem permissão para validar cupons ou este cupom já foi utilizado.
+    </div>
+  
+    <div *ngIf="!accessDenied">
+      <h1 class="text-center mb-4 display-4">Validação de Cupom</h1>
+      
+      <div *ngIf="result" class="alert alert-success text-center d-flex align-items-center justify-content-center">
+        <i class="fas fa-check-circle fa-4x me-3"></i>
+        <strong>Sucesso!</strong> Cupom validado com sucesso.
+      </div>
+      
+      <div *ngIf="!result && activateCode" class="alert alert-info text-center">
+        Validando o cupom, por favor, aguarde...
+      </div>
+
+    </div>
+  </div>
+  

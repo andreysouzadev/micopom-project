@@ -60,7 +60,6 @@ export class CouponDetailComponent implements OnInit {
       // Adicione outras propriedades conforme necessário
     };
     this.cartService.addItemToCart(newItem);
-    alert('Item adicionado ao carrinho!');
     }
 
 }

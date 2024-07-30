@@ -2,15 +2,15 @@
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 0;
-  margin: 20px;
+  margin-bottom: 20px;
   text-align: left;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
-  width: 240px;
+  max-width: 15em;
   overflow: hidden;
   background: white;
   cursor: pointer;
-   display: flex;
+  display: flex;
   flex-direction: column;
   height: 450px; /* Defina uma altura fixa ou mínima para garantir consistência */
 }

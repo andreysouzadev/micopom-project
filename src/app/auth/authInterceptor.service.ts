@@ -21,7 +21,9 @@ export class AuthInterceptor implements HttpInterceptor {
     const isAuthUrl = 
         req.url.startsWith(apiUrl + 'cart/cart') ||
         req.url.startsWith(apiUrl + 'payments/process-payment-pix') ||
-        req.url.startsWith(apiUrl + 'payments/process-payment-card')
+        req.url.startsWith(apiUrl + 'payments/process-payment-card') 
+        || req.url.startsWith(apiUrl + 'cupons/activate_coupon')
+        || req.url.startsWith(apiUrl + 'accounts/log')
         // || req.url.startsWith(apiUrl + '/api/protected'); // Adicione mais URLs conforme necessário
 
 
