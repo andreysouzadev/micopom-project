@@ -1,3 +1,43 @@
 .content {
     padding-top: 20%;
 }
+
+.footer {
+    background-color: #000;
+    color: #fff;
+    padding: 20px 0;
+  }
+  
+  .footer a {
+    color: #ffc107;
+    text-decoration: none;
+  }
+  
+  .footer a:hover {
+    text-decoration: underline;
+  }
+  
+  .footer h6 {
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  .footer p, .footer ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .footer .text-warning {
+    color: #ffc107;
+  }
+  
+  .footer .img-fluid {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .footer .list-unstyled li {
+    margin-bottom: 10px;
+  }
+  
