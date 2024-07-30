@@ -30,4 +30,49 @@
   .btn-block {
     width: 100%;
   }
-  
+
+.coupon-card {
+  border: 2px solid #ccc;
+  padding: 15px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.coupon-details {
+  flex: 1;
+}
+
+.coupon-status {
+  align-self: center;
+}
+
+/* Badge para cores dos status dos cupons */
+
+.badge-success {
+  background-color: #28a745;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.badge-secondary {
+  background-color: #6c757d;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.badge-danger {
+  background-color: #dc3545;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.badge-orange {
+  background-color: #ff4800;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
