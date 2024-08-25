@@ -35,6 +35,7 @@ import { PaymentPixComponent } from './payment-pix/payment-pix.component';
 import { ValidateCouponComponent } from './coupon/validate-coupon/validate-coupon.component';
 import { TrackingService } from './services/tracking.service';
 import { InteractionService } from './services/interaction.service';
+import { DiscountsCouponsComponent } from './my-account/discounts-coupons/discounts-coupons.component';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -60,6 +61,7 @@ registerLocaleData(localePt, 'pt-BR');
     ConfirmationComponent,
     PaymentPixComponent,
     ValidateCouponComponent,
+    DiscountsCouponsComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,7 +72,6 @@ registerLocaleData(localePt, 'pt-BR');
     HttpClientModule,
     FormsModule,
     NgxMaskDirective,
-
   ],
   providers: [
     AuthService,

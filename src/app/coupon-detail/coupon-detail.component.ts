@@ -5,6 +5,8 @@ import { Cupom } from '../item/item.component'; // Ajuste o caminho conforme nec
 import { CartItem, CartService} from '../cart/cart.service';
 import { CouponService } from '../services/coupons.service';
 import { Rating } from '../models/rating.model';
+import { LoadingComponent } from '../loading/loading.component';
+import { LoadingService } from '../services/loading.service';
 
 @Component({
   selector: 'app-coupon-detail',
@@ -21,12 +23,14 @@ export class CouponDetailComponent implements OnInit {
     private router: Router,
     private itemService: ItemService,
     private cartService: CartService,
-    private CouponService: CouponService
+    private CouponService: CouponService,
+    private loadingService: LoadingService
   ) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
+      this.loadingService.show();
       this.itemService.getItemById(id).subscribe(data => {
         // this.coupon = data;
         // this.coupon = data.map(cupom => ({
@@ -42,10 +46,12 @@ export class CouponDetailComponent implements OnInit {
           }
         )
       });
+      this.loadingService.hide();
     } else {
       // Redireciona para a página inicial ou exibe uma mensagem de erro
       this.router.navigate(['/']);
     }
+    
 
 
   }
