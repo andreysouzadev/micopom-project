@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CouponService } from 'src/app/services/coupons.service';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-my-coupons',
@@ -15,9 +16,12 @@ export class MyCouponsComponent implements OnInit {
   totalPages = 0;
 
 
-  constructor(private couponService: CouponService) {}
+  constructor(private couponService: CouponService,
+    private loadingService: LoadingService
+  ) {}
 
   ngOnInit(): void {
+    this.loadingService.show();
     this.couponService.getUserCoupons().subscribe({
       next: (coupons) => {
         this.coupons = coupons;
@@ -28,6 +32,7 @@ export class MyCouponsComponent implements OnInit {
         console.error('Error fetching coupons:', error);
       }
     });
+    this.loadingService.hide();
   }
 
   updatePagedCoupons(): void {

@@ -67,4 +67,21 @@ export class CouponService {
       console.log(activateToken)
       return this.http.post(`${this.apiUrl}/activate_coupon`, {"activateToken":activateToken})
     }
+
+    
+
+    newDiscountCoupon(
+      couponData: any
+    ):Observable<any>{
+      console.log('cham');
+      return this.http.post(`${environment.apiUrl}discounts/createCoupon`, couponData);
+    }
+
+    getDiscountsCoupons():Observable<any>{
+      return this.http.get(`${environment.apiUrl}discounts/discountsCoupons`)
+    }
+    
+    getExistentsCoupons():Observable<any> {
+      return this.http.get(`${environment.apiUrl}discounts/existentsCoupons`);
+    }
   }

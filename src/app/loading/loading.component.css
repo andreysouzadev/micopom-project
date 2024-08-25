@@ -8,6 +8,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1050; /* Certifique-se de que o z-index seja maior que o restante do conteúdo */
+    z-index: 50000; /* Certifique-se de que o z-index seja maior que o restante do conteúdo */
   }
   
