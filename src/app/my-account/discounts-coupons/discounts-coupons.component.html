@@ -1,0 +1,113 @@
+<app-menu></app-menu>
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
+        <a class="nav-link" [routerLink]="['/minha-conta']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Meus Dados</a>
+        <a class="nav-link" [routerLink]="['/meus-cupons']" routerLinkActive="active">Meus Cupons</a>
+        <a class="nav-link" [routerLink]="['/cupons-desconto']" routerLinkActive="active">Cupons de Desconto</a>
+        <a class="nav-link" [routerLink]="['/contas-a-pagar']" routerLinkActive="active">Contas a Pagar</a>
+
+      </div>
+    </div>
+    <div class="col-md-9">
+
+        <div class="d-flex justify-content-end mb-3">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#couponModal" (click)="newCouponClick()">Novo Cupom de Desconto</button>
+          </div>
+
+          <!-- Modal -->
+  <div class="modal fade" id="couponModal" tabindex="-1" aria-labelledby="couponModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="couponModalLabel">Novo Cupom de Desconto</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+              <label for="couponCode" class="form-label">Código do Cupom</label>
+              <input type="text" class="form-control" id="couponCode" [(ngModel)]="newCoupon.co_cupom" name="coupon_code" required>
+            </div>
+            <div class="mb-3">
+              <label for="description" class="form-label">Descrição (opcional)</label>
+              <input type="text" class="form-control" id="description" [(ngModel)]="newCoupon.de_cupom" name="description">
+            </div>
+            <div class="mb-3">
+              <label for="activationLimit" class="form-label">Limite de ativações</label>
+              <input type="number" class="form-control" id="activationLimit" [(ngModel)]="newCoupon.qt_limite_ativacoes" name="activation_limit" required>
+            </div>
+            <div class="mb-3">
+              <label for="startDate" class="form-label">Data de início</label>
+              <input type="date" class="form-control" id="startDate" [(ngModel)]="newCoupon.dt_inicio" name="start_date" required>
+            </div>
+            <div class="mb-3">
+              <label for="expirationDate" class="form-label">Data de expiração</label>
+              <input type="date" class="form-control" id="expirationDate" [(ngModel)]="newCoupon.dt_expiracao" name="expiration_date" required>
+            </div>
+            <div class="mb-3">
+              <label for="discountValue" class="form-label">Valor de desconto</label>
+              <input type="number" class="form-control" id="discountValue" [(ngModel)]="newCoupon.vl_desconto" name="discount_value" required>
+            </div>
+            <div class="mb-3">
+              <label for="discountType" class="form-label">Tipo de desconto</label>
+              <select class="form-select" id="discountType" [(ngModel)]="newCoupon.tp_desconto" name="discount_type" required>
+                <option value="real">Real</option>
+                <option value="percentage">Porcentagem</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="productSelect" class="form-label">Produtos</label>
+              <select class="form-select" id="productSelect" [(ngModel)]="newCoupon.product_ids" name="products" multiple required>
+                <option *ngFor="let product of filteredProducts" [value]="product.id_cupom">{{ product.no_cupom }} - {{ product.no_estabelecimento }}</option>
+              </select>
+              <input type="text" class="form-control mt-2" placeholder="Filtrar" [ngModelOptions]="{standalone: true}" [(ngModel)]="filterText" (input)="filterProducts()">
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+          </form>
+        </div>
+      </div>
+      </div>
+    </div>
+
+        <div *ngIf="discountsCoupons.length === 0" class="alert alert-info text-center">
+            <i class="bi bi-info-circle me-2" style="font-size: 1.5rem;"></i>
+            Nenhum cupom de desconto cadastrado.
+        </div>
+      <div class="coupon-card mb-3" *ngFor="let coupon of pagedCoupons">
+        <div class="coupon-details">
+          <h5>{{ coupon.co_cupom }}</h5>
+          <p><strong>Valor:</strong> {{ coupon.vl_desconto }}</p>
+          <p>Tipo de desconto: {{ coupon.tp_desconto }}</p>
+          <p><strong>Valido de {{ coupon.dt_inicio | date:'dd/MM/yyyy' }} até {{ coupon.dt_expiracao | date:'dd/MM/yyyy' }}</strong></p>
+          <p>Quantidade: {{coupon.qt_limite_ativacoes }}</p>
+        </div>
+        <div class="coupon-status">
+          <span [ngClass]="{
+              'badge-success': coupon.status === 'Disponível',
+              'badge-secondary': coupon.status === 'Utilizado',
+              'badge-danger': coupon.status === 'Vencido',
+              'badge-warning': coupon.status === 'Aguardando Pagamento',
+            }">
+            {{ coupon.status }}
+          </span>
+        </div>
+      </div>
+      <nav>
+        <ul class="pagination justify-content-center">
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <a class="page-link" href="#" (click)="changePage($event, currentPage - 1)">Anterior</a>
+          </li>
+          <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="currentPage === i + 1">
+            <a class="page-link" href="#" (click)="changePage($event, i + 1)">{{ i + 1 }}</a>
+          </li>
+          <li class="page-item" [class.disabled]="currentPage === totalPages">
+            <a class="page-link" href="#" (click)="changePage($event, currentPage + 1)">Próxima</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

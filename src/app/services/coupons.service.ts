@@ -37,6 +37,7 @@ export class CouponService {
             expirationDate: couponData.expirationDate,
             fullDescription: couponData.fullDescription,
             originalValue: couponData.originalValue,
+            repasseValue: couponData.repasseValue,
             shortDescription: couponData.shortDescription,
             establishmentList: couponData.establishmentList
           };
@@ -66,5 +67,22 @@ export class CouponService {
       console.log('Chamou Servico')
       console.log(activateToken)
       return this.http.post(`${this.apiUrl}/activate_coupon`, {"activateToken":activateToken})
+    }
+
+    
+
+    newDiscountCoupon(
+      couponData: any
+    ):Observable<any>{
+      console.log('cham');
+      return this.http.post(`${environment.apiUrl}discounts/createCoupon`, couponData);
+    }
+
+    getDiscountsCoupons():Observable<any>{
+      return this.http.get(`${environment.apiUrl}discounts/discountsCoupons`)
+    }
+    
+    getExistentsCoupons():Observable<any> {
+      return this.http.get(`${environment.apiUrl}discounts/existentsCoupons`);
     }
   }

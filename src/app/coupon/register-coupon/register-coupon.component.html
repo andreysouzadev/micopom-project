@@ -65,6 +65,13 @@
             Valor desconto é requerido.
           </div>
         </div>
+        <div class="form-group">
+          <label for="discountValue">Valor Repasse</label>
+          <input type="number" class="form-control custom-input" id="repasseValue" formControlName="repasseValue">
+          <div *ngIf="couponForm.get('repasseValue')?.invalid && (couponForm.get('repasseValue')?.dirty || couponForm.get('repasseValue')?.touched)" class="text-danger">
+            Valor de repasse é requerido.
+          </div>
+        </div>
       </div>
 
       <div class="col-md-4">

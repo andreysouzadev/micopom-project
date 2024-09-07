@@ -17,6 +17,8 @@ import { PaymentPixComponent } from './payment-pix/payment-pix.component';
 import { ValidateCouponComponent } from './coupon/validate-coupon/validate-coupon.component';
 import { AboutMicopomComponent } from './navegacao/footer/footer-pages/about-micopom/about-micopom/about-micopom.component';
 import { HowtobyeComponent } from './navegacao/footer/footer-pages/how-to-buy/howtobye/howtobye.component';
+import { DiscountsCouponsComponent } from './my-account/discounts-coupons/discounts-coupons.component';
+import { AccountsPayableComponent } from './my-account/accounts-payable/accounts-payable.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -37,6 +39,8 @@ const routes: Routes = [
   { path: 'validate-coupon/:activateCode', component: ValidateCouponComponent, canActivate: [AuthGuard]},
   { path: 'about-micopom', component: AboutMicopomComponent},
   { path: 'how-to-bye', component: HowtobyeComponent},
+  { path: 'cupons-desconto', component: DiscountsCouponsComponent, canActivate: [AuthGuard]},
+  { path: 'contas-a-pagar', component: AccountsPayableComponent, canActivate: [AuthGuard]},
   {
     path: '',
     children: [

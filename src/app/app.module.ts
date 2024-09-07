@@ -37,6 +37,8 @@ import { TrackingService } from './services/tracking.service';
 import { InteractionService } from './services/interaction.service';
 import { AboutMicopomComponent } from './navegacao/footer/footer-pages/about-micopom/about-micopom/about-micopom.component';
 import { HowtobyeComponent } from './navegacao/footer/footer-pages/how-to-buy/howtobye/howtobye.component';
+import { DiscountsCouponsComponent } from './my-account/discounts-coupons/discounts-coupons.component';
+import { AccountsPayableComponent } from './my-account/accounts-payable/accounts-payable.component';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -64,6 +66,8 @@ registerLocaleData(localePt, 'pt-BR');
     ValidateCouponComponent,
     AboutMicopomComponent,
     HowtobyeComponent,
+    DiscountsCouponsComponent,
+    AccountsPayableComponent
   ],
   imports: [
     BrowserModule,
@@ -74,7 +78,6 @@ registerLocaleData(localePt, 'pt-BR');
     HttpClientModule,
     FormsModule,
     NgxMaskDirective,
-
   ],
   providers: [
     AuthService,
