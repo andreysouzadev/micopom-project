@@ -36,6 +36,7 @@ import { ValidateCouponComponent } from './coupon/validate-coupon/validate-coupo
 import { TrackingService } from './services/tracking.service';
 import { InteractionService } from './services/interaction.service';
 import { DiscountsCouponsComponent } from './my-account/discounts-coupons/discounts-coupons.component';
+import { AccountsPayableComponent } from './my-account/accounts-payable/accounts-payable.component';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -62,6 +63,7 @@ registerLocaleData(localePt, 'pt-BR');
     PaymentPixComponent,
     ValidateCouponComponent,
     DiscountsCouponsComponent,
+    AccountsPayableComponent
   ],
   imports: [
     BrowserModule,

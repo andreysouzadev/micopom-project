@@ -37,6 +37,7 @@ export class CouponService {
             expirationDate: couponData.expirationDate,
             fullDescription: couponData.fullDescription,
             originalValue: couponData.originalValue,
+            repasseValue: couponData.repasseValue,
             shortDescription: couponData.shortDescription,
             establishmentList: couponData.establishmentList
           };
