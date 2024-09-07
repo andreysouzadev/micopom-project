@@ -35,6 +35,8 @@ import { PaymentPixComponent } from './payment-pix/payment-pix.component';
 import { ValidateCouponComponent } from './coupon/validate-coupon/validate-coupon.component';
 import { TrackingService } from './services/tracking.service';
 import { InteractionService } from './services/interaction.service';
+import { AboutMicopomComponent } from './navegacao/footer/footer-pages/about-micopom/about-micopom/about-micopom.component';
+import { HowtobyeComponent } from './navegacao/footer/footer-pages/how-to-buy/howtobye/howtobye.component';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -60,6 +62,8 @@ registerLocaleData(localePt, 'pt-BR');
     ConfirmationComponent,
     PaymentPixComponent,
     ValidateCouponComponent,
+    AboutMicopomComponent,
+    HowtobyeComponent,
   ],
   imports: [
     BrowserModule,

@@ -15,6 +15,8 @@ import { MyCouponsComponent } from './my-account/my-coupons/my-coupons.component
 import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { PaymentPixComponent } from './payment-pix/payment-pix.component';
 import { ValidateCouponComponent } from './coupon/validate-coupon/validate-coupon.component';
+import { AboutMicopomComponent } from './navegacao/footer/footer-pages/about-micopom/about-micopom/about-micopom.component';
+import { HowtobyeComponent } from './navegacao/footer/footer-pages/how-to-buy/howtobye/howtobye.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -33,6 +35,8 @@ const routes: Routes = [
   { path: 'confirmation', component: ConfirmationComponent, canActivate: [AuthGuard]},
   { path: 'payment-pix', component: PaymentPixComponent, canActivate: [AuthGuard]},
   { path: 'validate-coupon/:activateCode', component: ValidateCouponComponent, canActivate: [AuthGuard]},
+  { path: 'about-micopom', component: AboutMicopomComponent},
+  { path: 'how-to-bye', component: HowtobyeComponent},
   {
     path: '',
     children: [

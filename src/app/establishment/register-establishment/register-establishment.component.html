@@ -1,4 +1,4 @@
-<app-menu></app-menu>
+<!-- <app-menu></app-menu>
 <div class="container mt-1">
     <div class="container mt-1">
         <div class="row justify-content-center">
@@ -102,10 +102,118 @@
 
         </div>
 
-          
-  
       <button type="submit" class="btn btn-warning">Cadastrar</button>
     </form>
   </div>
   <app-footer></app-footer>
-  
+
+   -->
+
+   <app-menu></app-menu>
+
+   <div class="container mt-1">
+       <div class="row justify-content-center">
+           <div class="col-lg-3 mb-4">
+               <img src="assets/micoleao1.png" class="img-fluid" />
+           </div>
+       </div>
+       <div *ngIf="estabelecimentoInserido" class="alert alert-success alert-dismissible fade show" role="alert">
+           Estabelecimento inserido com sucesso
+       </div>
+       <h2 style="margin-top: 2%;">Cadastre seu estabelecimento</h2>
+       <form [formGroup]="establishmentForm" (ngSubmit)="onSubmit()">
+           <div class="row">
+               <div class="col-md-6">
+                   <div class="form-group">
+                       <label for="no_estabelecimento">Nome do Estabelecimento</label>
+                       <input type="text" class="form-control" id="no_estabelecimento" formControlName="no_estabelecimento">
+                       <div *ngIf="establishmentForm.get('no_estabelecimento')?.invalid && (establishmentForm.get('no_estabelecimento')?.dirty || establishmentForm.get('no_estabelecimento')?.touched)" class="text-danger">
+                           Nome do estabelecimento é requerido.
+                       </div>
+                   </div>
+               </div>
+               
+               <div class="col-md-6">
+                   <div class="form-group">
+                       <label for="tp_estabelecimento">Categoria do estabelecimento</label>
+                       <select class="form-control" id="tp_estabelecimento" formControlName="tp_estabelecimento">
+                           <option value="" >Selecione...</option>
+                           <option *ngFor="let CategoriaEstabelecimento of categorias" value ="{{ CategoriaEstabelecimento.id_categoria }}">
+                               {{ CategoriaEstabelecimento.no_categoria }}
+                           </option>
+                       </select>
+                       <div *ngIf="establishmentForm.get('tp_estabelecimento')?.invalid && (establishmentForm.get('tp_estabelecimento')?.dirty || establishmentForm.get('tp_estabelecimento')?.touched)" class="text-danger">
+                           Categoria é requerido.
+                       </div>
+                   </div>
+               </div>
+   
+               <div class="col-md-6">
+                   <div class="form-group">
+                       <label for="no_logradouro">Logradouro</label>
+                       <input type="text" class="form-control" id="no_logradouro" formControlName="no_logradouro">
+                       <div *ngIf="establishmentForm.get('no_logradouro')?.invalid && (establishmentForm.get('no_logradouro')?.dirty || establishmentForm.get('no_logradouro')?.touched)" class="text-danger">
+                           Logradouro é requerido.
+                       </div>
+                   </div>
+               </div>
+               <div class="col-md-6">
+                   <div class="form-group">
+                       <label for="nu_logradouro">N° Logradouro</label>
+                       <input type="number" class="form-control" id="nu_logradouro" formControlName="nu_logradouro">
+                       <div *ngIf="establishmentForm.get('nu_logradouro')?.invalid && (establishmentForm.get('nu_logradouro')?.dirty || establishmentForm.get('nu_logradouro')?.touched)" class="text-danger">
+                           N° logradouro é requerido.
+                       </div>
+                   </div>
+               </div>
+           </div>
+       
+           <div class="row">
+               <div class="col-md-6">
+                   <div class="form-group">
+                       <label for="de_complemento">Complemento</label>
+                       <input class="form-control" id="de_complemento" formControlName="de_complemento">
+                       <div *ngIf="establishmentForm.get('de_complemento')?.invalid && (establishmentForm.get('de_complemento')?.dirty || establishmentForm.get('de_complemento')?.touched)" class="text-danger">
+                           Complemento é requerido.
+                       </div>
+                   </div>
+               </div>
+               <div class="col-md-6">
+                   <div class="form-group">
+                       <label for="no_uf">UF</label>
+                       <input type="text" class="form-control" id="no_uf" formControlName="no_uf">
+                       <div *ngIf="establishmentForm.get('no_uf')?.invalid && (establishmentForm.get('no_uf')?.dirty || establishmentForm.get('no_uf')?.touched)" class="text-danger">
+                           UF é requerido.
+                       </div>
+                   </div>
+               </div>
+           </div>
+       
+           <div class="row">
+               <div class="col-md-6">
+                   <div class="form-group">
+                       <label for="no_cidade">Cidade</label>
+                       <input type="text" class="form-control" id="no_cidade" formControlName="no_cidade">
+                       <div *ngIf="establishmentForm.get('no_cidade')?.invalid && (establishmentForm.get('no_cidade')?.dirty || establishmentForm.get('no_cidade')?.touched)" class="text-danger">
+                           Cidade é requerido.
+                       </div>
+                   </div>
+               </div>
+               <div class="col-md-6">
+                   <div class="form-group">
+                       <label for="nu_telefone">Telefone</label>
+                       <input type="number" class="form-control" id="nu_telefone" formControlName="nu_telefone">
+                       <div *ngIf="establishmentForm.get('nu_telefone')?.invalid && (establishmentForm.get('nu_telefone')?.dirty || establishmentForm.get('nu_telefone')?.touched)" class="text-danger">
+                           Telefone é requerido.
+                       </div>
+                   </div>
+               </div>
+           </div>
+   
+           <button type="submit" class="btn btn-warning">Cadastrar</button>
+       </form>
+   </div>
+   
+   <!-- Coloque o footer fora do container -->
+   <app-footer style="width: 100%;"></app-footer>
+   
