@@ -49,6 +49,7 @@ export class RegisterCouponComponent implements OnInit {
       originalValue: ['', [Validators.required, Validators.min(0)]],
       cuponQuantity: ['', [Validators.required, Validators.min(0)]],
       discountValue: ['', [Validators.required, Validators.min(0)]],
+      repasseValue: ['', [Validators.required, Validators.min(0)]],
       expirationDate: ['', Validators.required],
       // imageUrl: [null, Validators.required],
       shortDescription: ['', Validators.required],
@@ -109,9 +110,9 @@ export class RegisterCouponComponent implements OnInit {
 
   onSubmit(): void {
     if (this.couponForm.valid) {
-        const { shortDescription, originalValue, discountValue, expirationDate, cuponQuantity, imageUrl, fullDescription, couponName, categoryList, establishmentList } = this.couponForm.value;
+        const { shortDescription, originalValue, discountValue, repasseValue, expirationDate, cuponQuantity, imageUrl, fullDescription, couponName, categoryList, establishmentList } = this.couponForm.value;
         this.CouponService.registerCoupon(
-          {shortDescription, originalValue, discountValue, expirationDate, cuponQuantity, imageUrl, fullDescription, couponName, categoryList, establishmentList},
+          {shortDescription, originalValue, discountValue, repasseValue, expirationDate, cuponQuantity, imageUrl, fullDescription, couponName, categoryList, establishmentList},
           this.mainFile,
           this.selectedFiles
         ).subscribe(  
