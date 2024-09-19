@@ -99,10 +99,10 @@ export class PaymentComponent implements OnInit{
               this.router.navigate(['payment-pix'], { queryParams: {qrCodeUrl, qrCodeCode}})
               this.cartService.clearCart();
               this.loadingService.hide();
-              // this.router.navigate(['/confirmation'], { queryParams: { status: 'success' } });
+              this.router.navigate(['/confirmation'], { queryParams: { status: 'success' } });
             } else {
               this.loadingService.hide();
-              // this.router.navigate(['/confirmation'], { queryParams: { status: 'failure' } });
+              this.router.navigate(['/confirmation'], { queryParams: { status: 'failure' } });
             }
           },
           error => {
