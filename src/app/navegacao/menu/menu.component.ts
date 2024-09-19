@@ -32,6 +32,7 @@ export class MenuComponent implements OnInit {
   cupons: Cupom[] = [];
   filteredItems: any[] = [];
   searchTerm: string = '';
+  sidebarOpen: boolean = false;
 
   constructor(
     private CategoryService: categoryService,
@@ -83,6 +84,7 @@ export class MenuComponent implements OnInit {
       this.sharedService.filterItems(this.searchTerm)
   }
 
+
   
 
     toggleCart() {
@@ -116,5 +118,8 @@ export class MenuComponent implements OnInit {
       this.cartTotal = this.cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
     }
 
+    toggleSidebar() {
+      this.sidebarOpen = !this.sidebarOpen;
+    }
     
 }

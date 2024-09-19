@@ -14,10 +14,10 @@
       <button class="btn btn-warning ms-2" (click)="onSearch()">Buscar</button>
     </div>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" (click)="toggleSidebar()">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
+    <div class="collapse navbar-collapse sidebar" id="navbarResponsive" [class.show]="sidebarOpen">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item" routerLinkActive="active">
           <a class="nav-link text-white" routerLink="/validate-coupon">Validar Cupom</a>
@@ -31,9 +31,11 @@
         <li class="nav-item" routerLinkActive="active">
           <a class="nav-link text-white" routerLink="/registro-estabelecimento">Estabelecimento</a>
         </li>
+        <!-- Notificações -->
         <li class="nav-item dropdown" *ngIf="user">
-          <button class="btn btn-link nav-link" id="notificationsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+          <button class="btn btn-link nav-link d-flex align-items-center" id="notificationsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fa fa-bell text-white"></i>
+            <span class="ms-2" *ngIf="sidebarOpen">Notificações</span> <!-- Aparecerá apenas no menu lateral -->
           </button>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationsDropdown">
             <li *ngFor="let notification of notifications">
@@ -44,9 +46,11 @@
             </li>
           </ul>
         </li>
+        <!-- Carrinho -->
         <li class="nav-item">
-          <button class="btn btn-link nav-link" (click)="toggleCart()">
+          <button class="btn btn-link nav-link d-flex align-items-center" (click)="toggleCart()">
             <i class="fa fa-shopping-cart text-white"></i>
+            <span *ngIf="sidebarOpen" class="ms-2">Carrinho</span> <!-- Aparecerá apenas no menu lateral -->
             <span *ngIf="itemCount > 0">{{ itemCount }}</span>
           </button>
         </li>

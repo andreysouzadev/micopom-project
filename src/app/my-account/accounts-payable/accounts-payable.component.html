@@ -11,6 +11,19 @@
       </div>
     </div>
     <div class="col-md-9">
+      <div *ngIf="accountsPayable.length === 0" class="alert alert-info text-center">
+        <i class="bi bi-info-circle me-2" style="font-size: 1.5rem;"></i>
+        Nenhuma conta a pagar cadastrada.
+    </div>
+  <div class="coupon-card mb-3" *ngFor="let accountPayable of accountsPayable">
+    <div class="coupon-details">
+      <h5>{{ accountPayable.id_estabelecimento }}</h5>
+      <p><strong>Estabelecimento:</strong> {{ accountPayable.no_estabelecimento }}</p>
+      <p><strong>Status:</strong> {{ accountPayable.st_conta_a_pagar }}</p>
+      <p><strong>Data para pagamento: </strong>{{ accountPayable.dt_vencimento | date:'dd/MM/yyyy' }}</p>
+      <p><strong>Total a pagar: </strong>{{accountPayable.total_a_pagar }}</p>
+    </div>
+  </div>
       <nav>
         <ul class="pagination justify-content-center">
           <li class="page-item" [class.disabled]="currentPage === 1">
